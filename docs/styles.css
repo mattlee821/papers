@@ -1,0 +1,57 @@
+/* Custom styles for the papers website */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Improve readability */
+.quarto-title-block {
+  margin-bottom: 2rem;
+}
+
+/* Style for paper categories */
+.categories {
+  margin: 1rem 0;
+}
+
+.category {
+  display: inline-block;
+  background-color: #e9ecef;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Improve list styling */
+ul {
+  line-height: 1.8;
+}
+
+/* Section dividers */
+hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 2px solid #dee2e6;
+}
+
+/* Code blocks */
+pre {
+  background-color: #f8f9fa;
+  border-left: 3px solid #0d6efd;
+  padding: 1rem;
+}
+
+/* Math equations */
+.katex {
+  font-size: 1.1em;
+}
+
+/* Blockquotes for key findings */
+blockquote {
+  border-left: 4px solid #0d6efd;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #495057;
+}
