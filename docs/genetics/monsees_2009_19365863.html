@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-25">
+<meta name="dcterms.date" content="2025-11-26">
 
-<title>Specificity, length and luck drive gene rankings in association studies</title>
+<title>Genome-wide association scans for secondary traits using case-control samples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -162,42 +162,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a></li>
+  <li><a href="#statistical-problem-ascertainment-bias" id="toc-statistical-problem-ascertainment-bias" class="nav-link" data-scroll-target="#statistical-problem-ascertainment-bias">Statistical Problem: Ascertainment Bias</a>
   <ul class="collapse">
-  <li><a href="#main-discoveries" id="toc-main-discoveries" class="nav-link" data-scroll-target="#main-discoveries">Main Discoveries</a></li>
+  <li><a href="#naïve-analysis-scenarios" id="toc-naïve-analysis-scenarios" class="nav-link" data-scroll-target="#naïve-analysis-scenarios">Naïve Analysis Scenarios</a></li>
+  <li><a href="#source-of-bias" id="toc-source-of-bias" class="nav-link" data-scroll-target="#source-of-bias">Source of Bias</a></li>
   </ul></li>
-  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a>
-  <ul class="collapse">
-  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data Source</a></li>
-  <li><a href="#analytical-framework" id="toc-analytical-framework" class="nav-link" data-scroll-target="#analytical-framework">Analytical Framework</a></li>
-  </ul></li>
-  <li><a href="#major-results" id="toc-major-results" class="nav-link" data-scroll-target="#major-results">Major Results</a>
-  <ul class="collapse">
-  <li><a href="#discordant-gene-rankings" id="toc-discordant-gene-rankings" class="nav-link" data-scroll-target="#discordant-gene-rankings">1. Discordant Gene Rankings</a></li>
-  <li><a href="#why-burden-tests-prioritize-trait-specific-genes" id="toc-why-burden-tests-prioritize-trait-specific-genes" class="nav-link" data-scroll-target="#why-burden-tests-prioritize-trait-specific-genes">2. Why Burden Tests Prioritize Trait-Specific Genes</a></li>
-  <li><a href="#why-gwas-capture-pleiotropic-genes" id="toc-why-gwas-capture-pleiotropic-genes" class="nav-link" data-scroll-target="#why-gwas-capture-pleiotropic-genes">3. Why GWAS Capture Pleiotropic Genes</a></li>
-  <li><a href="#gene-length-bias-in-burden-tests" id="toc-gene-length-bias-in-burden-tests" class="nav-link" data-scroll-target="#gene-length-bias-in-burden-tests">4. Gene Length Bias in Burden Tests</a></li>
-  <li><a href="#the-role-of-genetic-drift-in-gwas" id="toc-the-role-of-genetic-drift-in-gwas" class="nav-link" data-scroll-target="#the-role-of-genetic-drift-in-gwas">5. The Role of Genetic Drift in GWAS</a></li>
-  </ul></li>
-  <li><a href="#estimating-trait-importance" id="toc-estimating-trait-importance" class="nav-link" data-scroll-target="#estimating-trait-importance">Estimating Trait Importance</a></li>
-  <li><a href="#biological-implications" id="toc-biological-implications" class="nav-link" data-scroll-target="#biological-implications">Biological Implications</a>
-  <ul class="collapse">
-  <li><a href="#context-specific-variants" id="toc-context-specific-variants" class="nav-link" data-scroll-target="#context-specific-variants">Context-Specific Variants</a></li>
-  <li><a href="#drug-target-discovery" id="toc-drug-target-discovery" class="nav-link" data-scroll-target="#drug-target-discovery">Drug Target Discovery</a></li>
-  </ul></li>
-  <li><a href="#methodological-insights" id="toc-methodological-insights" class="nav-link" data-scroll-target="#methodological-insights">Methodological Insights</a>
-  <ul class="collapse">
-  <li><a href="#s-ldsc-analysis" id="toc-s-ldsc-analysis" class="nav-link" data-scroll-target="#s-ldsc-analysis">S-LDSC Analysis</a></li>
-  <li><a href="#population-genetics-modeling" id="toc-population-genetics-modeling" class="nav-link" data-scroll-target="#population-genetics-modeling">Population Genetics Modeling</a></li>
-  </ul></li>
-  <li><a href="#limitations-and-considerations" id="toc-limitations-and-considerations" class="nav-link" data-scroll-target="#limitations-and-considerations">Limitations and Considerations</a></li>
-  <li><a href="#practical-recommendations" id="toc-practical-recommendations" class="nav-link" data-scroll-target="#practical-recommendations">Practical Recommendations</a>
-  <ul class="collapse">
-  <li><a href="#for-association-study-interpretation" id="toc-for-association-study-interpretation" class="nav-link" data-scroll-target="#for-association-study-interpretation">For Association Study Interpretation</a></li>
-  <li><a href="#for-drug-development" id="toc-for-drug-development" class="nav-link" data-scroll-target="#for-drug-development">For Drug Development</a></li>
-  </ul></li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
-  <li><a href="#related-concepts" id="toc-related-concepts" class="nav-link" data-scroll-target="#related-concepts">Related Concepts</a></li>
+  <li><a href="#solution-inverse-probability-of-sampling-weighting-ipw" id="toc-solution-inverse-probability-of-sampling-weighting-ipw" class="nav-link" data-scroll-target="#solution-inverse-probability-of-sampling-weighting-ipw">Solution: Inverse-Probability-of-Sampling Weighting (IPW)</a></li>
+  <li><a href="#practical-recommendations" id="toc-practical-recommendations" class="nav-link" data-scroll-target="#practical-recommendations">Practical Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -206,12 +178,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Specificity, length and luck drive gene rankings in association studies</h1>
+<h1 class="title">Genome-wide association scans for secondary traits using case-control samples</h1>
   <div class="quarto-categories">
     <div class="quarto-category">GWAS</div>
-    <div class="quarto-category">burden tests</div>
-    <div class="quarto-category">complex traits</div>
-    <div class="quarto-category">genetic architecture</div>
+    <div class="quarto-category">Case-Control Studies</div>
+    <div class="quarto-category">Secondary Trait</div>
+    <div class="quarto-category">Statistical Bias</div>
+    <div class="quarto-category">Ascertainment Correction</div>
+    <div class="quarto-category">Inverse-Probability-of-Sampling Weighting</div>
   </div>
   </div>
 
@@ -223,7 +197,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">25 November 2025</p>
+      <p class="date">26 November 2025</p>
     </div>
   </div>
   
@@ -235,174 +209,51 @@ window.Quarto = {
 </header>
 
 
-<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/41193809/">41193809</a><br>
-<strong>DOI:</strong> <a href="https://doi.org/10.1038/s41586-025-09703-7">10.1038/s41586-025-09703-7</a><br>
-<strong>Overview generated by:</strong> Claude Sonnet 4.5, 25/11/2025</p>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/19365863/">19365863</a><br>
+<strong>DOI:</strong> <a href="http://dx.doi.org/10.1002/gepi.20424">10.1002/gepi.20424</a><br>
+<strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
 <section id="key-findings" class="level2">
 <h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
-<p>This study provides a systematic comparison of genome-wide association studies (GWAS) and rare variant loss-of-function (LoF) burden tests, revealing fundamental differences in how these methods prioritize genes.</p>
-<section id="main-discoveries" class="level3">
-<h3 class="anchored" data-anchor-id="main-discoveries">Main Discoveries</h3>
+<p>This paper addresses a critical methodological issue in genetic epidemiology where researchers attempt to maximize the return on investment from an expensive case-control <strong>Genome-Wide Association Study (GWAS)</strong> by analyzing additional, or <strong>secondary, quantitative traits</strong> (e.g., body mass index, mammographic density) collected on the same subjects. The core finding is that a <strong>naïve analysis</strong> (ignoring the case-control ascertainment) can lead to <strong>biased estimates</strong> of the association between a genetic marker and the secondary trait, particularly when <strong>both the marker and the secondary trait are independently associated with the primary disease risk</strong>. The authors demonstrate that the use of <strong>Inverse-Probability-of-Sampling-Weighted (IPW) regression</strong> provides <strong>unbiased estimates</strong> of the marker-secondary trait association in all scenarios, although it may suffer from reduced statistical power compared to the biased naïve methods.</p>
+</section>
+<section id="statistical-problem-ascertainment-bias" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-problem-ascertainment-bias">Statistical Problem: Ascertainment Bias</h2>
+<p>Case-control studies are designed to test the association between a genetic marker and a primary binary disease (e.g., breast cancer). When using these same samples to study a quantitative trait (the secondary trait, e.g., mammographic density), the selection process (ascertainment) based on the disease status introduces a bias.</p>
+<section id="naïve-analysis-scenarios" class="level3">
+<h3 class="anchored" data-anchor-id="naïve-analysis-scenarios">Naïve Analysis Scenarios</h3>
+<p>The study mathematically and via simulation tested the performance of two “naïve” approaches for testing the association between a marker (<span class="math inline">\(G\)</span>) and a secondary trait (<span class="math inline">\(T\)</span>) using case-control data, where <span class="math inline">\(D\)</span> is the primary disease status:</p>
 <ol type="1">
-<li><p><strong>Different Gene Rankings</strong>: GWAS and LoF burden tests systematically prioritize different genes, even when accounting for power differences and gene-mapping issues</p></li>
-<li><p><strong>Trait Specificity vs.&nbsp;Importance</strong>:</p>
-<ul>
-<li><strong>Burden tests</strong> prioritize trait-specific genes (genes primarily affecting the studied trait)</li>
-<li><strong>GWAS</strong> prioritize trait-specific variants (which can act on pleiotropic genes through context-specific effects)</li>
-</ul></li>
-<li><p><strong>Three Key Factors</strong>:</p>
-<ul>
-<li><strong>Specificity</strong>: How specific a gene/variant’s effects are to the trait under study</li>
-<li><strong>Length</strong>: Longer genes are more likely to be discovered by burden tests due to more LoF sites</li>
-<li><strong>Luck</strong>: Random genetic drift causes variant frequencies to vary, making GWAS rankings partially stochastic</li>
-</ul></li>
+<li><strong>Ignoring <span class="math inline">\(D\)</span></strong>: Regressing <span class="math inline">\(T\)</span> on <span class="math inline">\(G\)</span> in the combined sample, ignoring case-control status.</li>
+<li><strong>Stratifying on <span class="math inline">\(D\)</span></strong>: Regressing <span class="math inline">\(T\)</span> on <span class="math inline">\(G\)</span> separately within cases and controls, and then combining the results (e.g., via meta-analysis).</li>
 </ol>
-</section>
-</section>
-<section id="study-design" class="level2">
-<h2 class="anchored" data-anchor-id="study-design">Study Design</h2>
-<section id="data-source" class="level3">
-<h3 class="anchored" data-anchor-id="data-source">Data Source</h3>
+<p>The paper shows that both naïve methods have:</p>
 <ul>
-<li><strong>209 quantitative traits</strong> from UK Biobank</li>
-<li>Analyzed both GWAS and LoF burden test results</li>
-<li>~360,000 individuals for GWAS</li>
-<li>~450,000 individuals for burden tests</li>
+<li><strong>Proper Type I Error Rates (Unbiased Test)</strong>: When testing the null hypothesis of no <span class="math inline">\(G-T\)</span> association, the methods maintain the correct Type I error rate <strong>unless</strong> <strong>both</strong> <span class="math inline">\(G\)</span> and <span class="math inline">\(T\)</span> are independently associated with the primary disease <span class="math inline">\(D\)</span>.</li>
+<li><strong>Unbiased Estimates (Under Alternative)</strong>: Under the alternative hypothesis (i.e., a true <span class="math inline">\(G-T\)</span> association exists), the estimated effect size is <strong>unbiased only if</strong> the secondary trait <span class="math inline">\(T\)</span> is <strong>not</strong> associated with the primary disease <span class="math inline">\(D\)</span>.</li>
 </ul>
 </section>
-<section id="analytical-framework" class="level3">
-<h3 class="anchored" data-anchor-id="analytical-framework">Analytical Framework</h3>
-<p>The authors proposed two criteria for gene prioritization:</p>
-<ol type="1">
-<li><strong>Trait Importance</strong>: How much a gene quantitatively affects a trait (effect size)</li>
-<li><strong>Trait Specificity</strong>: The importance of a gene for the studied trait relative to all other traits</li>
-</ol>
+<section id="source-of-bias" class="level3">
+<h3 class="anchored" data-anchor-id="source-of-bias">Source of Bias</h3>
+<p>The bias in the naïve methods occurs when a significant confounding pathway exists: <span class="math inline">\(G \rightarrow D \leftarrow T\)</span>. Since the case-control study non-randomly samples based on <span class="math inline">\(D\)</span>, this selection distorts the observed association between <span class="math inline">\(G\)</span> and <span class="math inline">\(T\)</span>.</p>
 </section>
 </section>
-<section id="major-results" class="level2">
-<h2 class="anchored" data-anchor-id="major-results">Major Results</h2>
-<section id="discordant-gene-rankings" class="level3">
-<h3 class="anchored" data-anchor-id="discordant-gene-rankings">1. Discordant Gene Rankings</h3>
+<section id="solution-inverse-probability-of-sampling-weighting-ipw" class="level2">
+<h2 class="anchored" data-anchor-id="solution-inverse-probability-of-sampling-weighting-ipw">Solution: Inverse-Probability-of-Sampling Weighting (IPW)</h2>
+<p>The authors propose using <strong>IPW regression</strong> to correct for the ascertainment bias. IPW uses weights in the regression calculation that are inversely proportional to the probability of an individual being sampled into the study.</p>
 <ul>
-<li>Only <strong>26%</strong> of burden test hits fall within top GWAS loci</li>
-<li>74.6% of burden hits are within any GWAS locus, but often ranked much lower</li>
-<li>Example: NPR2 is the 2nd most significant burden test gene for height but contained in the 243rd most significant GWAS locus</li>
+<li>The weights are calculated based on the sampling fractions of cases and controls.</li>
+<li><strong>Performance</strong>: IPW regression yielded <strong>unbiased estimates</strong> of the <span class="math inline">\(G-T\)</span> association and maintained the <strong>proper Type I error rate</strong> in all scenarios considered, regardless of the association between <span class="math inline">\(G\)</span>, <span class="math inline">\(T\)</span>, and <span class="math inline">\(D\)</span>.</li>
+<li><strong>Trade-off</strong>: IPW regression consistently demonstrated <strong>lower statistical power</strong> than the naïve analyses in situations where the naïve analyses were also unbiased.</li>
 </ul>
-</section>
-<section id="why-burden-tests-prioritize-trait-specific-genes" class="level3">
-<h3 class="anchored" data-anchor-id="why-burden-tests-prioritize-trait-specific-genes">2. Why Burden Tests Prioritize Trait-Specific Genes</h3>
-<p>Burden tests aggregate LoF variants within genes. The expected association strength is proportional to:</p>
-<p><span class="math display">\[\frac{\gamma_1^2}{\sum_t \gamma_t^2}\]</span></p>
-<p>where <span class="math inline">\(\gamma_1^2\)</span> is the gene’s effect on the studied trait and <span class="math inline">\(\sum_t \gamma_t^2\)</span> is its total effect across all traits.</p>
-<p><strong>Key mechanisms</strong>: - Natural selection acts more strongly on genes with larger total effects across traits - This keeps LoF frequencies lower for pleiotropic genes - Result: Trait-specific genes have more power in burden tests despite potentially smaller effects</p>
-</section>
-<section id="why-gwas-capture-pleiotropic-genes" class="level3">
-<h3 class="anchored" data-anchor-id="why-gwas-capture-pleiotropic-genes">3. Why GWAS Capture Pleiotropic Genes</h3>
-<p>GWAS prioritize trait-specific <strong>variants</strong>, which can arise in two ways:</p>
-<ol type="1">
-<li>Variants affecting trait-specific genes</li>
-<li><strong>Context-specific variants</strong> on pleiotropic genes (e.g., tissue-specific regulatory variants)</li>
-</ol>
-<p>The study found: - Variants in tissue-specific ATAC peaks show higher heritability enrichment - Coding variants in specifically expressed genes contribute more to heritability - This explains why GWAS can identify highly pleiotropic genes missed by burden tests</p>
-</section>
-<section id="gene-length-bias-in-burden-tests" class="level3">
-<h3 class="anchored" data-anchor-id="gene-length-bias-in-burden-tests">4. Gene Length Bias in Burden Tests</h3>
-<ul>
-<li>Longer genes have more potential LoF sites</li>
-<li>This increases LoF carrier frequency, boosting statistical power</li>
-<li>Effect: Longer genes appear more significant and more pleiotropic, independent of their true biological importance</li>
-</ul>
-</section>
-<section id="the-role-of-genetic-drift-in-gwas" class="level3">
-<h3 class="anchored" data-anchor-id="the-role-of-genetic-drift-in-gwas">5. The Role of Genetic Drift in GWAS</h3>
-<ul>
-<li>Random drift causes variant frequencies to vary widely around their expected values</li>
-<li>For sufficiently important variants, GWAS rankings become largely random with respect to true effect size</li>
-<li>High-frequency variants have more power, creating an apparent “pleiotropy” of top GWAS hits (statistical artifact)</li>
-</ul>
-</section>
-</section>
-<section id="estimating-trait-importance" class="level2">
-<h2 class="anchored" data-anchor-id="estimating-trait-importance">Estimating Trait Importance</h2>
-<p>Neither method directly ranks genes by trait importance:</p>
-<ul>
-<li><strong>Burden tests</strong>: Flattening effect - most important genes are most constrained, leading to smallest frequencies and largest standard errors</li>
-<li><strong>GWAS</strong>: Individual variant rankings dominated by random frequency variation</li>
-</ul>
-<p><strong>Solution</strong>: Aggregate signals across multiple variant types - Methods like AMM that combine evidence across many variants per gene - Better correlates with selection coefficients (proxy for importance) - Overcomes the flattening problem</p>
-</section>
-<section id="biological-implications" class="level2">
-<h2 class="anchored" data-anchor-id="biological-implications">Biological Implications</h2>
-<section id="context-specific-variants" class="level3">
-<h3 class="anchored" data-anchor-id="context-specific-variants">Context-Specific Variants</h3>
-<p>The finding that many GWAS loci lack burden signals suggests context-specific variants acting on pleiotropic genes are major drivers of complex traits. The authors hypothesize these may include: - Developmental genes - Variants that perturb developmental trajectories in trait-specific ways - Tissue-specific regulatory elements</p>
-</section>
-<section id="drug-target-discovery" class="level3">
-<h3 class="anchored" data-anchor-id="drug-target-discovery">Drug Target Discovery</h3>
-<ul>
-<li>Trait-specific genes (identified by burden tests) may be better drug targets due to fewer side effects</li>
-<li>Explains why LoF burden evidence is more predictive of drug trial success than GWAS evidence</li>
-<li>However, if pleiotropic genes can be targeted context-specifically, they may have greater clinical impact</li>
-</ul>
-</section>
-</section>
-<section id="methodological-insights" class="level2">
-<h2 class="anchored" data-anchor-id="methodological-insights">Methodological Insights</h2>
-<section id="s-ldsc-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="s-ldsc-analysis">S-LDSC Analysis</h3>
-<p>The study used stratified LD score regression to show: - Heritability enrichment in tissue-specific ATAC peaks - Coding variants in specifically expressed genes contribute more to heritability - Both axes (gene specificity and variant context-specificity) independently contribute to GWAS signals</p>
-</section>
-<section id="population-genetics-modeling" class="level3">
-<h3 class="anchored" data-anchor-id="population-genetics-modeling">Population Genetics Modeling</h3>
-<p>Used stabilizing selection models to predict: - LoF frequencies inversely proportional to selection coefficient (<span class="math inline">\(s_{het}\)</span>) - Selection coefficient proportional to total trait effects across all traits - Explains observed relationship between constraint and LoF frequency</p>
-</section>
-</section>
-<section id="limitations-and-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="limitations-and-considerations">Limitations and Considerations</h2>
-<ol type="1">
-<li><strong>Complexity of gene effects</strong>: The simplified model (<span class="math inline">\(\alpha = \beta \gamma\)</span>) may not capture non-linear relationships</li>
-<li><strong>Incomplete pleiotropy landscape</strong>: Only 27 traits analyzed, actual pleiotropy may be higher</li>
-<li><strong>Context-specificity</strong>: Not all pleiotropic genes can be therapeutically targeted in context-specific ways</li>
-</ol>
 </section>
 <section id="practical-recommendations" class="level2">
 <h2 class="anchored" data-anchor-id="practical-recommendations">Practical Recommendations</h2>
-<section id="for-association-study-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="for-association-study-interpretation">For Association Study Interpretation</h3>
+<p>The study concludes with practical recommendations for GWAS analysis of secondary traits:</p>
 <ol type="1">
-<li><strong>Use both methods</strong>: GWAS and burden tests reveal complementary aspects of trait biology</li>
-<li><strong>Consider gene length</strong>: Longer genes in burden test results may be artifacts</li>
-<li><strong>Aggregate variants</strong>: For trait importance, use methods that combine signals across variants (AMM, MAGMA)</li>
-<li><strong>Mind the drift</strong>: Top GWAS hits are partially determined by random frequency variation</li>
+<li><strong>General Markers</strong>: For the vast majority of markers tested in a GWAS (which are not associated with the primary disease <span class="math inline">\(D\)</span>), the <strong>naïve analyses are valid tests</strong> of association and provide nearly unbiased estimates of the <span class="math inline">\(G-T\)</span> association.</li>
+<li><strong>Disease-Associated Markers</strong>: <strong>Care must be taken</strong> when both the marker (<span class="math inline">\(G\)</span>) and the secondary trait (<span class="math inline">\(T\)</span>) are associated with the primary disease (<span class="math inline">\(D\)</span>). In this scenario, the naïve estimates will be biased, and <strong>IPW regression is the statistically valid method</strong> to obtain an unbiased estimate of the <span class="math inline">\(G-T\)</span> effect.</li>
+<li><strong>Illustration</strong>: The authors illustrate the potential for bias using an analysis of the relationship between a marker in the <em>FGFR2</em> gene (a known breast cancer risk locus) and mammographic density in a breast cancer case-control sample.</li>
 </ol>
-</section>
-<section id="for-drug-development" class="level3">
-<h3 class="anchored" data-anchor-id="for-drug-development">For Drug Development</h3>
-<ol type="1">
-<li>Burden test hits may indicate better targets for minimizing side effects</li>
-<li>GWAS hits may reveal pleiotropic genes with larger phenotypic impact</li>
-<li>Consider whether context-specific targeting is feasible</li>
-</ol>
-</section>
-</section>
-<section id="conclusions" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
-<p>GWAS and LoF burden tests systematically prioritize different genes because:</p>
-<ul>
-<li><strong>Burden tests</strong> rank by gene-level trait specificity, favoring long, trait-specific genes</li>
-<li><strong>GWAS</strong> rank by variant-level trait specificity, capturing both trait-specific genes and context-specific variants on pleiotropic genes</li>
-</ul>
-<p>Neither method directly ranks by trait importance due to: - <strong>Burden tests</strong>: Flattening from natural selection - <strong>GWAS</strong>: Random genetic drift</p>
-<p>Both methods are valuable and reveal distinct aspects of trait biology. The choice of method depends on the research question and application, with burden tests better for identifying specific biology and GWAS better for comprehensive discovery including pleiotropic mechanisms.</p>
-</section>
-<section id="related-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="related-concepts">Related Concepts</h2>
-<ul>
-<li><strong>Trait specificity</strong> (<span class="math inline">\(\Psi_G\)</span>): <span class="math inline">\(\gamma_1^2 / \sum_t \gamma_t^2\)</span> for genes</li>
-<li><strong>Trait importance</strong>: <span class="math inline">\(\gamma_1^2\)</span> (squared effect size)</li>
-<li><strong>Flattening</strong>: Association strength becomes independent of effect size for highly important genes</li>
-<li><strong>Context-specificity</strong>: Variants acting only in certain cellular contexts or developmental stages</li>
-</ul>
 
 
 </section>

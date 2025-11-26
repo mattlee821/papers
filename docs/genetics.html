@@ -138,6 +138,10 @@ window.Quarto = {
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./pgs.html"> 
+<span class="menu-text">PGS</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
@@ -162,6 +166,7 @@ window.Quarto = {
   <li><a href="#using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" id="toc-using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" class="nav-link" data-scroll-target="#using-gwas-summary-data-to-impute-traits-for-genotyped-individuals">Using GWAS summary data to impute traits for genotyped individuals</a></li>
   <li><a href="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" id="toc-adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" class="nav-link" data-scroll-target="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</a></li>
   <li><a href="#genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" id="toc-genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" class="nav-link" data-scroll-target="#genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease">Genetic architecture: the shape of the genetic contribution to human traits and disease</a></li>
+  <li><a href="#genome-wide-association-scans-for-secondary-traits-using-case-control-samples" id="toc-genome-wide-association-scans-for-secondary-traits-using-case-control-samples" class="nav-link" data-scroll-target="#genome-wide-association-scans-for-secondary-traits-using-case-control-samples">Genome-wide association scans for secondary traits using case-control samples</a></li>
   </ul>
 </nav>
     </div>
@@ -225,6 +230,14 @@ window.Quarto = {
 <li>This review defines <strong>genetic architecture</strong> by four components: the number of causal variants (polygenicity), the distribution of their effect sizes, their allele frequency spectrum, and the types of genetic and environmental interactions (dominance, epistasis, GxE).</li>
 <li>It highlights that complex traits are <strong>highly polygenic</strong> and influenced by variants across the entire frequency spectrum, addressing <strong>“missing heritability”</strong> by pointing to the role of <strong>rare variants</strong>, non-additive effects, and <strong>Gene-by-Environment (GxE) interactions</strong>.</li>
 <li>The authors emphasize that <strong>pleiotropy</strong> (one variant affecting multiple traits) is widespread among common variants, discussing how techniques like <strong>Mendelian Randomization (MR)</strong> are essential for distinguishing causation from pleiotropy in the complex genetic landscape.</li>
+</ul>
+</section>
+<section id="genome-wide-association-scans-for-secondary-traits-using-case-control-samples" class="level3">
+<h3 class="anchored" data-anchor-id="genome-wide-association-scans-for-secondary-traits-using-case-control-samples"><a href="genetics/monsees_2009_19365863.html">Genome-wide association scans for secondary traits using case-control samples</a></h3>
+<ul>
+<li>This statistical methodology paper examines the bias introduced when a <strong>case-control GWAS</strong> (designed for a primary disease <span class="math inline">\(D\)</span>) is used to analyze a <strong>secondary quantitative trait</strong> (<span class="math inline">\(T\)</span>).</li>
+<li>It demonstrates that <strong>naïve analysis</strong> (ignoring case-control ascertainment) leads to <strong>biased effect estimates</strong> for the marker-secondary trait association (<span class="math inline">\(G-T\)</span>) specifically when <strong>both the marker <span class="math inline">\(G\)</span> and the trait <span class="math inline">\(T\)</span> are independently associated with the primary disease <span class="math inline">\(D\)</span></strong>.</li>
+<li>The authors propose using <strong>Inverse-Probability-of-Sampling-Weighted (IPW) regression</strong> as the robust method, which provides <strong>unbiased estimates</strong> in all scenarios, though at the cost of reduced statistical power, recommending naïve analysis for markers not associated with the primary disease.</li>
 </ul>
 
 
