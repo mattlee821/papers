@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-26">
 
-<title>PGS</title>
+<title>Polygenic scoring accuracy varies across the genetic ancestry continuum</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -85,35 +115,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./genetics.html"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./proteomics.html"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metabolomics.html"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./pgs.html" aria-current="page"> 
+    <a class="nav-link" href="../pgs.html"> 
 <span class="menu-text">PGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./statistics.html"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
 </ul>
@@ -132,9 +162,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review" id="toc-genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review" class="nav-link active" data-scroll-target="#genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review">Genetic prediction of complex traits with polygenic scores: A statistical review</a></li>
-  <li><a href="#genome-wide-risk-prediction-of-common-diseases-across-ancestries-in-one-million-people" id="toc-genome-wide-risk-prediction-of-common-diseases-across-ancestries-in-one-million-people" class="nav-link" data-scroll-target="#genome-wide-risk-prediction-of-common-diseases-across-ancestries-in-one-million-people">Genome-wide risk prediction of common diseases across ancestries in one million people</a></li>
-  <li><a href="#polygenic-scoring-accuracy-varies-across-the-genetic-ancestry-continuum" id="toc-polygenic-scoring-accuracy-varies-across-the-genetic-ancestry-continuum" class="nav-link" data-scroll-target="#polygenic-scoring-accuracy-varies-across-the-genetic-ancestry-continuum">Polygenic scoring accuracy varies across the genetic ancestry continuum</a></li>
+  <li><a href="#key-findings-the-genetic-distance-penalty-on-pgs-accuracy" id="toc-key-findings-the-genetic-distance-penalty-on-pgs-accuracy" class="nav-link active" data-scroll-target="#key-findings-the-genetic-distance-penalty-on-pgs-accuracy">Key Findings: The Genetic Distance Penalty on PGS Accuracy</a>
+  <ul class="collapse">
+  <li><a href="#core-discovery-continuous-and-steep-decay-of-accuracy" id="toc-core-discovery-continuous-and-steep-decay-of-accuracy" class="nav-link" data-scroll-target="#core-discovery-continuous-and-steep-decay-of-accuracy">Core Discovery: Continuous and Steep Decay of Accuracy</a></li>
+  <li><a href="#demonstrating-inequity-and-systematic-bias" id="toc-demonstrating-inequity-and-systematic-bias" class="nav-link" data-scroll-target="#demonstrating-inequity-and-systematic-bias">Demonstrating Inequity and Systematic Bias</a></li>
+  <li><a href="#conclusion-and-call-to-action" id="toc-conclusion-and-call-to-action" class="nav-link" data-scroll-target="#conclusion-and-call-to-action">Conclusion and Call to Action</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -143,14 +176,29 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">PGS</h1>
-</div>
+<h1 class="title">Polygenic scoring accuracy varies across the genetic ancestry continuum</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Polygenic Scores</div>
+    <div class="quarto-category">Genetic Ancestry</div>
+    <div class="quarto-category">Transferability</div>
+    <div class="quarto-category">Health Disparities</div>
+    <div class="quarto-category">Genetic Distance</div>
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">Precision Medicine</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -160,32 +208,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review" class="level3">
-<h3 class="anchored" data-anchor-id="genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review"><a href="pgs/ma_2021_34243982.html">Genetic prediction of complex traits with polygenic scores: A statistical review</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/37198491/">37198491</a> <strong>DOI:</strong> <a href="http://dx.doi.org/10.1038/s41586-023-06079-4">10.1038/s41586-023-06079-4</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
+<section id="key-findings-the-genetic-distance-penalty-on-pgs-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-the-genetic-distance-penalty-on-pgs-accuracy">Key Findings: The Genetic Distance Penalty on PGS Accuracy</h2>
+<p>This study provides a critical, individual-level assessment of <strong>Polygenic Score (PGS) portability</strong>, which is necessary for the equitable clinical application of genetic risk prediction. The authors argue that assessing PGS performance using traditional <strong>discrete genetic ancestry clusters</strong> (e.g., European, African) obscures crucial <strong>inter-individual variation</strong> and biases estimates. They introduce a framework that evaluates accuracy along a <strong>genetic ancestry continuum</strong> using a precise metric: <strong>Genetic Distance (GD)</strong>.</p>
+<section id="core-discovery-continuous-and-steep-decay-of-accuracy" class="level3">
+<h3 class="anchored" data-anchor-id="core-discovery-continuous-and-steep-decay-of-accuracy">Core Discovery: Continuous and Steep Decay of Accuracy</h3>
+<p>The central finding is the demonstration that <strong>PGS accuracy decreases individual-to-individual</strong> along the continuum of genetic ancestries in a highly predictable, linear fashion .</p>
+<ol type="1">
+<li><strong>Metric Definition</strong>: <strong>Genetic Distance (GD)</strong> is defined as the distance of a target individual’s genotype (e.g., PCA projection) from the population used to train the PGS model. The higher the GD, the more genetically dissimilar the individual is from the training set.</li>
+<li><strong>Quantification of Decay</strong>: Across a large set of <strong>84 complex traits and diseases</strong>, the average individual-level PGS accuracy showed an extremely powerful negative correlation with GD, with a Pearson correlation coefficient of <strong>-0.95</strong>. This near-perfect correlation highlights that the individual’s genetic background relative to the training population is the primary determinant of score performance.</li>
+<li><strong>Ubiquity of Variation</strong>: This decreasing trend was observed <strong>in all populations considered</strong>, including <em>within</em> traditionally labeled ‘homogeneous’ genetic ancestry groups (e.g., European ancestry in UK Biobank). This shows that sub-ancestry variation within a single continent still results in a measurable loss of accuracy based on GD.</li>
+</ol>
+</section>
+<section id="demonstrating-inequity-and-systematic-bias" class="level3">
+<h3 class="anchored" data-anchor-id="demonstrating-inequity-and-systematic-bias">Demonstrating Inequity and Systematic Bias</h3>
+<p>The study leveraged data from the UK Biobank (UKBB, training set, predominantly White British) and the diverse Los Angeles biobank (ATLAS, testing set) to quantify the transferability gap.</p>
 <ul>
-<li>This statistical review comprehensively analyzes 46 methods for <strong>Polygenic Score (PGS)</strong> construction, unifying most of them under a <strong>multiple linear regression framework</strong> to clarify their assumptions regarding effect size distribution and Linkage Disequilibrium (LD).</li>
-<li>The review concludes that optimal PGS performance (accuracy) is highly dependent on the trait’s <strong>genetic architecture</strong> and is significantly improved by using <strong>Bayesian/Regularization methods</strong> (e.g., LDpred, PRS-CS) that explicitly model LD and incorporate informed prior distributions for SNP effects.</li>
-<li>A critical challenge highlighted is the significant <strong>loss of transferability</strong> across ancestral populations, underscoring the need for more diverse training data and methods that better address <strong>ancestral heterogeneity</strong> and incorporate non-additive and Gene-by-Environment (GxE) effects.</li>
+<li><strong>Intra-European Penalty</strong>: When applying UKBB-trained models to individuals of European ancestry in ATLAS, those in the <strong>furthest GD decile</strong> experienced a significant <strong>14% lower accuracy</strong> relative to those in the closest decile.</li>
+<li><strong>Cross-Ancestry Disparity</strong>: The results reveal a severe “distance penalty” for non-European groups. Individuals of <strong>Hispanic/Latino American ancestry</strong> who are genetically <em>closest</em> (lowest GD decile) to the training data showed similar PGS performance to the European-ancestry individuals who are <strong>furthest away</strong> (highest GD decile). For the most distant Hispanic/Latino individuals, accuracy was substantially lower, overlapping with that of African American participants.</li>
+<li><strong>Bias in Risk Estimates</strong>: Crucially, GD was found to be significantly correlated with the <strong>PGS estimates themselves</strong> for 82 of 84 traits. This means the systematic bias due to ancestry distance does not just affect the <em>accuracy</em> (<span class="math inline">\(R^2\)</span>) but also the <em>magnitude</em> of the predicted risk, potentially leading to widespread miscalibration and inequitable risk stratification.</li>
 </ul>
 </section>
-<section id="genome-wide-risk-prediction-of-common-diseases-across-ancestries-in-one-million-people" class="level3">
-<h3 class="anchored" data-anchor-id="genome-wide-risk-prediction-of-common-diseases-across-ancestries-in-one-million-people"><a href="pgs/mars_2022_35591975.html">Genome-wide risk prediction of common diseases across ancestries in one million people</a></h3>
-<ul>
-<li>This large-scale study evaluated the cross-ancestry transferability of <strong>Polygenic Risk Scores (PRSs)</strong> for four common diseases (CAD, T2D, breast, and prostate cancer) using data from six biobanks and over one million individuals of diverse global ancestries.</li>
-<li>The analysis found that PRS transferability was <strong>high and robust</strong> across different populations and substructures of European ancestry, but was significantly <strong>lower for individuals of African, South Asian, and East Asian ancestry</strong>.</li>
-<li>The poor transferability, which was most pronounced in African ancestry individuals, highlights the critical issue of <strong>ancestral bias</strong> in genomic research and the potential for current PRS implementation to exacerbate <strong>health disparities</strong> until more diverse training data are available.</li>
-</ul>
+<section id="conclusion-and-call-to-action" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-and-call-to-action">Conclusion and Call to Action</h3>
+<p>The authors conclude that relying on aggregate population-level metrics (<span class="math inline">\(\text{e.g., } R^2\)</span>) obscures this vital individual-level variation and hinders efforts toward health equity. They urge researchers to <strong>abandon the use of discrete genetic ancestry clusters</strong> in favor of continuous metrics (like GD) to better characterize and address performance disparities, ensuring more reliable and equitable application of PGSs in personalized medicine.</p>
+
+
 </section>
-<section id="polygenic-scoring-accuracy-varies-across-the-genetic-ancestry-continuum" class="level3">
-<h3 class="anchored" data-anchor-id="polygenic-scoring-accuracy-varies-across-the-genetic-ancestry-continuum"><a href="genetics/ding_2023_37198491.html">Polygenic scoring accuracy varies across the genetic ancestry continuum</a></h3>
-<ul>
-<li><strong>Core Principle</strong>: This landmark study challenged the traditional use of discrete ancestry groups for polygenic scores (PGSs), proposing a framework that evaluates individual-level PGS accuracy based on <strong>Genetic Distance (GD)</strong> from the GWAS training population.</li>
-<li><strong>Key Finding</strong>: They demonstrated that individual-level PGS accuracy experiences a <strong>continuous, steep decay</strong> as GD from the training data increases, with an average Pearson correlation of <strong>R = -0.95</strong> across 84 complex traits, confirming that performance loss is a predictable function of genetic dissimilarity.</li>
-<li><strong>Health Equity Implication</strong>: The study quantified a major health disparity, showing that the genetically closest individuals of non-European ancestry (e.g., Hispanic/Latino American) had PGS accuracy comparable to the <strong>most distant European-ancestry individuals</strong>, highlighting the severe and systematic bias due to lack of diversity in training cohorts.</li>
-<li><strong>Recommendation</strong>: The authors advocate for moving beyond discrete ancestry labels and using continuous metrics like GD to characterize and correct for performance disparities, thus ensuring more equitable clinical translation of PGSs.</li>
-</ul>
-
-
 </section>
 
 </main> <!-- /main -->
