@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-26">
 
-<title>Statistics</title>
+<title>Sifting the evidence—what’s wrong with significance tests?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -85,35 +86,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./genetics.html"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./proteomics.html"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metabolomics.html"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pgs.html"> 
+    <a class="nav-link" href="../pgs.html"> 
 <span class="menu-text">PGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./statistics.html" aria-current="page"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
 </ul>
@@ -132,8 +133,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#large-scale-composite-hypothesis-testing-procedure-for-omics-data-analyses" id="toc-large-scale-composite-hypothesis-testing-procedure-for-omics-data-analyses" class="nav-link active" data-scroll-target="#large-scale-composite-hypothesis-testing-procedure-for-omics-data-analyses">Large-scale composite hypothesis testing procedure for omics data analyses</a></li>
-  <li><a href="#sifting-the-evidencewhats-wrong-with-significance-tests" id="toc-sifting-the-evidencewhats-wrong-with-significance-tests" class="nav-link" data-scroll-target="#sifting-the-evidencewhats-wrong-with-significance-tests">Sifting the evidence—what’s wrong with significance tests?</a></li>
+  <li><a href="#key-findings-the-misuse-and-limitations-of-statistical-significance" id="toc-key-findings-the-misuse-and-limitations-of-statistical-significance" class="nav-link active" data-scroll-target="#key-findings-the-misuse-and-limitations-of-statistical-significance">Key Findings: The Misuse and Limitations of Statistical Significance</a>
+  <ul class="collapse">
+  <li><a href="#the-central-problem-publication-bias" id="toc-the-central-problem-publication-bias" class="nav-link" data-scroll-target="#the-central-problem-publication-bias">The Central Problem: Publication Bias</a></li>
+  <li><a href="#shifting-focus-from-p-value-to-effect-magnitude" id="toc-shifting-focus-from-p-value-to-effect-magnitude" class="nav-link" data-scroll-target="#shifting-focus-from-p-value-to-effect-magnitude">Shifting Focus: From P-value to Effect Magnitude</a></li>
+  <li><a href="#historical-context" id="toc-historical-context" class="nav-link" data-scroll-target="#historical-context">Historical Context</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -142,14 +147,28 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics</h1>
-</div>
+<h1 class="title">Sifting the evidence—what’s wrong with significance tests?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Statistical Methods</div>
+    <div class="quarto-category">Epidemiology</div>
+    <div class="quarto-category">Significance Tests</div>
+    <div class="quarto-category">Publication Bias</div>
+    <div class="quarto-category">P-values</div>
+    <div class="quarto-category">Clinical Importance</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -159,23 +178,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="large-scale-composite-hypothesis-testing-procedure-for-omics-data-analyses" class="level3">
-<h3 class="anchored" data-anchor-id="large-scale-composite-hypothesis-testing-procedure-for-omics-data-analyses"><a href="statistics/dewalsche_2025_40918066.html">Large-scale composite hypothesis testing procedure for omics data analyses</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/11159626/">11159626</a> <strong>DOI:</strong> <a href="http://dx.doi.org/10.1136/bmj.322.7280.226">10.1136/bmj.322.7280.226</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
+<section id="key-findings-the-misuse-and-limitations-of-statistical-significance" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-the-misuse-and-limitations-of-statistical-significance">Key Findings: The Misuse and Limitations of Statistical Significance</h2>
+<p>This highly influential article critiques the over-reliance on <strong>statistical significance testing</strong> (p-values) in medical and epidemiological research, arguing that this practice fundamentally distorts the scientific literature and leads to public skepticism.</p>
+<section id="the-central-problem-publication-bias" class="level3">
+<h3 class="anchored" data-anchor-id="the-central-problem-publication-bias">The Central Problem: Publication Bias</h3>
+<p>The primary issue is the medical literature’s strong tendency to accentuate the positive, leading to <strong>publication bias</strong> (also known as the “file drawer effect”):</p>
+<ol type="1">
+<li><strong>Skewed Reporting</strong>: Studies with <strong>positive outcomes</strong> (those achieving statistical significance, typically P&lt;0.05) are far more likely to be published than those with <strong>null results</strong> (non-significant findings).</li>
+<li><strong>Increased Chance Findings</strong>: This creates a system where a host of purely <strong>chance findings</strong> are published and subsequently mistaken for real biological or clinical effects. The authors note that, by conventional reasoning, examining 20 associations will produce one “significant at P=0.05” result by chance alone.</li>
+<li><strong>Erosion of Trust</strong>: The proliferation of inconsistent, purely chance findings contributes significantly to <strong>scepticism</strong> about medical research and epidemiological studies among the public and practitioners.</li>
+</ol>
+</section>
+<section id="shifting-focus-from-p-value-to-effect-magnitude" class="level3">
+<h3 class="anchored" data-anchor-id="shifting-focus-from-p-value-to-effect-magnitude">Shifting Focus: From P-value to Effect Magnitude</h3>
+<p>The authors argue that focusing solely on whether a P-value crosses the 0.05 threshold misses the point of much medical research, particularly in observational and interventional studies:</p>
 <ul>
-<li>Novel method (qch_copula) for testing composite hypotheses across multiple traits/omics levels using mixture models with copula functions</li>
-<li>Controls Type I error effectively while achieving superior detection power compared to 8 state-of-the-art methods across diverse correlation scenarios</li>
-<li>Memory-efficient implementation enables analysis of 10<sup>5-10</sup>6 markers with up to 20 traits, validated through psychiatric disorder pleiotropy and plant virus resistance studies</li>
+<li><strong>Null Hypothesis Relevance</strong>: In many epidemiological studies and randomized controlled trials, there is often little reason to expect the true effect to be exactly null. The key issue is not consistency with a strict null hypothesis.</li>
+<li><strong>The Real Questions</strong>: Instead of asking <em>if</em> an effect exists (P-value), researchers should focus on:
+<ul>
+<li>Whether the <strong>direction</strong> of the effect has been reasonably and firmly established.</li>
+<li>Whether the <strong>magnitude</strong> of the effect is such that it is of <strong>public health or clinical importance</strong>. A small, statistically significant effect may be clinically irrelevant. A large, non-significant effect may warrant further study.</li>
+</ul></li>
 </ul>
 </section>
-<section id="sifting-the-evidencewhats-wrong-with-significance-tests" class="level3">
-<h3 class="anchored" data-anchor-id="sifting-the-evidencewhats-wrong-with-significance-tests"><a href="statistics/sterne_2001_11159626.html">Sifting the evidence—what’s wrong with significance tests?</a></h3>
-<ul>
-<li><strong>Core Critique</strong>: This classic commentary criticizes the widespread misuse and over-reliance on <strong>statistical significance tests (p-values)</strong> in medical literature, arguing that this practice fundamentally distorts evidence.</li>
-<li><strong>Central Problem</strong>: The authors identify <strong>publication bias</strong> (accentuating positive results over null results) as the key factor causing the mistaken publication of <strong>chance findings</strong> as real effects, thereby eroding confidence in science.</li>
-<li><strong>Recommendation</strong>: Researchers should shift their focus from the binary question of whether P &lt; 0.05 to assessing the <strong>direction</strong> and the <strong>magnitude</strong> of the effect, specifically asking if the effect is of <strong>public health or clinical importance</strong>.</li>
-</ul>
+<section id="historical-context" class="level3">
+<h3 class="anchored" data-anchor-id="historical-context">Historical Context</h3>
+<p>The critique is contextualized by referencing the founder of statistical significance testing, <strong>Ronald Fisher</strong>, and the early criticism he received from his colleague F. Yates, who noted that Fisher’s emphasis on significance testing was problematic. The paper implicitly advocates for the use of <strong>Confidence Intervals (CIs)</strong>, which convey both the direction and the magnitude of the effect along with the precision of the estimate.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
