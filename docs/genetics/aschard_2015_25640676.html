@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-26">
 
-<title>genetics</title>
+<title>Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -98,7 +99,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -114,31 +115,31 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./genetics.html" aria-current="page"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./proteomics.html"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metabolomics.html"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./statistics.html"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
 </ul>
@@ -157,10 +158,22 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#specificity-length-and-luck-drive-gene-rankings-in-association-studies" id="toc-specificity-length-and-luck-drive-gene-rankings-in-association-studies" class="nav-link active" data-scroll-target="#specificity-length-and-luck-drive-gene-rankings-in-association-studies">Specificity, length and luck drive gene rankings in association studies</a></li>
-  <li><a href="#metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis" id="toc-metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis" class="nav-link" data-scroll-target="#metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</a></li>
-  <li><a href="#using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" id="toc-using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" class="nav-link" data-scroll-target="#using-gwas-summary-data-to-impute-traits-for-genotyped-individuals">Using GWAS summary data to impute traits for genotyped individuals</a></li>
-  <li><a href="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" id="toc-adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" class="nav-link" data-scroll-target="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a>
+  <ul class="collapse">
+  <li><a href="#main-discoveries" id="toc-main-discoveries" class="nav-link" data-scroll-target="#main-discoveries">Main Discoveries</a></li>
+  </ul></li>
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-framework" id="toc-theoretical-framework" class="nav-link" data-scroll-target="#theoretical-framework">Theoretical Framework</a></li>
+  <li><a href="#simulation-methods" id="toc-simulation-methods" class="nav-link" data-scroll-target="#simulation-methods">Simulation Methods</a></li>
+  <li><a href="#real-world-data-application" id="toc-real-world-data-application" class="nav-link" data-scroll-target="#real-world-data-application">Real-World Data Application</a></li>
+  </ul></li>
+  <li><a href="#major-results" id="toc-major-results" class="nav-link" data-scroll-target="#major-results">Major Results</a></li>
+  <li><a href="#practical-implications" id="toc-practical-implications" class="nav-link" data-scroll-target="#practical-implications">Practical Implications</a>
+  <ul class="collapse">
+  <li><a href="#recommendations-for-future-gwas" id="toc-recommendations-for-future-gwas" class="nav-link" data-scroll-target="#recommendations-for-future-gwas">Recommendations for Future GWAS</a></li>
+  </ul></li>
+  <li><a href="#related-concepts" id="toc-related-concepts" class="nav-link" data-scroll-target="#related-concepts">Related Concepts</a></li>
   </ul>
 </nav>
     </div>
@@ -169,14 +182,27 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">genetics</h1>
-</div>
+<h1 class="title">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">Statistical Genetics</div>
+    <div class="quarto-category">Causal Inference</div>
+    <div class="quarto-category">Collider Bias</div>
+    <div class="quarto-category">Heritability</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -186,36 +212,81 @@ window.Quarto = {
 </header>
 
 
-<section id="specificity-length-and-luck-drive-gene-rankings-in-association-studies" class="level3">
-<h3 class="anchored" data-anchor-id="specificity-length-and-luck-drive-gene-rankings-in-association-studies"><a href="genetics/spence_2025_41193809.html">Specificity, length and luck drive gene rankings in association studies</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/25640676/">25640676</a><br>
+<strong>DOI:</strong> <a href="http://dx.doi.org/10.1016/j.ajhg.2014.12.021">10.1016/j.ajhg.2014.12.021</a><br>
+<strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p>This seminal methodological report examines the statistical consequences of adjusting Genome-Wide Association Studies (GWAS) for <strong>heritable covariates</strong> (correlated traits that are themselves genetically influenced), conclusively demonstrating that this common practice introduces a significant <strong>collider bias</strong>.</p>
+<section id="main-discoveries" class="level3">
+<h3 class="anchored" data-anchor-id="main-discoveries">Main Discoveries</h3>
+<ol type="1">
+<li><strong>Collider Bias Introduction</strong>: Adjusting a standard GWAS regression for a heritable covariate (<span class="math inline">\(C\)</span>) that is correlated with the outcome (<span class="math inline">\(Y\)</span>) and influenced by the SNP (<span class="math inline">\(G\)</span>) introduces bias (also known as index event bias or selection bias). This happens because conditioning on the covariate (the collider) opens a spurious path between the SNP and unobserved confounders, which can lead to <strong>false positive</strong> associations with the primary outcome.</li>
+<li><strong>Unbiased Estimation Condition</strong>: The resulting adjusted effect, <span class="math inline">\(\beta_{G \rightarrow Y \mid C}\)</span>, accurately estimates the <strong>direct genetic effect</strong> on the outcome only under two strict causal models:
 <ul>
-<li>Systematic comparison of GWAS and rare variant burden tests across 209 UK Biobank traits revealing they prioritize different genes through distinct mechanisms</li>
-<li>Burden tests favor trait-specific genes while GWAS capture both trait-specific genes and context-specific variants on pleiotropic genes</li>
-<li>Gene length and genetic drift are major confounders affecting rankings in burden tests and GWAS respectively</li>
+<li>The SNP has <strong>no effect on the covariate</strong> (<span class="math inline">\(\beta_{G \rightarrow C} = 0\)</span>).</li>
+<li>The covariate (<span class="math inline">\(C\)</span>) is a <strong>pure mediator</strong>, where the correlation between <span class="math inline">\(C\)</span> and <span class="math inline">\(Y\)</span> is entirely explained by a direct causal effect of <span class="math inline">\(C\)</span> on <span class="math inline">\(Y\)</span>.</li>
+</ul></li>
+<li><strong>Bias Formula</strong>: For scenarios involving shared genetic or environmental risk factors, the bias (<span class="math inline">\(\text{Bias}\)</span>) in the adjusted genetic effect estimate is well-approximated by the equation: <span class="math display">\[\text{Bias} \approx -\beta_{G \rightarrow C} \cdot \rho_{C Y} \cdot \sqrt{\frac{\text{Var}(C)}{\text{Var}(Y)}}\]</span> Where <span class="math inline">\(\beta_{G \rightarrow C}\)</span> is the genetic effect on the covariate, and <span class="math inline">\(\rho_{C Y}\)</span> is the phenotypic correlation between the covariate and the outcome. The magnitude and direction of the bias are dependent on these terms.</li>
+</ol>
+</section>
+</section>
+<section id="study-design" class="level2">
+<h2 class="anchored" data-anchor-id="study-design">Study Design</h2>
+<p>The study employed a rigorous statistical approach using established causal inference frameworks, detailed theoretical modeling, and numerical simulations.</p>
+<section id="theoretical-framework" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-framework">Theoretical Framework</h3>
+<ol type="1">
+<li><strong>Modeling of the True Direct Effect</strong>: The study defined the desired quantity, the <strong>direct genetic effect</strong> <span class="math inline">\(\beta_{G \rightarrow Y}\)</span>, as the effect of the SNP (<span class="math inline">\(G\)</span>) on the outcome (<span class="math inline">\(Y\)</span>) independent of the covariate (<span class="math inline">\(C\)</span>). This is achieved by adjusting for all causal factors of the covariate.</li>
+<li><strong>Linear Regression Model</strong>: The estimation was performed using a standard linear regression: <span class="math inline">\(Y = \alpha + \beta_{G \rightarrow Y \mid C} G + \gamma C + \epsilon\)</span>. The authors derived the expected value of the adjusted coefficient, <span class="math inline">\(\mathbb{E}[\beta_{G \rightarrow Y \mid C}]\)</span>, showing that it equals the true direct effect plus the bias term under various causal scenarios.</li>
+<li><strong>Bias Derivation</strong>: The bias was derived by considering the correlation structure induced when the covariate and the outcome share unobserved causes, specifically showing how adjustment for <span class="math inline">\(C\)</span> introduces conditioning on a <strong>collider</strong> related to the SNP’s effect. The full mathematical expression for the bias was derived, from which the simplified approximation was obtained.</li>
+</ol>
+</section>
+<section id="simulation-methods" class="level3">
+<h3 class="anchored" data-anchor-id="simulation-methods">Simulation Methods</h3>
+<ol type="1">
+<li><strong>Scenarios Tested</strong>: Simulations covered all three major causal scenarios: <strong>C is a mediator</strong> of the effect of <span class="math inline">\(G\)</span> on <span class="math inline">\(Y\)</span>; <strong>Y is a mediator</strong> of the effect of <span class="math inline">\(G\)</span> on <span class="math inline">\(C\)</span>; and <strong><span class="math inline">\(G\)</span> is a shared cause</strong> (pleiotropy) where the effect of <span class="math inline">\(G\)</span> on <span class="math inline">\(Y\)</span> is mediated by <span class="math inline">\(C\)</span>, or the traits share a hidden common environmental cause (<span class="math inline">\(U\)</span>).</li>
+<li><strong>Parameters</strong>: Simulations varied key parameters, including heritability of the traits (up to <span class="math inline">\(h^2 = 0.5\)</span>), the phenotypic correlation (<span class="math inline">\(\rho_{C Y}\)</span>, up to <span class="math inline">\(0.5\)</span>), and the genetic effect sizes (<span class="math inline">\(\beta_G\)</span>).</li>
+<li><strong>Evaluation Metrics</strong>: The primary metrics used to evaluate the consequences of the bias were the <strong>Type I error rate</strong> (false positive rate) and the <strong>statistical power</strong> of the adjusted association test. Results showed Type I error inflation when the adjusted model was used in biased scenarios.</li>
+</ol>
+</section>
+<section id="real-world-data-application" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-data-application">Real-World Data Application</h3>
+<ol type="1">
+<li><strong>Data Source</strong>: GWAS summary statistics from the <strong>GIANT consortium</strong> meta-analysis of anthropometric traits were used, specifically:
+<ul>
+<li>GWAS of <strong>Waist-to-Hip Ratio (WHR) adjusted for BMI</strong> (<span class="math inline">\(Y \mid C\)</span>).</li>
+<li>GWAS of <strong>BMI</strong> (<span class="math inline">\(C\)</span>).</li>
+</ul></li>
+<li><strong>Empirical Test</strong>: A test was performed to look for an enrichment of SNPs with marginal effects in <strong>opposite directions</strong> on WHR and BMI. A highly significant enrichment (<span class="math inline">\(p=0.005\)</span>) was found, providing empirical evidence that the statistical bias was present and inflating the number of significant loci.</li>
+</ol>
+</section>
+</section>
+<section id="major-results" class="level2">
+<h2 class="anchored" data-anchor-id="major-results">Major Results</h2>
+<ul>
+<li><strong>Power Paradox</strong>: Adjustment for a heritable covariate results in <strong>increased statistical power</strong> when the signs of <span class="math inline">\(\beta_{G \rightarrow Y \mid C}\)</span> and the bias term are in <strong>opposite directions</strong>. This effect explains the increased detection of specific loci in the WHR adjusted for BMI GWAS.</li>
+<li><strong>Interpretation Challenge</strong>: Since the adjusted estimates reflect a combination of the true direct effect and the bias term, they are <strong>neither the total genetic effect nor the direct genetic effect</strong> in most scenarios involving shared genetic or environmental risk factors.</li>
+<li><strong>Relevance to Ratio Traits</strong>: The findings are directly relevant to analyses of <strong>ratio traits</strong> (e.g., WHR, fasting glucose/insulin ratios), as these are mathematically equivalent to performing a regression adjusted for the denominator.</li>
 </ul>
 </section>
-<section id="metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis"><a href="genetics/dewalsche_2025_39792927.html">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</a></h3>
-<ul>
-<li>Novel meta-analysis approach for multi-environment trials (METs) that jointly analyzes GWAS summary statistics while accounting for inter-environment correlations</li>
-<li>Controls Type I error effectively (FDR ≤0.05) where competing methods fail severely (METAL FDR &gt;0.84), with computational efficiency enabling analysis of 600K markers × 22 environments in ~2 minutes</li>
-<li>Identified novel competition-responsive flowering QTLs in Arabidopsis and heat-stress yield QTLs in maize through contrast tests and meta-regression with environmental covariates</li>
-</ul>
+<section id="practical-implications" class="level2">
+<h2 class="anchored" data-anchor-id="practical-implications">Practical Implications</h2>
+<section id="recommendations-for-future-gwas" class="level3">
+<h3 class="anchored" data-anchor-id="recommendations-for-future-gwas">Recommendations for Future GWAS</h3>
+<ol type="1">
+<li><strong>Prioritize Unadjusted Analysis</strong>: For general genetic discovery and estimation of the <strong>total genetic effect</strong> (which includes effects mediated through other traits), the <strong>unadjusted GWAS</strong> of the primary outcome is the statistically unbiased standard.</li>
+<li><strong>Use Bivariate Methods</strong>: To gain statistical power and accurately account for correlated traits without introducing collider bias, researchers should prefer <strong>multivariate</strong> or <strong>bivariate</strong> methods (e.g., those simultaneously modeling both <span class="math inline">\(C\)</span> and <span class="math inline">\(Y\)</span>) over simple regression adjustment.</li>
+<li><strong>Causal Inference</strong>: If the research goal is specifically to estimate the <strong>direct causal effect</strong>, more advanced methods like <strong>Multivariable Mendelian Randomization (MVMR)</strong> should be considered to isolate the effect while mitigating the bias.</li>
+</ol>
 </section>
-<section id="using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" class="level3">
-<h3 class="anchored" data-anchor-id="using-gwas-summary-data-to-impute-traits-for-genotyped-individuals"><a href="genetics/ren_2023_37181332.html">Using GWAS summary data to impute traits for genotyped individuals</a></h3>
-<ul>
-<li>Novel nonparametric LS-imputation method recovers genetic components of traits from GWAS summary statistics and individual genotypes, enabling nonlinear association analyses impossible with summary data alone</li>
-<li>Perfectly recovers trait values when test genotypes match training genotypes (correlation &gt;0.999), capturing nonlinear SNP-trait information despite using only linear marginal associations</li>
-<li>Outperforms PRS-CS for association analyses in UK Biobank HDL data: successfully detects non-additive genetic effects, SNP-SNP interactions, and trains nonlinear prediction models (random forests) while PRS-CS shows severe false positive inflation</li>
-</ul>
 </section>
-<section id="adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" class="level3">
-<h3 class="anchored" data-anchor-id="adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies"><a href="genetics/aschard_2015_25640676.html">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</a></h3>
+<section id="related-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="related-concepts">Related Concepts</h2>
 <ul>
-<li>Adjusting a Genome-Wide Association Study (GWAS) for a <strong>heritable covariate</strong> (a correlated, genetically influenced trait) introduces an unintended <strong>collider bias</strong>, which distorts SNP effect estimates and can lead to false positive associations.</li>
-<li>The bias is approximately proportional to the product of the genetic effect on the covariate and the phenotypic correlation between the traits, and was empirically confirmed by finding a <strong>significant enrichment of SNPs with opposite effects</strong> in the WHR adjusted for BMI GWAS (<span class="math inline">\(p=0.005\)</span>).</li>
-<li>The authors strongly caution against interpreting adjusted results as true direct genetic effects, recommending <strong>unadjusted GWAS</strong> for total effect discovery and <strong>bivariate methods</strong> for power gains without inducing collider bias.</li>
+<li><strong>Collider Bias</strong>: A form of selection bias where conditioning on a variable that is a common effect (a collider) of two other variables induces a spurious association between the two causes.</li>
+<li><strong>Direct vs.&nbsp;Total Genetic Effect</strong>: The direct effect is the association independent of the covariate; the total effect includes the portion mediated through the covariate.</li>
+<li><strong>Waist-to-Hip Ratio (WHR) adjusted for BMI</strong>: The primary empirical example, where the adjustment for the highly heritable BMI creates a biased estimate for the remaining variance of WHR.</li>
 </ul>
 
 
