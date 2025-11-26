@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-26">
 
-<title>PGS</title>
+<title>Genetic prediction of complex traits with polygenic scores: A statistical review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -85,35 +115,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./genetics.html"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./proteomics.html"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metabolomics.html"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./pgs.html" aria-current="page"> 
+    <a class="nav-link" href="../pgs.html"> 
 <span class="menu-text">PGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./statistics.html"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
 </ul>
@@ -132,7 +162,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review" id="toc-genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review" class="nav-link active" data-scroll-target="#genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review">Genetic prediction of complex traits with polygenic scores: A statistical review</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a></li>
+  <li><a href="#categorization-and-statistical-framework" id="toc-categorization-and-statistical-framework" class="nav-link" data-scroll-target="#categorization-and-statistical-framework">Categorization and Statistical Framework</a>
+  <ul class="collapse">
+  <li><a href="#core-pgs-calculation" id="toc-core-pgs-calculation" class="nav-link" data-scroll-target="#core-pgs-calculation">Core PGS Calculation</a></li>
+  <li><a href="#unifying-multiple-linear-regression-framework" id="toc-unifying-multiple-linear-regression-framework" class="nav-link" data-scroll-target="#unifying-multiple-linear-regression-framework">Unifying Multiple Linear Regression Framework</a></li>
+  <li><a href="#classification-of-pgs-methods" id="toc-classification-of-pgs-methods" class="nav-link" data-scroll-target="#classification-of-pgs-methods">Classification of PGS Methods</a></li>
+  </ul></li>
+  <li><a href="#practical-considerations-and-performance" id="toc-practical-considerations-and-performance" class="nav-link" data-scroll-target="#practical-considerations-and-performance">Practical Considerations and Performance</a>
+  <ul class="collapse">
+  <li><a href="#factors-affecting-pgs-performance" id="toc-factors-affecting-pgs-performance" class="nav-link" data-scroll-target="#factors-affecting-pgs-performance">Factors Affecting PGS Performance</a></li>
+  <li><a href="#decision-tree-for-pgs-analysis" id="toc-decision-tree-for-pgs-analysis" class="nav-link" data-scroll-target="#decision-tree-for-pgs-analysis">Decision Tree for PGS Analysis</a></li>
+  </ul></li>
+  <li><a href="#challenges-and-future-directions" id="toc-challenges-and-future-directions" class="nav-link" data-scroll-target="#challenges-and-future-directions">Challenges and Future Directions</a></li>
   </ul>
 </nav>
     </div>
@@ -141,14 +183,28 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">PGS</h1>
-</div>
+<h1 class="title">Genetic prediction of complex traits with polygenic scores: A statistical review</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Polygenic Scores</div>
+    <div class="quarto-category">Polygenic Risk Scores</div>
+    <div class="quarto-category">Genetic Prediction</div>
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">Statistical Genetics</div>
+    <div class="quarto-category">Review</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -158,13 +214,67 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review" class="level3">
-<h3 class="anchored" data-anchor-id="genetic-prediction-of-complex-traits-with-polygenic-scores-a-statistical-review"><a href="pgs/ma_2021_34243982.html">Genetic prediction of complex traits with polygenic scores: A statistical review</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/34243982/">34243982</a><br>
+<strong>DOI:</strong> <a href="http://dx.doi.org/10.1016/j.tig.2021.06.004">10.1016/j.tig.2021.06.004</a><br>
+<strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p>This comprehensive statistical review provides an exhaustive analysis of the landscape of <strong>Polygenic Score (PGS)</strong> methods, a critical area in human genetics focused on predicting complex traits and disease risk using genetic data. The authors review 46 different methods for PGS construction, establishing a unifying <strong>multiple linear regression framework</strong> to connect and categorize the majority of these techniques. The core conclusion is that the optimal PGS method is highly dependent on the <strong>genetic architecture</strong> of the target trait (e.g., polygenicity, effect size distribution) and the nature of the available training and target data. The review serves as an essential reference, providing both the statistical underpinnings for method developers and practical guidance (including a decision tree) for analysts performing PGS analysis in clinical and research settings.</p>
+</section>
+<section id="categorization-and-statistical-framework" class="level2">
+<h2 class="anchored" data-anchor-id="categorization-and-statistical-framework">Categorization and Statistical Framework</h2>
+<p>The review structures the diverse landscape of PGS methods into a coherent statistical framework, primarily centered on how they estimate the SNP effect sizes, which serve as the weights for the Polygenic Score.</p>
+<section id="core-pgs-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="core-pgs-calculation">Core PGS Calculation</h3>
+<p>In its simplest form, the PGS for an individual (<span class="math inline">\(i\)</span>) is a weighted sum of their genotypes across <span class="math inline">\(M\)</span> single nucleotide polymorphisms (SNPs): <span class="math display">\[\text{PGS}_i = \sum_{j=1}^{M} G_{ij} \hat{\beta}_j\]</span> where <span class="math inline">\(G_{ij}\)</span> is the genotype of individual <span class="math inline">\(i\)</span> at SNP <span class="math inline">\(j\)</span>, and <span class="math inline">\(\hat{\beta}_j\)</span> is the estimated genetic effect size (the weight) for that SNP.</p>
+</section>
+<section id="unifying-multiple-linear-regression-framework" class="level3">
+<h3 class="anchored" data-anchor-id="unifying-multiple-linear-regression-framework">Unifying Multiple Linear Regression Framework</h3>
+<p>The authors classify most modern PGS methods as variants of a general <strong>multiple linear regression model</strong>: <span class="math display">\[\mathbf{Y} = \mathbf{G}\mathbf{\beta} + \mathbf{\epsilon}\]</span> where <span class="math inline">\(\mathbf{Y}\)</span> is the phenotype vector, <span class="math inline">\(\mathbf{G}\)</span> is the genotype matrix, <span class="math inline">\(\mathbf{\beta}\)</span> is the vector of true genetic effects, and <span class="math inline">\(\mathbf{\epsilon}\)</span> is the error term. Different PGS methods (e.g., LDpred, S-Bayes) are distinguished by their assumptions about the effect size vector, <span class="math inline">\(\mathbf{\beta}\)</span>, and how they account for the correlation structure of the genotypes (Linkage Disequilibrium or LD).</p>
+</section>
+<section id="classification-of-pgs-methods" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-pgs-methods">Classification of PGS Methods</h3>
+<p>The review categorizes the 46 analyzed methods based on their underlying statistical approach:</p>
+<ol type="1">
+<li><strong>Classical Methods</strong>: These include <strong>P-value Thresholding and Clumping (P+T)</strong>, which selects a subset of independent SNPs based on their p-values. This remains a simple and surprisingly effective baseline method.</li>
+<li><strong>Bayesian and Regularization Methods</strong>: These methods explicitly model the genetic architecture by incorporating prior distributions on the SNP effect sizes (<span class="math inline">\(\mathbf{\beta}\)</span>) and/or regularizing the estimates to account for noise and LD. Examples include:
 <ul>
-<li>This statistical review comprehensively analyzes 46 methods for <strong>Polygenic Score (PGS)</strong> construction, unifying most of them under a <strong>multiple linear regression framework</strong> to clarify their assumptions regarding effect size distribution and Linkage Disequilibrium (LD).</li>
-<li>The review concludes that optimal PGS performance (accuracy) is highly dependent on the trait’s <strong>genetic architecture</strong> and is significantly improved by using <strong>Bayesian/Regularization methods</strong> (e.g., LDpred, PRS-CS) that explicitly model LD and incorporate informed prior distributions for SNP effects.</li>
-<li>A critical challenge highlighted is the significant <strong>loss of transferability</strong> across ancestral populations, underscoring the need for more diverse training data and methods that better address <strong>ancestral heterogeneity</strong> and incorporate non-additive and Gene-by-Environment (GxE) effects.</li>
-</ul>
+<li><strong>LDpred/LDpred2</strong>: Assumes a fraction of SNPs are causal and uses an LD reference panel to shrink effect sizes.</li>
+<li><strong>BayesC/BayesR</strong>: Assumes effect sizes come from a mixture of normal distributions, allowing for a few large effects and many small ones.</li>
+<li><strong>Lasso/Ridge Regression</strong>: Uses penalization to optimize effect size selection and estimation.</li>
+</ul></li>
+<li><strong>Summary Statistics-Based Methods</strong>: Methods that operate entirely on GWAS summary statistics and an external LD reference panel (e.g., LDpred, S-Bayes, PRS-CS). These are the most computationally efficient and widely used due to data sharing conventions.</li>
+<li><strong>Meta-Dimensional Methods</strong>: These include methods that incorporate information beyond SNP effects, such as functional annotations or gene expression data (e.g., MetaXcan).</li>
+</ol>
+</section>
+</section>
+<section id="practical-considerations-and-performance" class="level2">
+<h2 class="anchored" data-anchor-id="practical-considerations-and-performance">Practical Considerations and Performance</h2>
+<section id="factors-affecting-pgs-performance" class="level3">
+<h3 class="anchored" data-anchor-id="factors-affecting-pgs-performance">Factors Affecting PGS Performance</h3>
+<p>The prediction accuracy of a PGS (typically measured by the coefficient of determination, <span class="math inline">\(R^2\)</span>) is highly sensitive to several factors:</p>
+<ol type="1">
+<li><strong>Genetic Architecture</strong>: Methods that accurately model the true genetic architecture (e.g., high polygenicity vs.&nbsp;oligenicity) perform best. Bayesian methods often excel because they flexibly model the prior distribution of effect sizes.</li>
+<li><strong>Training Sample Size</strong>: Performance is highly dependent on the size of the GWAS used to estimate <span class="math inline">\(\hat{\beta}\)</span>. Larger sample sizes generally lead to more accurate effect size estimates and thus better PGS performance.</li>
+<li><strong>Ancestral Divergence</strong>: Prediction accuracy significantly drops when the <strong>target population</strong> ancestry differs substantially from the <strong>training population</strong> (e.g., GWAS conducted primarily in European populations but applied to African populations). This highlights the critical issue of transferability and health equity.</li>
+<li><strong>Linkage Disequilibrium (LD) Modeling</strong>: Explicitly accounting for LD, such as in LDpred and PRS-CS, is crucial for improving prediction accuracy compared to simple methods like P+T.</li>
+</ol>
+</section>
+<section id="decision-tree-for-pgs-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree-for-pgs-analysis">Decision Tree for PGS Analysis</h3>
+<p>The review provides a practical <strong>decision tree</strong> to help researchers select the appropriate PGS method based on the available data and research question:</p>
+<p>Key branches include: * <strong>Input Data</strong>: Is individual-level data or only GWAS summary data available? * <strong>Trait Complexity</strong>: Analyzing a single trait or multiple correlated traits? * <strong>Modeling Approach</strong>: Choosing between model-based (e.g., linear mixed models) and algorithm-based (e.g., machine learning) methods.</p>
+</section>
+</section>
+<section id="challenges-and-future-directions" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-and-future-directions">Challenges and Future Directions</h2>
+<p>The authors identify several major challenges that need to be addressed to realize the full clinical potential of PGS:</p>
+<ol type="1">
+<li><strong>Addressing Heterogeneity (Ancestry)</strong>: Developing methods that maintain high predictive accuracy across diverse ancestral populations and that can properly perform <strong>multi-ancestry meta-analysis</strong> to generate universally accurate PGS.</li>
+<li><strong>Non-Additive and GxE Effects</strong>: Incorporating <strong>non-additive genetic effects</strong> (dominance, epistasis) and <strong>Gene-by-Environment (GxE)</strong> interactions into the PGS model. Current models are largely additive and thus leave substantial variance unexplained.</li>
+<li><strong>Causal Variants and Fine-Mapping</strong>: Moving beyond marker SNPs to accurately identify and weight the true <strong>causal variants</strong> to improve biological relevance and prediction.</li>
+<li><strong>Clinical Implementation</strong>: Establishing standardized reporting guidelines, validating PGS in independent clinical cohorts, and addressing the ethical concerns related to using PGS in personalized medicine.</li>
+</ol>
 
 
 </section>
