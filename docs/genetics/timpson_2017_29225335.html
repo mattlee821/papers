@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-26">
 
-<title>genetics</title>
+<title>Genetic architecture: the shape of the genetic contribution to human traits and disease</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,37 +69,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -114,31 +86,31 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./genetics.html" aria-current="page"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./proteomics.html"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metabolomics.html"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./statistics.html"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
 </ul>
@@ -157,11 +129,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#specificity-length-and-luck-drive-gene-rankings-in-association-studies" id="toc-specificity-length-and-luck-drive-gene-rankings-in-association-studies" class="nav-link active" data-scroll-target="#specificity-length-and-luck-drive-gene-rankings-in-association-studies">Specificity, length and luck drive gene rankings in association studies</a></li>
-  <li><a href="#metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis" id="toc-metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis" class="nav-link" data-scroll-target="#metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</a></li>
-  <li><a href="#using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" id="toc-using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" class="nav-link" data-scroll-target="#using-gwas-summary-data-to-impute-traits-for-genotyped-individuals">Using GWAS summary data to impute traits for genotyped individuals</a></li>
-  <li><a href="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" id="toc-adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" class="nav-link" data-scroll-target="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</a></li>
-  <li><a href="#genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" id="toc-genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" class="nav-link" data-scroll-target="#genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease">Genetic architecture: the shape of the genetic contribution to human traits and disease</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a>
+  <ul class="collapse">
+  <li><a href="#core-components-of-genetic-architecture" id="toc-core-components-of-genetic-architecture" class="nav-link" data-scroll-target="#core-components-of-genetic-architecture">Core Components of Genetic Architecture</a></li>
+  </ul></li>
+  <li><a href="#impact-of-modern-genomic-technologies-on-architecture-discovery" id="toc-impact-of-modern-genomic-technologies-on-architecture-discovery" class="nav-link" data-scroll-target="#impact-of-modern-genomic-technologies-on-architecture-discovery">Impact of Modern Genomic Technologies on Architecture Discovery</a>
+  <ul class="collapse">
+  <li><a href="#gwas-and-common-variant-architecture" id="toc-gwas-and-common-variant-architecture" class="nav-link" data-scroll-target="#gwas-and-common-variant-architecture">GWAS and Common Variant Architecture</a></li>
+  <li><a href="#next-generation-sequencing-ngs-and-rare-variants" id="toc-next-generation-sequencing-ngs-and-rare-variants" class="nav-link" data-scroll-target="#next-generation-sequencing-ngs-and-rare-variants">Next-Generation Sequencing (NGS) and Rare Variants</a></li>
+  </ul></li>
+  <li><a href="#complexity-of-genetic-effects" id="toc-complexity-of-genetic-effects" class="nav-link" data-scroll-target="#complexity-of-genetic-effects">Complexity of Genetic Effects</a>
+  <ul class="collapse">
+  <li><a href="#pleiotropy-and-shared-genetic-etiology" id="toc-pleiotropy-and-shared-genetic-etiology" class="nav-link" data-scroll-target="#pleiotropy-and-shared-genetic-etiology">Pleiotropy and Shared Genetic Etiology</a></li>
+  <li><a href="#gene-environment-gxe-interactions" id="toc-gene-environment-gxe-interactions" class="nav-link" data-scroll-target="#gene-environment-gxe-interactions">Gene-Environment (GxE) Interactions</a></li>
+  </ul></li>
+  <li><a href="#future-directions-and-clinical-goals" id="toc-future-directions-and-clinical-goals" class="nav-link" data-scroll-target="#future-directions-and-clinical-goals">Future Directions and Clinical Goals</a></li>
   </ul>
 </nav>
     </div>
@@ -170,14 +152,29 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">genetics</h1>
-</div>
+<h1 class="title">Genetic architecture: the shape of the genetic contribution to human traits and disease</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Genetic Architecture</div>
+    <div class="quarto-category">Complex Traits</div>
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">Heritability</div>
+    <div class="quarto-category">Rare Variants</div>
+    <div class="quarto-category">Pleiotropy</div>
+    <div class="quarto-category">Gene-Environment Interaction</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -187,45 +184,79 @@ window.Quarto = {
 </header>
 
 
-<section id="specificity-length-and-luck-drive-gene-rankings-in-association-studies" class="level3">
-<h3 class="anchored" data-anchor-id="specificity-length-and-luck-drive-gene-rankings-in-association-studies"><a href="genetics/spence_2025_41193809.html">Specificity, length and luck drive gene rankings in association studies</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/29225335/">29225335</a><br>
+<strong>DOI:</strong> <a href="http://dx.doi.org/10.1038/nrg.2017.101">10.1038/nrg.2017.101</a><br>
+<strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p>This comprehensive review synthesizes the field’s understanding of <strong>genetic architecture</strong>—the characteristics of genetic variation responsible for heritable phenotypic variability—in the era following the advent of large-scale Genome-Wide Association Studies (GWAS) and Next-Generation Sequencing (NGS). The authors systematically define the components of genetic architecture and explain how recent technological advances have begun to reveal the complex interplay of factors contributing to human traits and diseases.</p>
+<section id="core-components-of-genetic-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="core-components-of-genetic-architecture">Core Components of Genetic Architecture</h3>
+<p>The genetic architecture of any complex trait is defined by four interacting components, which the review explores in depth:</p>
+<ol type="1">
+<li><strong>Number of Causal Variants</strong>: The sheer count of genetic variants (SNPs, indels, SVs) that collectively affect the trait. Most complex traits are <strong>highly polygenic</strong>, involving thousands of variants.</li>
+<li><strong>Effect Size Distribution</strong>: The magnitude of the effect that each variant contributes to the phenotype. GWAS has revealed that many common variants have <strong>small, additive effects</strong>, while rare variants often have <strong>large effects</strong>.</li>
+<li><strong>Allele Frequency Spectrum</strong>: The distribution of causal variant frequencies in the population. Common traits are often influenced by variants across the entire frequency spectrum, supporting the <strong>‘common disease, common variant’</strong> and <strong>‘common disease, rare variant’</strong> hypotheses in tandem.</li>
+<li><strong>Interactions</strong>: The complexity added by non-additive relationships:
 <ul>
-<li>Systematic comparison of GWAS and rare variant burden tests across 209 UK Biobank traits revealing they prioritize different genes through distinct mechanisms</li>
-<li>Burden tests favor trait-specific genes while GWAS capture both trait-specific genes and context-specific variants on pleiotropic genes</li>
-<li>Gene length and genetic drift are major confounders affecting rankings in burden tests and GWAS respectively</li>
+<li><strong>Allelic Interactions</strong>: <strong>Dominance</strong> (interaction between alleles at the same locus).</li>
+<li><strong>Locus Interactions</strong>: <strong>Epistasis</strong> (interaction between alleles at different loci).</li>
+<li><strong>Environmental Interactions</strong>: <strong>Gene-by-Environment (GxE)</strong> interaction.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="impact-of-modern-genomic-technologies-on-architecture-discovery" class="level2">
+<h2 class="anchored" data-anchor-id="impact-of-modern-genomic-technologies-on-architecture-discovery">Impact of Modern Genomic Technologies on Architecture Discovery</h2>
+<p>The review highlights how different technologies have been instrumental in characterizing specific aspects of the genetic architecture:</p>
+<section id="gwas-and-common-variant-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="gwas-and-common-variant-architecture">GWAS and Common Variant Architecture</h3>
+<ul>
+<li><strong>GWAS Success</strong>: GWAS has been highly successful in identifying thousands of <strong>common, low-effect variants</strong> for hundreds of traits, confirming the extreme polygenicity of complex traits.</li>
+<li><strong>Missing Heritability</strong>: The review addresses the historical problem of <strong>“missing heritability”</strong>—the gap between heritability estimated from twin/family studies (broad-sense heritability) and that explained by all detected common SNPs (SNP-heritability). Explanations include:
+<ul>
+<li>The contribution of <strong>rare variants</strong> missed by GWAS arrays.</li>
+<li>The residual influence of <strong>non-additive effects</strong> (dominance and epistasis) captured by family studies but not fully by linear GWAS models.</li>
+<li>The contribution of <strong>structural variation</strong> and <strong>gene-environment interactions</strong>.</li>
+</ul></li>
+<li><strong>Locus Heterogeneity</strong>: GWAS often reveals multiple independent associated signals within the same locus, indicating <strong>allelic series</strong> or complex local regulation.</li>
 </ul>
 </section>
-<section id="metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="metage-investigating-genotype-x-environment-interactions-through-gwas-meta-analysis"><a href="genetics/dewalsche_2025_39792927.html">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</a></h3>
+<section id="next-generation-sequencing-ngs-and-rare-variants" class="level3">
+<h3 class="anchored" data-anchor-id="next-generation-sequencing-ngs-and-rare-variants">Next-Generation Sequencing (NGS) and Rare Variants</h3>
 <ul>
-<li>Novel meta-analysis approach for multi-environment trials (METs) that jointly analyzes GWAS summary statistics while accounting for inter-environment correlations</li>
-<li>Controls Type I error effectively (FDR ≤0.05) where competing methods fail severely (METAL FDR &gt;0.84), with computational efficiency enabling analysis of 600K markers × 22 environments in ~2 minutes</li>
-<li>Identified novel competition-responsive flowering QTLs in Arabidopsis and heat-stress yield QTLs in maize through contrast tests and meta-regression with environmental covariates</li>
+<li><strong>Sequencing Role</strong>: NGS studies (e.g., whole-exome sequencing, whole-genome sequencing) are essential for characterizing the role of <strong>rare variants</strong>.</li>
+<li><strong>Burden Tests</strong>: These tests aggregate the effects of multiple rare variants within a single gene or region. The review notes that rare, high-penetrance variants often reside in genes under <strong>strong negative selection</strong>, explaining why their overall contribution to population variance (though individually large) may be limited.</li>
+<li><strong>Clinical Relevance</strong>: Rare variants are crucial for understanding <strong>Mendelian disease</strong> and for identifying genes with large effects that are strong candidates for <strong>drug targets</strong>.</li>
 </ul>
 </section>
-<section id="using-gwas-summary-data-to-impute-traits-for-genotyped-individuals" class="level3">
-<h3 class="anchored" data-anchor-id="using-gwas-summary-data-to-impute-traits-for-genotyped-individuals"><a href="genetics/ren_2023_37181332.html">Using GWAS summary data to impute traits for genotyped individuals</a></h3>
+</section>
+<section id="complexity-of-genetic-effects" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-of-genetic-effects">Complexity of Genetic Effects</h2>
+<section id="pleiotropy-and-shared-genetic-etiology" class="level3">
+<h3 class="anchored" data-anchor-id="pleiotropy-and-shared-genetic-etiology">Pleiotropy and Shared Genetic Etiology</h3>
 <ul>
-<li>Novel nonparametric LS-imputation method recovers genetic components of traits from GWAS summary statistics and individual genotypes, enabling nonlinear association analyses impossible with summary data alone</li>
-<li>Perfectly recovers trait values when test genotypes match training genotypes (correlation &gt;0.999), capturing nonlinear SNP-trait information despite using only linear marginal associations</li>
-<li>Outperforms PRS-CS for association analyses in UK Biobank HDL data: successfully detects non-additive genetic effects, SNP-SNP interactions, and trains nonlinear prediction models (random forests) while PRS-CS shows severe false positive inflation</li>
+<li><strong>Widespread Pleiotropy</strong>: The authors emphasize that <strong>pleiotropy</strong> (a single genetic variant affecting multiple distinct traits) is the <strong>norm, not the exception</strong>, for common variants identified by GWAS. This is supported by analyses showing extensive genetic correlation between traits.</li>
+<li><strong>Confounding</strong>: Pleiotropy complicates causal inference. The review discusses how techniques like <strong>Mendelian Randomization (MR)</strong> are used to distinguish true causal effects from horizontal pleiotropy (a single variant affecting multiple outcomes through different pathways).</li>
 </ul>
 </section>
-<section id="adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" class="level3">
-<h3 class="anchored" data-anchor-id="adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies"><a href="genetics/aschard_2015_25640676.html">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</a></h3>
+<section id="gene-environment-gxe-interactions" class="level3">
+<h3 class="anchored" data-anchor-id="gene-environment-gxe-interactions">Gene-Environment (GxE) Interactions</h3>
 <ul>
-<li>Adjusting a Genome-Wide Association Study (GWAS) for a <strong>heritable covariate</strong> (a correlated, genetically influenced trait) introduces an unintended <strong>collider bias</strong>, which distorts SNP effect estimates and can lead to false positive associations.</li>
-<li>The bias is approximately proportional to the product of the genetic effect on the covariate and the phenotypic correlation between the traits, and was empirically confirmed by finding a <strong>significant enrichment of SNPs with opposite effects</strong> in the WHR adjusted for BMI GWAS (<span class="math inline">\(p=0.005\)</span>).</li>
-<li>The authors strongly caution against interpreting adjusted results as true direct genetic effects, recommending <strong>unadjusted GWAS</strong> for total effect discovery and <strong>bivariate methods</strong> for power gains without inducing collider bias.</li>
+<li><strong>Definition</strong>: GxE occurs when the effect of a genetic variant on a phenotype depends on the individual’s environment (e.g., diet, smoking, stress).</li>
+<li><strong>Detection Challenge</strong>: GxE interactions are notoriously difficult to detect and estimate accurately due to requiring large samples with precise environmental measures. The review notes that population-based cohorts like the UK Biobank are vital for making progress in this area.</li>
 </ul>
 </section>
-<section id="genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" class="level3">
-<h3 class="anchored" data-anchor-id="genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease"><a href="genetics/timpson_2017_29225335.html">Genetic architecture: the shape of the genetic contribution to human traits and disease</a></h3>
-<ul>
-<li>This review defines <strong>genetic architecture</strong> by four components: the number of causal variants (polygenicity), the distribution of their effect sizes, their allele frequency spectrum, and the types of genetic and environmental interactions (dominance, epistasis, GxE).</li>
-<li>It highlights that complex traits are <strong>highly polygenic</strong> and influenced by variants across the entire frequency spectrum, addressing <strong>“missing heritability”</strong> by pointing to the role of <strong>rare variants</strong>, non-additive effects, and <strong>Gene-by-Environment (GxE) interactions</strong>.</li>
-<li>The authors emphasize that <strong>pleiotropy</strong> (one variant affecting multiple traits) is widespread among common variants, discussing how techniques like <strong>Mendelian Randomization (MR)</strong> are essential for distinguishing causation from pleiotropy in the complex genetic landscape.</li>
-</ul>
+</section>
+<section id="future-directions-and-clinical-goals" class="level2">
+<h2 class="anchored" data-anchor-id="future-directions-and-clinical-goals">Future Directions and Clinical Goals</h2>
+<p>The review concludes by outlining the necessary steps to fully characterize genetic architecture and achieve the field’s clinical goals:</p>
+<ol type="1">
+<li><strong>Comprehensive Mapping</strong>: Moving from association studies to <strong>causal variant identification</strong>, focusing on non-coding variants and improving fine-mapping methods.</li>
+<li><strong>Accounting for Non-Additivity</strong>: Developing statistical methods that are better powered to detect and estimate <strong>dominance and epistatic effects</strong> in large cohorts.</li>
+<li><strong>Integrating Environment</strong>: Robustly incorporating environmental exposure data into models to quantify the contribution of <strong>GxE interactions</strong> and improve personalized risk prediction.</li>
+<li><strong>Clinical Translation</strong>: Leveraging the understanding of genetic architecture to improve <strong>disease screening, diagnosis, prognosis, and therapeutic development</strong>. This includes prioritizing genes for drug development based on the magnitude and specificity of their genetic effects.</li>
+</ol>
 
 
 </section>
