@@ -145,6 +145,14 @@ window.Quarto = {
     <a class="nav-link" href="./statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./interaction.html"> 
+<span class="menu-text">interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./other.html"> 
+<span class="menu-text">other</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -167,6 +175,10 @@ window.Quarto = {
   <li><a href="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" id="toc-adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies" class="nav-link" data-scroll-target="#adjusting-for-heritable-covariates-can-bias-effect-estimates-in-genome-wide-association-studies">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</a></li>
   <li><a href="#genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" id="toc-genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease" class="nav-link" data-scroll-target="#genetic-architecture-the-shape-of-the-genetic-contribution-to-human-traits-and-disease">Genetic architecture: the shape of the genetic contribution to human traits and disease</a></li>
   <li><a href="#genome-wide-association-scans-for-secondary-traits-using-case-control-samples" id="toc-genome-wide-association-scans-for-secondary-traits-using-case-control-samples" class="nav-link" data-scroll-target="#genome-wide-association-scans-for-secondary-traits-using-case-control-samples">Genome-wide association scans for secondary traits using case-control samples</a></li>
+  <li><a href="#joint-analysis-of-gwas-and-multi-omics-qtl-summary-statistics-reveals-a-large-fraction-of-gwas-signals-shared-with-molecular-phenotypes" id="toc-joint-analysis-of-gwas-and-multi-omics-qtl-summary-statistics-reveals-a-large-fraction-of-gwas-signals-shared-with-molecular-phenotypes" class="nav-link" data-scroll-target="#joint-analysis-of-gwas-and-multi-omics-qtl-summary-statistics-reveals-a-large-fraction-of-gwas-signals-shared-with-molecular-phenotypes">Joint analysis of GWAS and multi-omics QTL summary statistics reveals a large fraction of GWAS signals shared with molecular phenotypes</a></li>
+  <li><a href="#the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes" id="toc-the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes" class="nav-link" data-scroll-target="#the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes">The contribution of genetic determinants of blood gene expression and splicing to molecular phenotypes and health outcomes</a></li>
+  <li><a href="#extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization" id="toc-extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization" class="nav-link" data-scroll-target="#extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization">Extensive co-regulation of neighboring genes complicates the use of eQTLs in target gene prioritization</a></li>
+  <li><a href="#global-quantification-of-mammalian-gene-expression-control" id="toc-global-quantification-of-mammalian-gene-expression-control" class="nav-link" data-scroll-target="#global-quantification-of-mammalian-gene-expression-control">Global quantification of mammalian gene expression control</a></li>
   </ul>
 </nav>
     </div>
@@ -192,6 +204,9 @@ window.Quarto = {
 </header>
 
 
+<ul>
+<li>1/3 of pQTL signals (Olink/Somalogic) are epitope effects</li>
+</ul>
 <section id="specificity-length-and-luck-drive-gene-rankings-in-association-studies" class="level3">
 <h3 class="anchored" data-anchor-id="specificity-length-and-luck-drive-gene-rankings-in-association-studies"><a href="genetics/spence_2025_41193809.html">Specificity, length and luck drive gene rankings in association studies</a></h3>
 <ul>
@@ -238,6 +253,38 @@ window.Quarto = {
 <li>This statistical methodology paper examines the bias introduced when a <strong>case-control GWAS</strong> (designed for a primary disease <span class="math inline">\(D\)</span>) is used to analyze a <strong>secondary quantitative trait</strong> (<span class="math inline">\(T\)</span>).</li>
 <li>It demonstrates that <strong>naïve analysis</strong> (ignoring case-control ascertainment) leads to <strong>biased effect estimates</strong> for the marker-secondary trait association (<span class="math inline">\(G-T\)</span>) specifically when <strong>both the marker <span class="math inline">\(G\)</span> and the trait <span class="math inline">\(T\)</span> are independently associated with the primary disease <span class="math inline">\(D\)</span></strong>.</li>
 <li>The authors propose using <strong>Inverse-Probability-of-Sampling-Weighted (IPW) regression</strong> as the robust method, which provides <strong>unbiased estimates</strong> in all scenarios, though at the cost of reduced statistical power, recommending naïve analysis for markers not associated with the primary disease.</li>
+</ul>
+</section>
+<section id="joint-analysis-of-gwas-and-multi-omics-qtl-summary-statistics-reveals-a-large-fraction-of-gwas-signals-shared-with-molecular-phenotypes" class="level3">
+<h3 class="anchored" data-anchor-id="joint-analysis-of-gwas-and-multi-omics-qtl-summary-statistics-reveals-a-large-fraction-of-gwas-signals-shared-with-molecular-phenotypes"><a href="genetics/wu_2023_37601976.html">Joint analysis of GWAS and multi-omics QTL summary statistics reveals a large fraction of GWAS signals shared with molecular phenotypes</a></h3>
+<ul>
+<li><strong>Objective</strong>: The new method, <strong>OPERA</strong>, was developed to integrate GWAS and multi-omics <strong>QTL (xQTL)</strong> summary statistics to quantify the proportion of complex trait genetic signals mediated by molecular phenotypes.</li>
+<li><strong>Key Finding</strong>: The study found that approximately <strong>50% of genetic signals identified in GWAS are shared with (and likely mediated by) at least one molecular phenotype</strong>, with <strong>eQTLs</strong> (gene expression QTLs) being the most dominant mediators.</li>
+<li><strong>Impact</strong>: OPERA led to the discovery of <strong>89 novel genes</strong> for 11 complex traits, confirming the approach’s ability to significantly enhance gene discovery and fine-mapping by linking genetic variants to their underlying molecular regulatory mechanisms.</li>
+</ul>
+</section>
+<section id="the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes" class="level3">
+<h3 class="anchored" data-anchor-id="the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes"><a href="genetics/tokolyi_2025_40038547.html">The contribution of genetic determinants of blood gene expression and splicing to molecular phenotypes and health outcomes</a></h3>
+<ul>
+<li><strong>Topic</strong>: Investigating the <strong>gene-regulatory mechanisms</strong> (eQTLs and sQTLs) of nonprotein-coding genetic variants in blood and their causal contribution to <strong>3,430 molecular phenotypes</strong> (proteins, metabolites, lipids) and health outcomes.</li>
+<li><strong>Method</strong>: Mapped eQTLs and sQTLs in 4,732 individuals and used <strong>colocalization</strong> and <strong>mediation analyses</strong> to link these regulatory variants to downstream molecular and disease traits.</li>
+<li><strong>Impact</strong>: Identified 222 molecular phenotypes significantly <strong>mediated by gene expression or splicing</strong>, providing mechanistic insights into diseases (e.g., <span class="math inline">\(WARS1\)</span> in hypertension) and offering a valuable public resource for human genetic etiology.</li>
+</ul>
+</section>
+<section id="extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization" class="level3">
+<h3 class="anchored" data-anchor-id="extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization"><a href="genetics/tambets_2024_39210598.html">Extensive co-regulation of neighboring genes complicates the use of eQTLs in target gene prioritization</a></h3>
+<ul>
+<li><strong>Research Problem</strong>: Systematic benchmarking showed that using <strong>eQTL colocalization methods</strong> to prioritize causal genes for GWAS hits is often complicated by extensive co-regulation of neighboring genes and is less effective than simpler heuristics.</li>
+<li><strong>Key Result</strong>: The simple strategy of assigning fine-mapped pQTLs to the <strong>closest protein coding gene</strong> significantly outperformed all tested Bayesian colocalization methods, achieving 76.9% recall and 71.9% precision.</li>
+<li><strong>Conclusion</strong>: Linking GWAS variants to target genes remains challenging using eQTL evidence alone, and robust gene prioritization requires the <strong>triangulation of evidence from multiple functional sources</strong> to improve confidence.</li>
+</ul>
+</section>
+<section id="global-quantification-of-mammalian-gene-expression-control" class="level3">
+<h3 class="anchored" data-anchor-id="global-quantification-of-mammalian-gene-expression-control"><a href="genetics/schwanhausser_2011_21593866.html">Global quantification of mammalian gene expression control</a></h3>
+<ul>
+<li><strong>Core Discovery</strong>: This seminal study, using parallel metabolic pulse labeling and absolute quantification in mammalian cells, concluded that the <strong>cellular abundance of proteins is predominantly controlled at the level of translation</strong>, not transcription.</li>
+<li><strong>Quantification</strong>: The study found a strong correlation between mRNA and protein abundance (<span class="math inline">\(R \approx 0.73\)</span>) but <strong>no correlation between the half-lives</strong> (turnover rates) of corresponding mRNA and proteins.</li>
+<li><strong>Mechanism</strong>: Protein synthesis rates (translation) were found to be the most variable component, serving as the primary determinant of protein steady-state levels, while degradation rates primarily determine the <strong>kinetics and response time</strong> of the system.</li>
 </ul>
 
 

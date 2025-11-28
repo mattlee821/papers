@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-27">
+<meta name="dcterms.date" content="2025-11-28">
 
-<title>Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</title>
+<title>Extensive co-regulation of neighboring genes complicates the use of eQTLs in target gene prioritization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -170,22 +141,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a>
+  <li><a href="#key-findings-limitations-of-eqtl-colocalization-in-causal-gene-prioritization" id="toc-key-findings-limitations-of-eqtl-colocalization-in-causal-gene-prioritization" class="nav-link active" data-scroll-target="#key-findings-limitations-of-eqtl-colocalization-in-causal-gene-prioritization">Key Findings: Limitations of eQTL Colocalization in Causal Gene Prioritization</a></li>
+  <li><a href="#study-design-and-benchmarking-methods" id="toc-study-design-and-benchmarking-methods" class="nav-link" data-scroll-target="#study-design-and-benchmarking-methods">Study Design and Benchmarking Methods</a>
   <ul class="collapse">
-  <li><a href="#main-discoveries" id="toc-main-discoveries" class="nav-link" data-scroll-target="#main-discoveries">Main Discoveries</a></li>
+  <li><a href="#ground-truth-dataset" id="toc-ground-truth-dataset" class="nav-link" data-scroll-target="#ground-truth-dataset">Ground Truth Dataset</a></li>
+  <li><a href="#methods-evaluated" id="toc-methods-evaluated" class="nav-link" data-scroll-target="#methods-evaluated">Methods Evaluated</a></li>
   </ul></li>
-  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
   <ul class="collapse">
-  <li><a href="#theoretical-framework" id="toc-theoretical-framework" class="nav-link" data-scroll-target="#theoretical-framework">Theoretical Framework</a></li>
-  <li><a href="#simulation-methods" id="toc-simulation-methods" class="nav-link" data-scroll-target="#simulation-methods">Simulation Methods</a></li>
-  <li><a href="#real-world-data-application" id="toc-real-world-data-application" class="nav-link" data-scroll-target="#real-world-data-application">Real-World Data Application</a></li>
+  <li><a href="#performance-of-prioritization-strategies" id="toc-performance-of-prioritization-strategies" class="nav-link" data-scroll-target="#performance-of-prioritization-strategies">Performance of Prioritization Strategies</a></li>
+  <li><a href="#mr-assumption-violations" id="toc-mr-assumption-violations" class="nav-link" data-scroll-target="#mr-assumption-violations">MR Assumption Violations</a></li>
   </ul></li>
-  <li><a href="#major-results" id="toc-major-results" class="nav-link" data-scroll-target="#major-results">Major Results</a></li>
-  <li><a href="#practical-implications" id="toc-practical-implications" class="nav-link" data-scroll-target="#practical-implications">Practical Implications</a>
-  <ul class="collapse">
-  <li><a href="#recommendations-for-future-gwas" id="toc-recommendations-for-future-gwas" class="nav-link" data-scroll-target="#recommendations-for-future-gwas">Recommendations for Future GWAS</a></li>
-  </ul></li>
-  <li><a href="#related-concepts" id="toc-related-concepts" class="nav-link" data-scroll-target="#related-concepts">Related Concepts</a></li>
+  <li><a href="#conclusions-and-recommendations" id="toc-conclusions-and-recommendations" class="nav-link" data-scroll-target="#conclusions-and-recommendations">Conclusions and Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -194,13 +161,15 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</h1>
+<h1 class="title">Extensive co-regulation of neighboring genes complicates the use of eQTLs in target gene prioritization</h1>
   <div class="quarto-categories">
+    <div class="quarto-category">Human Genetics</div>
     <div class="quarto-category">GWAS</div>
-    <div class="quarto-category">Statistical Genetics</div>
-    <div class="quarto-category">Causal Inference</div>
-    <div class="quarto-category">Collider Bias</div>
-    <div class="quarto-category">Heritability</div>
+    <div class="quarto-category">eQTL</div>
+    <div class="quarto-category">pQTL</div>
+    <div class="quarto-category">Colocalization</div>
+    <div class="quarto-category">Mendelian Randomization</div>
+    <div class="quarto-category">Target Gene Prioritization</div>
   </div>
   </div>
 
@@ -212,7 +181,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">27 November 2025</p>
+      <p class="date">28 November 2025</p>
     </div>
   </div>
   
@@ -224,82 +193,49 @@ window.Quarto = {
 </header>
 
 
-<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/25640676/">25640676</a><br>
-<strong>DOI:</strong> <a href="http://dx.doi.org/10.1016/j.ajhg.2014.12.021">10.1016/j.ajhg.2014.12.021</a><br>
-<strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
-<section id="key-findings" class="level2">
-<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
-<p>This seminal methodological report examines the statistical consequences of adjusting Genome-Wide Association Studies (GWAS) for <strong>heritable covariates</strong> (correlated traits that are themselves genetically influenced), conclusively demonstrating that this common practice introduces a significant <strong>collider bias</strong>.</p>
-<section id="main-discoveries" class="level3">
-<h3 class="anchored" data-anchor-id="main-discoveries">Main Discoveries</h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/39210598/">39210598</a> <strong>DOI:</strong> <a href="https://doi.org/10.1016/j.xhgg.2024.100348">10.1016/j.xhgg.2024.100348</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 28/11/2025</p>
+<section id="key-findings-limitations-of-eqtl-colocalization-in-causal-gene-prioritization" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-limitations-of-eqtl-colocalization-in-causal-gene-prioritization">Key Findings: Limitations of eQTL Colocalization in Causal Gene Prioritization</h2>
+<p>The study addresses the fundamental problem in human genetics of linking non-coding regulatory variants from genome-wide association studies (<strong>GWASs</strong>) to their causal target genes. It establishes that the practice of using gene expression quantitative trait loci (<strong>eQTLs</strong>) for colocalization analysis to prioritize targets is complicated by the <strong>extensive co-regulation of neighboring genes</strong>. The authors found that existing colocalization methods are generally <strong>outperformed</strong> by a much simpler heuristic: assigning the fine-mapped variant to the closest protein-coding gene.</p>
+</section>
+<section id="study-design-and-benchmarking-methods" class="level2">
+<h2 class="anchored" data-anchor-id="study-design-and-benchmarking-methods">Study Design and Benchmarking Methods</h2>
+<section id="ground-truth-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="ground-truth-dataset">Ground Truth Dataset</h3>
+<p>The researchers created a large ground truth dataset by re-analyzing fine-mapped plasma <strong>protein QTL (pQTL)</strong> data from <strong>3,301 individuals</strong> in the <strong>INTERVAL cohort</strong>. Focusing on variants located within or close to the affected protein (cis-pQTLs), they assumed that the gene coding for the protein was the most likely causal gene for 793 proteins. This assumption provided a robust ground truth set for systematic benchmarking.</p>
+</section>
+<section id="methods-evaluated" class="level3">
+<h3 class="anchored" data-anchor-id="methods-evaluated">Methods Evaluated</h3>
+<p>The study systematically compared three Bayesian colocalization methods and five Mendelian Randomization (MR) approaches:</p>
 <ol type="1">
-<li><strong>Collider Bias Introduction</strong>: Adjusting a standard GWAS regression for a heritable covariate (<span class="math inline">\(C\)</span>) that is correlated with the outcome (<span class="math inline">\(Y\)</span>) and influenced by the SNP (<span class="math inline">\(G\)</span>) introduces bias (also known as index event bias or selection bias). This happens because conditioning on the covariate (the collider) opens a spurious path between the SNP and unobserved confounders, which can lead to <strong>false positive</strong> associations with the primary outcome.</li>
-<li><strong>Unbiased Estimation Condition</strong>: The resulting adjusted effect, <span class="math inline">\(\beta_{G \rightarrow Y \mid C}\)</span>, accurately estimates the <strong>direct genetic effect</strong> on the outcome only under two strict causal models:
+<li><strong>Colocalization Methods:</strong>
 <ul>
-<li>The SNP has <strong>no effect on the covariate</strong> (<span class="math inline">\(\beta_{G \rightarrow C} = 0\)</span>).</li>
-<li>The covariate (<span class="math inline">\(C\)</span>) is a <strong>pure mediator</strong>, where the correlation between <span class="math inline">\(C\)</span> and <span class="math inline">\(Y\)</span> is entirely explained by a direct causal effect of <span class="math inline">\(C\)</span> on <span class="math inline">\(Y\)</span>.</li>
+<li><code>coloc.susie</code> (supports multiple causal variants).</li>
+<li><code>coloc.abf</code> (assumes a single causal variant).</li>
+<li><code>CLPP</code> (colocalization posterior probability defined at the variant level).</li>
 </ul></li>
-<li><strong>Bias Formula</strong>: For scenarios involving shared genetic or environmental risk factors, the bias (<span class="math inline">\(\text{Bias}\)</span>) in the adjusted genetic effect estimate is well-approximated by the equation: <span class="math display">\[\text{Bias} \approx -\beta_{G \rightarrow C} \cdot \rho_{C Y} \cdot \sqrt{\frac{\text{Var}(C)}{\text{Var}(Y)}}\]</span> Where <span class="math inline">\(\beta_{G \rightarrow C}\)</span> is the genetic effect on the covariate, and <span class="math inline">\(\rho_{C Y}\)</span> is the phenotypic correlation between the covariate and the outcome. The magnitude and direction of the bias are dependent on these terms.</li>
+<li><strong>Mendelian Randomization (MR) Methods:</strong> Five varieties were tested, including standard inverse-variance weighted MR (<strong>IVW-MR</strong>), <strong>MR-RAPS</strong>, and <strong>MRLocus</strong>.</li>
 </ol>
 </section>
 </section>
-<section id="study-design" class="level2">
-<h2 class="anchored" data-anchor-id="study-design">Study Design</h2>
-<p>The study employed a rigorous statistical approach using established causal inference frameworks, detailed theoretical modeling, and numerical simulations.</p>
-<section id="theoretical-framework" class="level3">
-<h3 class="anchored" data-anchor-id="theoretical-framework">Theoretical Framework</h3>
-<ol type="1">
-<li><strong>Modeling of the True Direct Effect</strong>: The study defined the desired quantity, the <strong>direct genetic effect</strong> <span class="math inline">\(\beta_{G \rightarrow Y}\)</span>, as the effect of the SNP (<span class="math inline">\(G\)</span>) on the outcome (<span class="math inline">\(Y\)</span>) independent of the covariate (<span class="math inline">\(C\)</span>). This is achieved by adjusting for all causal factors of the covariate.</li>
-<li><strong>Linear Regression Model</strong>: The estimation was performed using a standard linear regression: <span class="math inline">\(Y = \alpha + \beta_{G \rightarrow Y \mid C} G + \gamma C + \epsilon\)</span>. The authors derived the expected value of the adjusted coefficient, <span class="math inline">\(\mathbb{E}[\beta_{G \rightarrow Y \mid C}]\)</span>, showing that it equals the true direct effect plus the bias term under various causal scenarios.</li>
-<li><strong>Bias Derivation</strong>: The bias was derived by considering the correlation structure induced when the covariate and the outcome share unobserved causes, specifically showing how adjustment for <span class="math inline">\(C\)</span> introduces conditioning on a <strong>collider</strong> related to the SNP’s effect. The full mathematical expression for the bias was derived, from which the simplified approximation was obtained.</li>
-</ol>
-</section>
-<section id="simulation-methods" class="level3">
-<h3 class="anchored" data-anchor-id="simulation-methods">Simulation Methods</h3>
-<ol type="1">
-<li><strong>Scenarios Tested</strong>: Simulations covered all three major causal scenarios: <strong>C is a mediator</strong> of the effect of <span class="math inline">\(G\)</span> on <span class="math inline">\(Y\)</span>; <strong>Y is a mediator</strong> of the effect of <span class="math inline">\(G\)</span> on <span class="math inline">\(C\)</span>; and <strong><span class="math inline">\(G\)</span> is a shared cause</strong> (pleiotropy) where the effect of <span class="math inline">\(G\)</span> on <span class="math inline">\(Y\)</span> is mediated by <span class="math inline">\(C\)</span>, or the traits share a hidden common environmental cause (<span class="math inline">\(U\)</span>).</li>
-<li><strong>Parameters</strong>: Simulations varied key parameters, including heritability of the traits (up to <span class="math inline">\(h^2 = 0.5\)</span>), the phenotypic correlation (<span class="math inline">\(\rho_{C Y}\)</span>, up to <span class="math inline">\(0.5\)</span>), and the genetic effect sizes (<span class="math inline">\(\beta_G\)</span>).</li>
-<li><strong>Evaluation Metrics</strong>: The primary metrics used to evaluate the consequences of the bias were the <strong>Type I error rate</strong> (false positive rate) and the <strong>statistical power</strong> of the adjusted association test. Results showed Type I error inflation when the adjusted model was used in biased scenarios.</li>
-</ol>
-</section>
-<section id="real-world-data-application" class="level3">
-<h3 class="anchored" data-anchor-id="real-world-data-application">Real-World Data Application</h3>
-<ol type="1">
-<li><strong>Data Source</strong>: GWAS summary statistics from the <strong>GIANT consortium</strong> meta-analysis of anthropometric traits were used, specifically:
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="performance-of-prioritization-strategies" class="level3">
+<h3 class="anchored" data-anchor-id="performance-of-prioritization-strategies">Performance of Prioritization Strategies</h3>
 <ul>
-<li>GWAS of <strong>Waist-to-Hip Ratio (WHR) adjusted for BMI</strong> (<span class="math inline">\(Y \mid C\)</span>).</li>
-<li>GWAS of <strong>BMI</strong> (<span class="math inline">\(C\)</span>).</li>
-</ul></li>
-<li><strong>Empirical Test</strong>: A test was performed to look for an enrichment of SNPs with marginal effects in <strong>opposite directions</strong> on WHR and BMI. A highly significant enrichment (<span class="math inline">\(p=0.005\)</span>) was found, providing empirical evidence that the statistical bias was present and inflating the number of significant loci.</li>
-</ol>
-</section>
-</section>
-<section id="major-results" class="level2">
-<h2 class="anchored" data-anchor-id="major-results">Major Results</h2>
-<ul>
-<li><strong>Power Paradox</strong>: Adjustment for a heritable covariate results in <strong>increased statistical power</strong> when the signs of <span class="math inline">\(\beta_{G \rightarrow Y \mid C}\)</span> and the bias term are in <strong>opposite directions</strong>. This effect explains the increased detection of specific loci in the WHR adjusted for BMI GWAS.</li>
-<li><strong>Interpretation Challenge</strong>: Since the adjusted estimates reflect a combination of the true direct effect and the bias term, they are <strong>neither the total genetic effect nor the direct genetic effect</strong> in most scenarios involving shared genetic or environmental risk factors.</li>
-<li><strong>Relevance to Ratio Traits</strong>: The findings are directly relevant to analyses of <strong>ratio traits</strong> (e.g., WHR, fasting glucose/insulin ratios), as these are mathematically equivalent to performing a regression adjusted for the denominator.</li>
+<li><strong>Closest Gene Heuristic:</strong> Assigning pQTLs to their closest protein coding gene achieved the highest performance overall: <strong>76.9% recall</strong> and <strong>71.9% precision</strong>.</li>
+<li><strong>Colocalization Methods:</strong> When comparing performance using only the strongest signal, <code>coloc.susie</code> had the highest recall (46.3%) but lowest precision (45.1%). Conversely, <code>CLPP</code> was the most precise (68.5%) but yielded the correct gene for less than a fifth of the proteins (17.5% recall).</li>
+<li><strong>Colocalization + MR:</strong> Combining colocalization evidence with MR—restricting analysis to cases with two or more independent colocalizing signals—increased precision substantially to <strong>81%</strong>. However, this led to a massive reduction in recall to just <strong>7.1%</strong>, primarily due to the limited power of eQTL datasets to detect secondary eQTL signals.</li>
 </ul>
 </section>
-<section id="practical-implications" class="level2">
-<h2 class="anchored" data-anchor-id="practical-implications">Practical Implications</h2>
-<section id="recommendations-for-future-gwas" class="level3">
-<h3 class="anchored" data-anchor-id="recommendations-for-future-gwas">Recommendations for Future GWAS</h3>
-<ol type="1">
-<li><strong>Prioritize Unadjusted Analysis</strong>: For general genetic discovery and estimation of the <strong>total genetic effect</strong> (which includes effects mediated through other traits), the <strong>unadjusted GWAS</strong> of the primary outcome is the statistically unbiased standard.</li>
-<li><strong>Use Bivariate Methods</strong>: To gain statistical power and accurately account for correlated traits without introducing collider bias, researchers should prefer <strong>multivariate</strong> or <strong>bivariate</strong> methods (e.g., those simultaneously modeling both <span class="math inline">\(C\)</span> and <span class="math inline">\(Y\)</span>) over simple regression adjustment.</li>
-<li><strong>Causal Inference</strong>: If the research goal is specifically to estimate the <strong>direct causal effect</strong>, more advanced methods like <strong>Multivariable Mendelian Randomization (MVMR)</strong> should be considered to isolate the effect while mitigating the bias.</li>
-</ol>
+<section id="mr-assumption-violations" class="level3">
+<h3 class="anchored" data-anchor-id="mr-assumption-violations">MR Assumption Violations</h3>
+<p>The standard inverse-variance-weighted MR often produced many false positives. The authors found that cis-eQTLs frequently <strong>violated MR assumptions</strong>, underscoring that using robust inference methods to account for these violations is essential to avoid inaccurate results.</p>
 </section>
 </section>
-<section id="related-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="related-concepts">Related Concepts</h2>
-<ul>
-<li><strong>Collider Bias</strong>: A form of selection bias where conditioning on a variable that is a common effect (a collider) of two other variables induces a spurious association between the two causes.</li>
-<li><strong>Direct vs.&nbsp;Total Genetic Effect</strong>: The direct effect is the association independent of the covariate; the total effect includes the portion mediated through the covariate.</li>
-<li><strong>Waist-to-Hip Ratio (WHR) adjusted for BMI</strong>: The primary empirical example, where the adjustment for the highly heritable BMI creates a biased estimate for the remaining variance of WHR.</li>
-</ul>
+<section id="conclusions-and-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-recommendations">Conclusions and Recommendations</h2>
+<p>The study demonstrates that colocalization methods using eQTL data alone are insufficient and less effective than expected for accurately prioritizing causal genes underlying GWAS variants. The complexity of co-regulation highlights the need for robust methods. Ultimately, prioritizing novel targets in human genetics requires <strong>triangulation of evidence from multiple sources</strong> (e.g., integrating pQTLs, eQTLs, and other functional data) rather than relying on a single data modality.</p>
 
 
 </section>
