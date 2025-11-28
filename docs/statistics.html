@@ -145,6 +145,14 @@ window.Quarto = {
     <a class="nav-link active" href="./statistics.html" aria-current="page"> 
 <span class="menu-text">statistics</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./interaction.html"> 
+<span class="menu-text">interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./other.html"> 
+<span class="menu-text">other</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -177,6 +185,8 @@ window.Quarto = {
   <li><a href="#synthesizing-subject-matter-expertise-for-variable-selection-in-causal-effect-estimation-a-case-study" id="toc-synthesizing-subject-matter-expertise-for-variable-selection-in-causal-effect-estimation-a-case-study" class="nav-link" data-scroll-target="#synthesizing-subject-matter-expertise-for-variable-selection-in-causal-effect-estimation-a-case-study">Synthesizing Subject-matter Expertise for Variable Selection in Causal Effect Estimation: A Case Study</a></li>
   <li><a href="#can-algorithms-replace-expert-knowledge-for-causal-inference-a-case-study-on-novice-use-of-causal-discovery" id="toc-can-algorithms-replace-expert-knowledge-for-causal-inference-a-case-study-on-novice-use-of-causal-discovery" class="nav-link" data-scroll-target="#can-algorithms-replace-expert-knowledge-for-causal-inference-a-case-study-on-novice-use-of-causal-discovery">Can algorithms replace expert knowledge for causal inference? A case study on novice use of causal discovery</a></li>
   <li><a href="#a-structural-description-of-biases-that-generate-immortal-time" id="toc-a-structural-description-of-biases-that-generate-immortal-time" class="nav-link" data-scroll-target="#a-structural-description-of-biases-that-generate-immortal-time">A Structural Description of Biases That Generate Immortal Time</a></li>
+  <li><a href="#comparison-of-imputation-strategies-for-incomplete-longitudinal-data-in-life-course-epidemiology" id="toc-comparison-of-imputation-strategies-for-incomplete-longitudinal-data-in-life-course-epidemiology" class="nav-link" data-scroll-target="#comparison-of-imputation-strategies-for-incomplete-longitudinal-data-in-life-course-epidemiology">Comparison of Imputation Strategies for Incomplete Longitudinal Data in Life-Course Epidemiology</a></li>
+  <li><a href="#an-efficient-not-only-linear-correlation-coefficient-based-on-clustering" id="toc-an-efficient-not-only-linear-correlation-coefficient-based-on-clustering" class="nav-link" data-scroll-target="#an-efficient-not-only-linear-correlation-coefficient-based-on-clustering">An efficient, not-only-linear correlation coefficient based on clustering</a></li>
   </ul>
 </nav>
     </div>
@@ -335,6 +345,22 @@ window.Quarto = {
 <li><strong>Core Argument</strong>: The true source of <strong>immortal time bias</strong> is the underlying <strong>selection</strong> or <strong>misclassification</strong> of subjects, not the period of event-free time itself.</li>
 <li><strong>Two Mechanisms</strong>: The paper structurally describes two ways the bias arises: 1) <strong>Selection bias</strong> when eligibility is applied after assignment; and 2) <strong>Misclassification bias</strong> when assignment is defined using post-eligibility data for strategies indistinguishable at baseline.</li>
 <li><strong>Prevention</strong>: The definitive solution is to use <strong>Target Trial Emulation</strong> to achieve <strong>synchronization</strong> of eligibility and treatment assignment at the start of follow-up, thereby eliminating the generating biases.</li>
+</ul>
+</section>
+<section id="comparison-of-imputation-strategies-for-incomplete-longitudinal-data-in-life-course-epidemiology" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-imputation-strategies-for-incomplete-longitudinal-data-in-life-course-epidemiology"><a href="statistics/shaw_2023_37338987.html">Comparison of Imputation Strategies for Incomplete Longitudinal Data in Life-Course Epidemiology</a></h3>
+<ul>
+<li><strong>Topic</strong>: A study comparing the performance of three <strong>Multiple Imputation (MI)</strong> methods for handling <strong>incomplete longitudinal data</strong> in life-course epidemiology, focusing on the effect of longitudinal depressive symptoms on mortality.</li>
+<li><strong>Methods Compared</strong>: <strong>Normal Linear Regression (MICE)</strong>, <strong>Predictive Mean Matching (PMM)</strong>, and <strong>Variable-Tailored Specification</strong> were tested under nine scenarios varying missingness rate and mechanism (MCAR, MAR, MNAR).</li>
+<li><strong>Finding</strong>: All methods showed similar levels of <strong>bias</strong> in estimating the causal effect (Hazard Ratios), but <strong>Predictive Mean Matching (PMM)</strong> was identified as the most appealing strategy due to its consistently <strong>low root mean square error (RMSE)</strong> and competitive computation time.</li>
+</ul>
+</section>
+<section id="an-efficient-not-only-linear-correlation-coefficient-based-on-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="an-efficient-not-only-linear-correlation-coefficient-based-on-clustering"><a href="statistics/pividori_2024_39243756.html">An efficient, not-only-linear correlation coefficient based on clustering</a></h3>
+<ul>
+<li><strong>Novel Statistic</strong>: The paper introduces the <strong>Clustering-based Correlation Coefficient (CCC)</strong>, a computationally efficient measure that detects both <strong>linear and non-linear relationships</strong>, unlike traditional coefficients like Pearson’s <span class="math inline">\(r\)</span>.</li>
+<li><strong>Mechanism</strong>: CCC operates by assessing how well the marginal information of two variables aligns with the clusters formed by their <strong>joint distribution</strong>, allowing it to capture complex, non-monotonic associations.</li>
+<li><strong>Biological Utility</strong>: In an application to human gene expression data, CCC successfully identified <strong>biologically meaningful non-linear patterns</strong>, including those driven by <strong>sex differences</strong>, that were missed by standard linear methods.</li>
 </ul>
 
 
