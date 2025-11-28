@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Multi-Omics</title>
+<title>multi-omics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -116,6 +145,14 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./interaction.html"> 
+<span class="menu-text">interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./other.html"> 
+<span class="menu-text">other</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -127,15 +164,35 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#integrating-untargeted-metabolomics-genetically-informed-causal-inference-and-pathway-enrichment-to-define-the-obesity-metabolome" id="toc-integrating-untargeted-metabolomics-genetically-informed-causal-inference-and-pathway-enrichment-to-define-the-obesity-metabolome" class="nav-link active" data-scroll-target="#integrating-untargeted-metabolomics-genetically-informed-causal-inference-and-pathway-enrichment-to-define-the-obesity-metabolome">Integrating untargeted metabolomics, genetically informed causal inference, and pathway enrichment to define the obesity metabolome</a></li>
+  <li><a href="#causal-integration-of-multi-omics-data-with-prior-knowledge-to-generate-mechanistic-hypotheses" id="toc-causal-integration-of-multi-omics-data-with-prior-knowledge-to-generate-mechanistic-hypotheses" class="nav-link" data-scroll-target="#causal-integration-of-multi-omics-data-with-prior-knowledge-to-generate-mechanistic-hypotheses">Causal integration of multi-omics data with prior knowledge to generate mechanistic hypotheses</a></li>
+  <li><a href="#protein-metabolite-association-studies-identify-novel-proteomic-determinants-of-metabolite-levels-in-human-plasma" id="toc-protein-metabolite-association-studies-identify-novel-proteomic-determinants-of-metabolite-levels-in-human-plasma" class="nav-link" data-scroll-target="#protein-metabolite-association-studies-identify-novel-proteomic-determinants-of-metabolite-levels-in-human-plasma">Protein-metabolite association studies identify novel proteomic determinants of metabolite levels in human plasma</a></li>
+  <li><a href="#multi-intact-integrative-analysis-of-the-genome-transcriptome-and-proteome-identifies-causal-mechanisms-of-complex-traits" id="toc-multi-intact-integrative-analysis-of-the-genome-transcriptome-and-proteome-identifies-causal-mechanisms-of-complex-traits" class="nav-link" data-scroll-target="#multi-intact-integrative-analysis-of-the-genome-transcriptome-and-proteome-identifies-causal-mechanisms-of-complex-traits">Multi-INTACT: integrative analysis of the genome, transcriptome, and proteome identifies causal mechanisms of complex traits</a></li>
+  <li><a href="#variable-selection-for-generalized-canonical-correlation-analysis" id="toc-variable-selection-for-generalized-canonical-correlation-analysis" class="nav-link" data-scroll-target="#variable-selection-for-generalized-canonical-correlation-analysis">Variable selection for generalized canonical correlation analysis</a></li>
+  <li><a href="#diablo-an-integrative-approach-for-identifying-key-molecular-drivers-from-multi-omics-assays" id="toc-diablo-an-integrative-approach-for-identifying-key-molecular-drivers-from-multi-omics-assays" class="nav-link" data-scroll-target="#diablo-an-integrative-approach-for-identifying-key-molecular-drivers-from-multi-omics-assays">DIABLO: an integrative approach for identifying key molecular drivers from multi-omics assays</a></li>
+  <li><a href="#multi-omics-factor-analysis-a-framework-for-unsupervised-integration-of-multi-omics-data-sets" id="toc-multi-omics-factor-analysis-a-framework-for-unsupervised-integration-of-multi-omics-data-sets" class="nav-link" data-scroll-target="#multi-omics-factor-analysis-a-framework-for-unsupervised-integration-of-multi-omics-data-sets">Multi-Omics Factor Analysis a framework for unsupervised integration of multi-omics data sets</a></li>
+  <li><a href="#identifying-temporal-and-spatial-patterns-of-variation-from-multimodal-data-using-mefisto" id="toc-identifying-temporal-and-spatial-patterns-of-variation-from-multimodal-data-using-mefisto" class="nav-link" data-scroll-target="#identifying-temporal-and-spatial-patterns-of-variation-from-multimodal-data-using-mefisto">Identifying temporal and spatial patterns of variation from multimodal data using MEFISTO</a></li>
+  <li><a href="#a-fully-bayesian-latent-variable-model-for-integrative-clustering-analysis-of-multi-type-omics-data" id="toc-a-fully-bayesian-latent-variable-model-for-integrative-clustering-analysis-of-multi-type-omics-data" class="nav-link" data-scroll-target="#a-fully-bayesian-latent-variable-model-for-integrative-clustering-analysis-of-multi-type-omics-data">A fully Bayesian latent variable model for integrative clustering analysis of multi-type omics data</a></li>
+  <li><a href="#a-general-framework-for-integrative-analysis-of-incomplete-multi-omics-data" id="toc-a-general-framework-for-integrative-analysis-of-incomplete-multi-omics-data" class="nav-link" data-scroll-target="#a-general-framework-for-integrative-analysis-of-incomplete-multi-omics-data">A General Framework for Integrative Analysis of Incomplete Multi-omics Data</a></li>
+  <li><a href="#multi-omic-graph-diagnosis-mogdx-a-data-integration-tool-to-perform-classification-tasks-for-heterogeneous-diseases" id="toc-multi-omic-graph-diagnosis-mogdx-a-data-integration-tool-to-perform-classification-tasks-for-heterogeneous-diseases" class="nav-link" data-scroll-target="#multi-omic-graph-diagnosis-mogdx-a-data-integration-tool-to-perform-classification-tasks-for-heterogeneous-diseases">Multi-Omic Graph Diagnosis (MOGDx): a data integration tool to perform classification tasks for heterogeneous diseases</a></li>
+  <li><a href="#statistical-methods-for-integrative-clustering-of-multi-omics-data" id="toc-statistical-methods-for-integrative-clustering-of-multi-omics-data" class="nav-link" data-scroll-target="#statistical-methods-for-integrative-clustering-of-multi-omics-data">Statistical Methods for Integrative Clustering of Multi-omics Data</a></li>
+  <li><a href="#disease-prediction-with-multi-omics-and-biomarkers-empowers-case-control-genetic-discoveries-in-the-uk-biobank" id="toc-disease-prediction-with-multi-omics-and-biomarkers-empowers-case-control-genetic-discoveries-in-the-uk-biobank" class="nav-link" data-scroll-target="#disease-prediction-with-multi-omics-and-biomarkers-empowers-case-control-genetic-discoveries-in-the-uk-biobank">Disease prediction with multi-omics and biomarkers empowers case-control genetic discoveries in the UK Biobank</a></li>
+  <li><a href="#benchmarking-joint-multi-omics-dimensionality-reduction-approaches-for-the-study-of-cancer" id="toc-benchmarking-joint-multi-omics-dimensionality-reduction-approaches-for-the-study-of-cancer" class="nav-link" data-scroll-target="#benchmarking-joint-multi-omics-dimensionality-reduction-approaches-for-the-study-of-cancer">Benchmarking joint multi-omics dimensionality reduction approaches for the study of cancer</a></li>
+  <li><a href="#biomarker-identification-by-interpretable-maximum-mean-discrepancy" id="toc-biomarker-identification-by-interpretable-maximum-mean-discrepancy" class="nav-link" data-scroll-target="#biomarker-identification-by-interpretable-maximum-mean-discrepancy">Biomarker identification by interpretable maximum mean discrepancy</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Multi-Omics</h1>
+<h1 class="title">multi-omics</h1>
 </div>
 
 
@@ -152,12 +209,128 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="integrating-untargeted-metabolomics-genetically-informed-causal-inference-and-pathway-enrichment-to-define-the-obesity-metabolome" class="level3">
+<h3 class="anchored" data-anchor-id="integrating-untargeted-metabolomics-genetically-informed-causal-inference-and-pathway-enrichment-to-define-the-obesity-metabolome"><a href="multi-omics/hsu_2020_32467615.html">Integrating untargeted metabolomics, genetically informed causal inference, and pathway enrichment to define the obesity metabolome</a></h3>
 <ul>
-<li>test</li>
-<li>test</li>
+<li><strong>Approach</strong>: A multi-omics framework was developed, combining <strong>untargeted metabolomics</strong> (measuring both known and unknown metabolites) with <strong>two-sample Mendelian Randomization (MR)</strong> using metabolite-QTLs (mQTLs).</li>
+<li><strong>Causal Findings</strong>: <strong>23 metabolites</strong> (15 known and 8 unknown) were identified as causally associated with BMI, with specific pathways like <strong>amino acid catabolism</strong> and <strong>lipid metabolism</strong> being implicated in the obesity metabolome.</li>
+<li><strong>Innovation</strong>: A novel <strong>pathway enrichment method</strong> was used to infer the metabolic function of the causally associated <strong>unknown metabolites</strong> based on their shared genetic links with identified metabolites.</li>
+</ul>
+</section>
+<section id="causal-integration-of-multi-omics-data-with-prior-knowledge-to-generate-mechanistic-hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="causal-integration-of-multi-omics-data-with-prior-knowledge-to-generate-mechanistic-hypotheses"><a href="multi-omics/dugourd-et-al-2021-causal-integration-of-multi-omics-data-with-prior-knowledge-to-generate-mechanistic-hypotheses.html">Causal integration of multi-omics data with prior knowledge to generate mechanistic hypotheses</a></h3>
+<ul>
+<li><strong>Method</strong>: The paper introduces <strong>COSMOS</strong> (Causal Oriented Search of Multi-Omics Space), a computational tool that causally integrates <strong>phosphoproteomics, transcriptomics, and metabolomics</strong> with a vast <strong>prior knowledge network</strong>.</li>
+<li><strong>Causal Inference</strong>: COSMOS infers the activity of key regulators (kinases, TFs) and then calculates a <strong>causal score</strong> for regulatory links to generate testable hypotheses that cross the molecular layers.</li>
+<li><strong>Hypotheses</strong>: Applied to Renal Cell Carcinoma data, COSMOS generated specific hypotheses, such as a causal cascade from the <strong>TSSK4 kinase</strong> to the <strong>ZHX2 transcription factor</strong> and finally to the regulation of the <strong>GAPDH enzyme/metabolism</strong>.</li>
+</ul>
+</section>
+<section id="protein-metabolite-association-studies-identify-novel-proteomic-determinants-of-metabolite-levels-in-human-plasma" class="level3">
+<h3 class="anchored" data-anchor-id="protein-metabolite-association-studies-identify-novel-proteomic-determinants-of-metabolite-levels-in-human-plasma"><a href="multi-omics/benson_2023_37582364.html">Protein-metabolite association studies identify novel proteomic determinants of metabolite levels in human plasma</a></h3>
+<ul>
+<li><strong>Approach</strong>: A large-scale multi-omics resource was created by meta-analyzing proteomic and metabolomic data from three cohorts, followed by the use of <strong>Mendelian Randomization (MR)</strong> with <strong>pQTLs</strong> to infer causal relationships.</li>
+<li><strong>Causal Findings</strong>: The study identified <strong>224 putative causal associations</strong> between 95 proteins and 96 metabolites, including novel links like the causal role of <strong>ADAMTSL3</strong> in regulating <strong>BCAA metabolites</strong>.</li>
+<li><strong>Validation</strong>: Over 50% of the top causal findings were <strong>experimentally validated</strong> through metabolomic profiling of <strong>mouse knockout strains</strong>, providing strong biological proof for the in-silico MR results.</li>
+</ul>
+</section>
+<section id="multi-intact-integrative-analysis-of-the-genome-transcriptome-and-proteome-identifies-causal-mechanisms-of-complex-traits" class="level3">
+<h3 class="anchored" data-anchor-id="multi-intact-integrative-analysis-of-the-genome-transcriptome-and-proteome-identifies-causal-mechanisms-of-complex-traits"><a href="multi-omics/okamoto_2025_39901160.html">Multi-INTACT: integrative analysis of the genome, transcriptome, and proteome identifies causal mechanisms of complex traits</a></h3>
+<ul>
+<li><strong>Method</strong>: <strong>Multi-INTACT</strong> is a novel statistical framework that jointly analyzes GWAS, eQTL, and pQTL summary statistics to model the <strong>causal chain</strong> from genetic variant <span class="math inline">\(\rightarrow\)</span> gene expression <span class="math inline">\(\rightarrow\)</span> protein level <span class="math inline">\(\rightarrow\)</span> complex trait.</li>
+<li><strong>Causal Partitioning</strong>: The method successfully <strong>partitions GWAS heritability</strong> and identifies the precise molecular layer (transcriptome or proteome) mediating the genetic effect, showing that many effects are <strong>primarily mediated by protein levels</strong>.</li>
+<li><strong>Impact</strong>: Applied to complex traits like lipids, Multi-INTACT confirmed known genes and revealed novel gene-trait associations by providing the <strong>mechanistic evidence</strong> (the specific regulatory path) driving the GWAS signal.</li>
+</ul>
+</section>
+<section id="variable-selection-for-generalized-canonical-correlation-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="variable-selection-for-generalized-canonical-correlation-analysis"><a href="multi-omics/tenenhaus_2014_24550197.html">Variable selection for generalized canonical correlation analysis</a></h3>
+<ul>
+<li><strong>Method</strong>: The paper introduces <strong>SGCCA (Sparse Generalized Canonical Correlation Analysis)</strong>, an extension of the RGCCA framework designed for integrating <strong>three or more multi-omics data blocks</strong>.</li>
+<li><strong>Key Innovation</strong>: SGCCA incorporates a <strong>sparse (<span class="math inline">\(L_1\)</span>) penalty</strong> to simultaneously perform <strong>dimension reduction</strong> and <strong>variable selection</strong>.</li>
+<li><strong>Significance</strong>: SGCCA pinpoints a minimal, highly relevant set of features from each omics layer that drives the <strong>shared correlation structure</strong> across the integrated datasets, significantly improving the biological <strong>interpretability</strong> of multi-omics results.</li>
+</ul>
+</section>
+<section id="diablo-an-integrative-approach-for-identifying-key-molecular-drivers-from-multi-omics-assays" class="level3">
+<h3 class="anchored" data-anchor-id="diablo-an-integrative-approach-for-identifying-key-molecular-drivers-from-multi-omics-assays"><a href="multi-omics/singh_2019_30657866.html">DIABLO: an integrative approach for identifying key molecular drivers from multi-omics assays</a></h3>
+<ul>
+<li><strong>Method</strong>: <strong>DIABLO</strong> (Data Integration Analysis for Biomarker discovery using Latent variable approaches for Omics datasets) is a <strong>supervised multi-block PLS/GCCA</strong> method for joint analysis of heterogeneous omics data.</li>
+<li><strong>Feature Selection</strong>: It uses a <strong>sparse penalty</strong> (L1) to select a minimal set of <strong>key molecular drivers</strong> that are highly correlated across omics layers and maximally associated with a specific <strong>clinical outcome</strong> (e.g., disease status).</li>
+<li><strong>Impact</strong>: DIABLO demonstrated superior <strong>classification accuracy</strong> and biological coherence in identifying integrated biomarkers for complex diseases, such as the molecular drivers distinguishing <strong>breast cancer subtypes</strong>.</li>
+</ul>
+</section>
+<section id="multi-omics-factor-analysis-a-framework-for-unsupervised-integration-of-multi-omics-data-sets" class="level3">
+<h3 class="anchored" data-anchor-id="multi-omics-factor-analysis-a-framework-for-unsupervised-integration-of-multi-omics-data-sets"><a href="multi-omics/argelaguet-et-al-2018-multi-omics-factor-analysis-a-framework-for-unsupervised-integration-of-multi-omics-data-sets.html">Multi-Omics Factor Analysis a framework for unsupervised integration of multi-omics data sets</a></h3>
+<ul>
+<li><strong>Method</strong>: <strong>MOFA</strong> (Multi-Omics Factor Analysis) is an <strong>unsupervised</strong> statistical framework based on <strong>Factor Analysis</strong> to integrate multi-omics data.</li>
+<li><strong>Key Innovation</strong>: MOFA infers a set of <strong>latent factors</strong> that capture the principal sources of variation and, crucially, <strong>disentangle shared heterogeneity</strong> (variation common to multiple omics layers) from <strong>modality-specific heterogeneity</strong>.</li>
+<li><strong>Impact</strong>: Applied to Chronic Lymphocytic Leukemia (CLL) data, MOFA identified factors associated with key clinical drivers (e.g., <strong>IGHV mutation status</strong>) and enabled robust <strong>patient subtyping</strong> and <strong>data imputation</strong>.</li>
+</ul>
+</section>
+<section id="identifying-temporal-and-spatial-patterns-of-variation-from-multimodal-data-using-mefisto" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-temporal-and-spatial-patterns-of-variation-from-multimodal-data-using-mefisto"><a href="multi-omics/velten_2022_35027765.html">Identifying temporal and spatial patterns of variation from multimodal data using MEFISTO</a></h3>
+<ul>
+<li><strong>Method</strong>: <strong>MEFISTO</strong> (Multi-omics Factor Analysis Informed by Spatial and Temporal Omics) is an extension of MOFA that uses <strong>Gaussian Process (GP) priors</strong> on latent factors to model <strong>spatial or temporal dependencies</strong> between samples.</li>
+<li><strong>Key Capabilities</strong>: It performs <strong>spatio-temporally informed dimensionality reduction</strong>, allowing factors to change <strong>smoothly</strong> over time/space. It also enables robust <strong>interpolation</strong> of data for unobserved locations or time points.</li>
+<li><strong>Application</strong>: MEFISTO successfully analyzed data from <strong>spatial transcriptomics</strong>, <strong>longitudinal microbiome studies</strong>, and <strong>single-cell multi-omics atlases</strong> to align and extract common developmental or temporal patterns.</li>
+</ul>
+</section>
+<section id="a-fully-bayesian-latent-variable-model-for-integrative-clustering-analysis-of-multi-type-omics-data" class="level3">
+<h3 class="anchored" data-anchor-id="a-fully-bayesian-latent-variable-model-for-integrative-clustering-analysis-of-multi-type-omics-data"><a href="multi-omics/mo_2018_30657866.html">A fully Bayesian latent variable model for integrative clustering analysis of multi-type omics data</a></h3>
+<ul>
+<li><strong>Method</strong>: The paper proposes a <strong>fully Bayesian latent variable model</strong> for <strong>integrative clustering analysis</strong> of multi-omics data, building on the iCluster framework.</li>
+<li><strong>Key Innovation</strong>: The Bayesian approach incorporates <strong>adaptive shrinkage priors</strong> to enforce <strong>sparsity (feature selection)</strong> on the omics-specific loading matrices, which simultaneously identifies <strong>robust disease subtypes</strong> and their minimal <strong>molecular signatures</strong>.</li>
+<li><strong>Impact</strong>: Applied to TCGA cancer data, the model demonstrated superior performance in identifying clinically relevant, stable subtypes and the specific genes/loci driving the differences across mRNA, methylation, and CNV data.</li>
+</ul>
+</section>
+<section id="a-general-framework-for-integrative-analysis-of-incomplete-multi-omics-data" class="level3">
+<h3 class="anchored" data-anchor-id="a-general-framework-for-integrative-analysis-of-incomplete-multi-omics-data"><a href="multi-omics/lin_2020_32691502.html">A General Framework for Integrative Analysis of Incomplete Multi-omics Data</a></h3>
+<ul>
+<li><strong>Problem</strong>: Multi-omics analysis is challenged by <strong>missing values</strong> (incomplete subject profiling) and <strong>detection limits</strong> (censored data).</li>
+<li><strong>Method</strong>: A general <strong>statistical framework</strong> based on a <strong>joint likelihood function</strong> and an <strong>Expectation-Maximization (EM) algorithm</strong> was developed to rigorously model and integrate multi-omics data while accounting for arbitrary missingness and censoring.</li>
+<li><strong>Impact</strong>: Applied to the SPIROMICS cohort, the framework demonstrated <strong>superior statistical power</strong> and <strong>reduced bias</strong> compared to ad-hoc imputation methods, particularly in identifying <strong>protein quantitative trait loci (pQTLs)</strong> and biomarker-phenotype associations.</li>
+</ul>
+</section>
+<section id="multi-omic-graph-diagnosis-mogdx-a-data-integration-tool-to-perform-classification-tasks-for-heterogeneous-diseases" class="level3">
+<h3 class="anchored" data-anchor-id="multi-omic-graph-diagnosis-mogdx-a-data-integration-tool-to-perform-classification-tasks-for-heterogeneous-diseases"><a href="multi-omics/ryan_2024_39177104.pdf">Multi-Omic Graph Diagnosis (MOGDx): a data integration tool to perform classification tasks for heterogeneous diseases</a></h3>
+<ul>
+<li><strong>Method</strong>: <strong>MOGDx</strong> (Multi-Omic Graph Diagnosis) is a data integration tool that utilizes <strong>Graph Convolutional Networks (GCNs)</strong> to perform <strong>supervised classification tasks</strong> for heterogeneous diseases.</li>
+<li><strong>Integration Principle</strong>: It models <strong>patients as nodes</strong> in a graph, with <strong>omics data</strong> as node features and <strong>molecular similarity</strong> as edges, allowing the GNN to learn complex, non-linear <strong>cross-omics patterns</strong>.</li>
+<li><strong>Impact</strong>: MOGDx achieved <strong>superior classification accuracy</strong> in cancer subtyping tasks, offers <strong>robustness</strong> to missing data, and facilitates the identification of the <strong>key molecular biomarkers</strong> driving disease heterogeneity.</li>
+</ul>
+</section>
+<section id="statistical-methods-for-integrative-clustering-of-multi-omics-data" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-methods-for-integrative-clustering-of-multi-omics-data"><a href="multi-omics/chalise_2023_36929074.html">Statistical Methods for Integrative Clustering of Multi-omics Data</a></h3>
+<ul>
+<li><strong>Topic</strong>: A detailed overview and tutorial on <strong>Statistical Methods for Integrative Clustering of Multi-omics Data</strong>, primarily focusing on <strong>model-based approaches</strong> for identifying cancer subtypes.</li>
+<li><strong>Methods Covered</strong>: Reviews and contrasts <strong>iCluster/iClusterPlus</strong> (latent variable models with sparsity for feature selection) and <strong>Similarity Network Fusion (SNF)</strong> (nonparametric, network-based fusion).</li>
+<li><strong>Impact</strong>: Emphasizes the methods’ ability to yield <strong>robust and biologically relevant disease subtypes</strong> and their defining <strong>molecular signatures</strong> by integrating heterogeneous data (e.g., mRNA, methylation, CNV), exemplified using <strong>TCGA cancer cohorts</strong>.</li>
+</ul>
+</section>
+<section id="disease-prediction-with-multi-omics-and-biomarkers-empowers-case-control-genetic-discoveries-in-the-uk-biobank" class="level3">
+<h3 class="anchored" data-anchor-id="disease-prediction-with-multi-omics-and-biomarkers-empowers-case-control-genetic-discoveries-in-the-uk-biobank"><a href="multi-omics/garg_2024_39261665.html">Disease prediction with multi-omics and biomarkers empowers case-control genetic discoveries in the UK Biobank</a></h3>
+<ul>
+<li><strong>Method</strong>: <strong>MILTON (Machine Learning with Phenotype Associations)</strong>, an ensemble machine-learning framework, was developed to integrate multi-omics (including plasma proteomics) and biomarker data from the UK Biobank to predict disease risk.</li>
+<li><strong>Objective</strong>: To demonstrate how these biomarker-based predictions can <strong>augment genetic association analyses</strong> in a phenome-wide context.</li>
+<li><strong>Impact</strong>: MILTON <strong>outperformed Polygenic Risk Scores (PRSs)</strong> in predicting incident disease. Its application in a PheWAS <strong>improved signals for 88 known and 14 novel genetic associations</strong>, showing its utility in empowering genetic discovery for complex diseases by improving disease classification.</li>
+</ul>
+</section>
+<section id="benchmarking-joint-multi-omics-dimensionality-reduction-approaches-for-the-study-of-cancer" class="level3">
+<h3 class="anchored" data-anchor-id="benchmarking-joint-multi-omics-dimensionality-reduction-approaches-for-the-study-of-cancer"><a href="multi-omics/cantini_2021_33402734.html">Benchmarking joint multi-omics dimensionality reduction approaches for the study of cancer</a></h3>
+<ul>
+<li><strong>Topic</strong>: A systematic <strong>benchmarking</strong> of nine <strong>joint Dimensionality Reduction (jDR) methods</strong> for integrating multi-omics data, using simulated data, <strong>TCGA cancer cohorts</strong>, and single-cell data.</li>
+<li><strong>Key Findings</strong>: <strong>intNMF</strong> excelled in unsupervised clustering tasks, while <strong>MCIA (Multiple Co-Inertia Analysis)</strong> was identified as the most robust, all-around performer across various prediction and integration tasks.</li>
+<li><strong>Resource</strong>: The study created a reproducible code platform called <strong>momix</strong> to aid researchers in selecting and applying jDR methods, offering <strong>practical guidelines</strong> for multi-omics integration.</li>
+</ul>
+</section>
+<section id="biomarker-identification-by-interpretable-maximum-mean-discrepancy" class="level3">
+<h3 class="anchored" data-anchor-id="biomarker-identification-by-interpretable-maximum-mean-discrepancy"><a href="multi-omics/adamer_2024_38940158.html">Biomarker identification by interpretable maximum mean discrepancy</a></h3>
+<ul>
+<li><strong>Topic</strong>: Introduction of <strong>SpInOpt-MMD (Sparse, Interpretable, and Optimized Maximum Mean Discrepancy)</strong>, a novel method for simultaneously performing <strong>two-sample testing</strong> and <strong>biomarker feature selection</strong> in high-dimensional omics data.</li>
+<li><strong>Method</strong>: SpInOpt-MMD integrates sparse and interpretable optimization into the <strong>Maximum Mean Discrepancy (MMD) test</strong>, allowing it to detect statistically significant group differences and identify the features (biomarkers) responsible in a single step.</li>
+<li><strong>Impact</strong>: The method is effective for <strong>small sample sizes</strong> and outperforms other feature selection approaches (like SHAP) in several contexts, offering a powerful, unified approach for biomarker discovery in multi-omics and biomedical applications.</li>
 </ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
