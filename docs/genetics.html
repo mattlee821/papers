@@ -153,6 +153,18 @@ window.Quarto = {
     <a class="nav-link" href="./other.html"> 
 <span class="menu-text">other</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./expression.html"> 
+<span class="menu-text">expression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ml.html"> 
+<span class="menu-text">ml</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./finemap-colocalisation.html"> 
+<span class="menu-text">finemap-colocalisation</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -179,6 +191,9 @@ window.Quarto = {
   <li><a href="#the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes" id="toc-the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes" class="nav-link" data-scroll-target="#the-contribution-of-genetic-determinants-of-blood-gene-expression-and-splicing-to-molecular-phenotypes-and-health-outcomes">The contribution of genetic determinants of blood gene expression and splicing to molecular phenotypes and health outcomes</a></li>
   <li><a href="#extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization" id="toc-extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization" class="nav-link" data-scroll-target="#extensive-co-regulation-of-neighboring-genes-complicates-the-use-of-eqtls-in-target-gene-prioritization">Extensive co-regulation of neighboring genes complicates the use of eQTLs in target gene prioritization</a></li>
   <li><a href="#global-quantification-of-mammalian-gene-expression-control" id="toc-global-quantification-of-mammalian-gene-expression-control" class="nav-link" data-scroll-target="#global-quantification-of-mammalian-gene-expression-control">Global quantification of mammalian gene expression control</a></li>
+  <li><a href="#what-is-a-differentially-expressed-gene" id="toc-what-is-a-differentially-expressed-gene" class="nav-link" data-scroll-target="#what-is-a-differentially-expressed-gene">What is a Differentially Expressed Gene?</a></li>
+  <li><a href="#a-phenome-wide-comparative-analysis-of-genetic-discordance-between-obesity-and-type-2-diabetes" id="toc-a-phenome-wide-comparative-analysis-of-genetic-discordance-between-obesity-and-type-2-diabetes" class="nav-link" data-scroll-target="#a-phenome-wide-comparative-analysis-of-genetic-discordance-between-obesity-and-type-2-diabetes">A phenome-wide comparative analysis of genetic discordance between obesity and type 2 diabetes</a></li>
+  <li><a href="#valid-inference-for-machine-learning-assisted-genome-wide-association-studies" id="toc-valid-inference-for-machine-learning-assisted-genome-wide-association-studies" class="nav-link" data-scroll-target="#valid-inference-for-machine-learning-assisted-genome-wide-association-studies">Valid inference for machine learning-assisted genome-wide association studies</a></li>
   </ul>
 </nav>
     </div>
@@ -285,6 +300,31 @@ window.Quarto = {
 <li><strong>Core Discovery</strong>: This seminal study, using parallel metabolic pulse labeling and absolute quantification in mammalian cells, concluded that the <strong>cellular abundance of proteins is predominantly controlled at the level of translation</strong>, not transcription.</li>
 <li><strong>Quantification</strong>: The study found a strong correlation between mRNA and protein abundance (<span class="math inline">\(R \approx 0.73\)</span>) but <strong>no correlation between the half-lives</strong> (turnover rates) of corresponding mRNA and proteins.</li>
 <li><strong>Mechanism</strong>: Protein synthesis rates (translation) were found to be the most variable component, serving as the primary determinant of protein steady-state levels, while degradation rates primarily determine the <strong>kinetics and response time</strong> of the system.</li>
+</ul>
+</section>
+<section id="what-is-a-differentially-expressed-gene" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-differentially-expressed-gene"><a href="genetics/hoerbst_2025_na.html">What is a Differentially Expressed Gene?</a></h3>
+<ul>
+<li><strong>Central Problem</strong>: Traditional binary classification of Differentially Expressed Genes (DEGs) using p-value and <span class="math inline">\(\log_{2}\)</span> fold change thresholds suffers from reproducibility issues due to biological and technical variation, especially with low replicate numbers.</li>
+<li><strong>Findings</strong>: The use of rigid <span class="math inline">\(\log_{2}\)</span> fold change cut-offs leads to <strong>false negatives</strong> (missing small but significant changes), and inherent gene variability, particularly in small sample sets, leads to <strong>false positives</strong> (misinterpreting noise as a change).</li>
+<li><strong>Recommendation</strong>: The authors advocate for <strong>rank-based methods</strong> grounded in <strong>Bayesian statistics</strong> (using Bayes factors) over traditional tools like DESeq2 and edgeR to reduce reliance on arbitrary thresholds and better communicate the uncertainty of differential expression.</li>
+</ul>
+</section>
+<section id="a-phenome-wide-comparative-analysis-of-genetic-discordance-between-obesity-and-type-2-diabetes" class="level3">
+<h3 class="anchored" data-anchor-id="a-phenome-wide-comparative-analysis-of-genetic-discordance-between-obesity-and-type-2-diabetes"><a href="genetics/coral_2023_36703017.html">A phenome-wide comparative analysis of genetic discordance between obesity and type 2 diabetes</a></h3>
+<ul>
+<li><strong>Core Finding</strong>: The study used genetic data to define two distinct <strong>obesity profiles</strong> that exhibit highly contrasting, or discordant, effects on the risk of developing type 2 diabetes (T2D).</li>
+<li><strong>Phenotypic Differences</strong>: The two profiles showed key differences across a wide range of clinical and molecular traits, including <strong>cardiovascular mortality</strong>, <strong>liver metabolism</strong>, specific <strong>lipid fractions</strong>, and <strong>blood pressure</strong>.</li>
+<li><strong>Mechanism</strong>: Instrumental analyses highlighted the prominent <strong>causal role</strong> of factors like <strong>waist-to-hip ratio</strong> and <strong>blood pressure</strong> in driving the differences in T2D risk between the two genetic obesity subtypes.</li>
+</ul>
+</section>
+<section id="valid-inference-for-machine-learning-assisted-genome-wide-association-studies" class="level3">
+<h3 class="anchored" data-anchor-id="valid-inference-for-machine-learning-assisted-genome-wide-association-studies"><a href="genetics/miao_2024_39349818.html">Valid inference for machine learning-assisted genome-wide association studies</a></h3>
+<ul>
+<li><strong>Objective</strong>: This paper addressed the critical issue of <strong>invalid statistical inference</strong> and <strong>false-positive risks</strong> in <strong>Machine Learning (ML)-assisted Genome-Wide Association Studies (GWAS)</strong>, which use ML-imputed phenotypes. It introduced a new statistical framework called <strong>Post-Prediction GWAS (POP-GWAS)</strong> to ensure valid results.</li>
+<li><strong>Problem</strong>: The study demonstrated that performing a standard GWAS on an ML-imputed phenotype systematically biases the results, leading to <strong>inflated p-values</strong> and a high risk of false-positive associations.</li>
+<li><strong>Solution (POP-GWAS)</strong>: POP-GWAS corrects for this bias by redesigning the GWAS test statistic to explicitly account for the variance introduced by the ML imputation model, requiring only GWAS summary statistics and information on the prediction model’s performance.</li>
+<li><strong>Validation</strong>: Application to a GWAS of <strong>bone mineral density (BMD)</strong> revealed that POP-GWAS successfully corrected the inflated p-values and led to the identification of <strong>89 new loci</strong> that were missed or deemed unreliable by the naive approach.</li>
 </ul>
 
 

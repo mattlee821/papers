@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>metabolomics</title>
+<title>finemapping/colocalisation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,35 +68,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -126,7 +97,7 @@ window.Quarto = {
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./metabolomics.html" aria-current="page"> 
+    <a class="nav-link" href="./metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
@@ -162,7 +133,7 @@ window.Quarto = {
 <span class="menu-text">ml</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./finemap-colocalisation.html"> 
+    <a class="nav-link active" href="./finemap-colocalisation.html" aria-current="page"> 
 <span class="menu-text">finemap-colocalisation</span></a>
   </li>  
 </ul>
@@ -181,12 +152,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation" id="toc-network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation" class="nav-link active" data-scroll-target="#network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation">Network-based strategies in metabolomics data analysis and interpretation: from molecular networking to biological interpretation</a></li>
-  <li><a href="#longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity" id="toc-longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity" class="nav-link" data-scroll-target="#longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity">Longitudinal metabolomics of increasing body-mass index and waist-hip ratio reveals two dynamic patterns of obesity</a></li>
-  <li><a href="#characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies" id="toc-characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies" class="nav-link" data-scroll-target="#characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies">Characterization of missing values in untargeted MS-based metabolomics data and evaluation of missing data handling strategies</a></li>
-  <li><a href="#networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation" id="toc-networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation" class="nav-link" data-scroll-target="#networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</a></li>
-  <li><a href="#best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data" id="toc-best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data" class="nav-link" data-scroll-target="#best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data">Best practices and tools in R and Python for statistical processing and visualization of lipidomics and metabolomics data</a></li>
-  <li><a href="#altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy" id="toc-altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy" class="nav-link" data-scroll-target="#altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy">Altered metabolite levels in cancer: implications for tumour biology and cancer therapy</a></li>
+  <li><a href="#a-frequentist-test-of-proportional-colocalization-after-selecting-relevant-genetic-variants" id="toc-a-frequentist-test-of-proportional-colocalization-after-selecting-relevant-genetic-variants" class="nav-link active" data-scroll-target="#a-frequentist-test-of-proportional-colocalization-after-selecting-relevant-genetic-variants">A frequentist test of proportional colocalization after selecting relevant genetic variants</a></li>
   </ul>
 </nav>
     </div>
@@ -195,7 +161,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">metabolomics</h1>
+<h1 class="title">finemapping/colocalisation</h1>
 </div>
 
 
@@ -212,65 +178,12 @@ window.Quarto = {
 </header>
 
 
-<section id="network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation"><a href="metabolomics/desouza_2020_32380880.html">Network-based strategies in metabolomics data analysis and interpretation: from molecular networking to biological interpretation</a></h3>
+<section id="a-frequentist-test-of-proportional-colocalization-after-selecting-relevant-genetic-variants" class="level3">
+<h3 class="anchored" data-anchor-id="a-frequentist-test-of-proportional-colocalization-after-selecting-relevant-genetic-variants"><a href="finemap-colocalisation/patel_2024_240212171.html">A frequentist test of proportional colocalization after selecting relevant genetic variants</a></h3>
 <ul>
-<li><strong>Focus</strong>: This review highlights the use of <strong>network-based strategies</strong> as essential tools for analyzing and interpreting complex metabolomics data, especially from untargeted Mass Spectrometry (MS).</li>
-<li><strong>Molecular Networking (MN)</strong>: Used to organize MS/MS spectral data based on <strong>chemical structural similarity</strong>, thereby facilitating the identification of unknown compounds in chemical families.</li>
-<li><strong>Metabolic Networks</strong>: Constructed using <strong>statistical correlation</strong> between metabolite abundance levels to infer functional and biological relationships, enabling mapping onto known biochemical pathways for biological contextualization.</li>
-</ul>
-</section>
-<section id="longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity" class="level3">
-<h3 class="anchored" data-anchor-id="longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity"><a href="metabolomics/makinen_2023_36823293.html">Longitudinal metabolomics of increasing body-mass index and waist-hip ratio reveals two dynamic patterns of obesity</a></h3>
-<ul>
-<li><strong>Objective</strong>: This longitudinal study used metabolomics and <strong>systems epidemiology tools</strong> (Self-Organizing Map, SOM) on over 12,800 participants to dissect the complex temporal associations between <strong>Body-Mass Index (BMI)</strong>, <strong>Waist-Hip Ratio (WHR)</strong>, and the circulating metabolome.</li>
-<li><strong>Key Finding</strong>: The study revealed <strong>two dynamically different metabolic patterns</strong> for increasing obesity:
-<ol type="1">
-<li>An increase in <strong>BMI</strong> that was <strong>not</strong> accompanied by an increase in <strong>fatty acid (FA) saturation</strong> was associated with a relatively favorable metabolic profile.</li>
-<li>An increase in <strong>WHR</strong> (central adiposity) was <strong>uniformly associated</strong> with a single, highly adverse metabolic profile, characterized by worse glucose metabolism, inflammation, and high amino acid levels.</li>
-</ol></li>
-<li><strong>Implication</strong>: The results suggest that obesity is metabolically heterogeneous and that <strong>WHR is a more consistent marker of severe adverse metabolic risk</strong> than BMI alone, emphasizing the need to consider dynamic metabolic changes for personalized risk assessment.</li>
-</ul>
-</section>
-<section id="characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies" class="level3">
-<h3 class="anchored" data-anchor-id="characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies"><a href="metabolomics/do_2018_30830398.html">Characterization of missing values in untargeted MS-based metabolomics data and evaluation of missing data handling strategies</a></h3>
-<ul>
-<li><strong>Objective</strong>: The study systematically characterized the sources of <strong>missing values (MVs)</strong> in untargeted Mass Spectrometry (MS)-based metabolomics data and evaluated various imputation strategies.</li>
-<li><strong>Missing Value Types</strong>: Distinguished between <strong>systematic missingness</strong> primarily due to <strong>Limits of Detection (LOD)</strong> and <strong>random missingness</strong> due to technical issues.</li>
-<li><strong>Best Strategy</strong>: For the prevalent LOD-related MVs, which represent concentrations near zero, simple methods like <strong>imputation with half of the minimum observed value</strong> were found to be effective and often outperformed complex data-driven methods (e.g., PPCA).</li>
-<li><strong>Recommendation</strong>: Researchers should use targeted imputation strategies based on the <strong>nature of the missingness</strong> to avoid introducing bias and reducing statistical power.</li>
-</ul>
-</section>
-<section id="networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation"><a href="metabolomics/amara_2022_35350714.html">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</a></h3>
-<ul>
-<li><strong>Focus</strong>: This review highlights the use of <strong>networks and graph theory</strong> as powerful computational tools for analyzing and interpreting complex metabolomics data.</li>
-<li><strong>Network Types</strong>:
-<ol type="1">
-<li><strong>Analytical/Chemical Networks</strong>: Derived from Mass Spectrometry (MS) data, such as <strong>Molecular Networking (MN)</strong>, which connects spectra based on <strong>chemical structural similarity</strong> to aid in compound identification.</li>
-<li><strong>Biological/Correlation Networks</strong>: Derived from quantitative metabolite abundance data. These networks use <strong>statistical correlation</strong> between metabolites to infer shared biological regulation, map metabolites onto known <strong>biochemical pathways</strong>, and facilitate <strong>multi-omics integration</strong> (connecting metabolites to genes/proteins).</li>
-</ol></li>
-<li><strong>Implication</strong>: Graph theory enables researchers to move beyond simple lists of metabolites to view the metabolome as a structured, interactive system, which is essential for biological interpretation and hypothesis generation.</li>
-</ul>
-</section>
-<section id="best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data" class="level3">
-<h3 class="anchored" data-anchor-id="best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data"><a href="metabolomics/idkowiak_2025_41027880.html">Best practices and tools in R and Python for statistical processing and visualization of lipidomics and metabolomics data</a></h3>
-<ul>
-<li><strong>Objective</strong>: This review compiles <strong>best practices and freely accessible tools</strong> in <strong>R and Python</strong> for the <strong>statistical processing and visualization</strong> of extensive mass spectrometry-based <strong>lipidomics and metabolomics</strong> data.</li>
-<li><strong>Focus</strong>: The article provides a “solid core” of resources for <strong>exploratory data analysis (EDA)</strong> and visualization to help researchers identify and visualize statistically significant trends and biologically relevant differences within their complex datasets.</li>
-<li><strong>Implication</strong>: It guides researchers on using modern computational platforms (R/Python) and integrating metadata (e.g., clinical parameters) with their omics data to perform robust and reproducible downstream analysis.</li>
-</ul>
-</section>
-<section id="altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy" class="level3">
-<h3 class="anchored" data-anchor-id="altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy"><a href="metabolomics/sullivan_2016_27658530.html">Altered metabolite levels in cancer: implications for tumour biology and cancer therapy</a></h3>
-<ul>
-<li><strong>Focus</strong>: This review examines how <strong>altered intracellular metabolite concentrations</strong> in cancer cells, often driven by genetic mutations, actively <strong>promote tumor initiation and progression</strong>, moving beyond the idea that metabolic changes are merely a consequence of cancer.</li>
-<li><strong>Oncometabolites</strong>: Specific metabolites act as effector molecules:
-<ul>
-<li><strong>2-Hydroxyglutarate (2-HG)</strong>: Produced by <em>IDH1/2</em> mutations, it inhibits <strong>epigenetic regulators</strong> (like TET enzymes) leading to globally altered gene expression and oncogenesis.</li>
-<li><strong>Fumarate and Succinate</strong>: Accumulate due to <em>FH/SDH</em> mutations, leading to the stabilization of <strong>HIF-<span class="math inline">\(1\alpha\)</span></strong> (pseudohypoxia), which drives proliferation and the Warburg effect.</li>
-</ul></li>
-<li><strong>Implication</strong>: The altered metabolome is a rich source of <strong>therapeutic targets</strong>. Strategies can focus on counteracting the effects of oncometabolites or exploiting the metabolic dependencies created by these shifts (e.g., limited aspartate for nucleotide synthesis).</li>
+<li><strong>Objective</strong>: This paper introduced <strong><code>prop-coloc-cond</code></strong>, a novel <strong>frequentist test of proportional colocalization</strong> designed to assess whether two traits share the same causal genetic variants in a specific genomic region.</li>
+<li><strong>Methodological Advance</strong>: The key innovation is that the test formally <strong>accounts for the uncertainty introduced by selecting the relevant genetic variants</strong> (e.g., through fine-mapping) before testing for proportionality, which ensures accurate Type I error control.</li>
+<li><strong>Role in Research</strong>: This test provides a valuable <strong>complement to existing Bayesian colocalization methods</strong>, offering robust evidence based on different statistical assumptions, particularly useful when Bayesian results are inconclusive or sensitive to prior choices.</li>
 </ul>
 
 

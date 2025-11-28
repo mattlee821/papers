@@ -124,6 +124,18 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./other.html" aria-current="page"> 
 <span class="menu-text">other</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./expression.html"> 
+<span class="menu-text">expression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ml.html"> 
+<span class="menu-text">ml</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./finemap-colocalisation.html"> 
+<span class="menu-text">finemap-colocalisation</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -141,7 +153,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#data-workflow-with-apache-arrow" id="toc-data-workflow-with-apache-arrow" class="nav-link active" data-scroll-target="#data-workflow-with-apache-arrow">Data workflow with Apache Arrow</a></li>
+  <li><a href="#hands-on-introduction-to-data-science-with-python" id="toc-hands-on-introduction-to-data-science-with-python" class="nav-link" data-scroll-target="#hands-on-introduction-to-data-science-with-python">Hands on Introduction to Data Science with Python</a></li>
   <li><a href="#reproducible-scalable-and-shareable-analysis-pipelines-with-bioinformatics-workflow-managers" id="toc-reproducible-scalable-and-shareable-analysis-pipelines-with-bioinformatics-workflow-managers" class="nav-link" data-scroll-target="#reproducible-scalable-and-shareable-analysis-pipelines-with-bioinformatics-workflow-managers">Reproducible, scalable, and shareable analysis pipelines with bioinformatics workflow managers</a></li>
+  <li><a href="#good-enough-practices-in-scientific-computing" id="toc-good-enough-practices-in-scientific-computing" class="nav-link" data-scroll-target="#good-enough-practices-in-scientific-computing">Good enough practices in scientific computing</a></li>
+  <li><a href="#best-practices-for-scientific-computing" id="toc-best-practices-for-scientific-computing" class="nav-link" data-scroll-target="#best-practices-for-scientific-computing">Best Practices for Scientific Computing</a></li>
+  <li><a href="#biobanking-with-genetics-shapes-precision-medicine-and-global-health" id="toc-biobanking-with-genetics-shapes-precision-medicine-and-global-health" class="nav-link" data-scroll-target="#biobanking-with-genetics-shapes-precision-medicine-and-global-health">Biobanking with genetics shapes precision medicine and global health</a></li>
+  <li><a href="#simona-a-comprehensive-r-package-for-semantic-similarity-analysis-on-bio-ontologies" id="toc-simona-a-comprehensive-r-package-for-semantic-similarity-analysis-on-bio-ontologies" class="nav-link" data-scroll-target="#simona-a-comprehensive-r-package-for-semantic-similarity-analysis-on-bio-ontologies">simona: a comprehensive R package for semantic similarity analysis on bio-ontologies</a></li>
   </ul>
 </nav>
     </div>
@@ -174,12 +191,52 @@ ul.task-list li input[type="checkbox"] {
 <li>how to use the R arrow package for fast reading/writing (Parquet, Feather) and for scalable data manipulation using familiar dplyr workflows</li>
 </ul>
 </section>
+<section id="hands-on-introduction-to-data-science-with-python" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-introduction-to-data-science-with-python"><a href="https://florian-huber.github.io/data_science_course/book/cover.html">Hands on Introduction to Data Science with Python</a></h3>
+<ul>
+<li>The book was designed to be understandable to new undergraduate students, with only basic Python programming and math skills as requirements.</li>
+<li>A large part of the topics is used in a broad data science introduction course for 2nd semester data science students.</li>
+<li>The course is taught to master students of applied computer science, many of them without prior introduction to data science or machine learning.</li>
+</ul>
+</section>
 <section id="reproducible-scalable-and-shareable-analysis-pipelines-with-bioinformatics-workflow-managers" class="level3">
 <h3 class="anchored" data-anchor-id="reproducible-scalable-and-shareable-analysis-pipelines-with-bioinformatics-workflow-managers"><a href="https://pubmed.ncbi.nlm.nih.gov/34556866/">Reproducible, scalable, and shareable analysis pipelines with bioinformatics workflow managers</a></h3>
 <ul>
 <li><strong>Topic</strong>: A Perspective piece highlighting the necessity and benefits of using <strong>bioinformatics workflow managers</strong> to create <strong>reproducible, scalable, and shareable</strong> computational analysis pipelines for high-throughput data.</li>
 <li><strong>Function</strong>: Workflow managers simplify pipeline development, <strong>optimize resource usage</strong>, and manage <strong>software installation/versions</strong> for portability across different compute platforms.</li>
 <li><strong>Resource</strong>: The paper outlines <strong>community-curated pipeline initiatives</strong> that allow users to perform complex, best-practice analyses without manual assembly, contributing to better reproducibility in biomedical research.</li>
+</ul>
+</section>
+<section id="good-enough-practices-in-scientific-computing" class="level3">
+<h3 class="anchored" data-anchor-id="good-enough-practices-in-scientific-computing"><a href="https://pubmed.ncbi.nlm.nih.gov/28640806/">Good enough practices in scientific computing</a></h3>
+<ul>
+<li><strong>Core Principle</strong>: The paper outlines a set of pragmatic <strong>“good enough” practices</strong> for research computing to improve <strong>reproducibility, integrity, and efficiency</strong> in computational science, addressing the widespread lack of formal training in these areas.</li>
+<li><strong>Data Management</strong>: Recommendations include <strong>never modifying raw data</strong>, organizing files descriptively, and using version control for all processing scripts to maintain a clear data provenance trail.</li>
+<li><strong>Code and Project Quality</strong>: Researchers should write clear, human-readable code, automate their analysis workflows using tools like Makefiles, and clearly <strong>license their data and code</strong> to facilitate reuse and collaboration.</li>
+</ul>
+</section>
+<section id="best-practices-for-scientific-computing" class="level3">
+<h3 class="anchored" data-anchor-id="best-practices-for-scientific-computing"><a href="https://pubmed.ncbi.nlm.nih.gov/24415924/">Best Practices for Scientific Computing</a></h3>
+<ul>
+<li>The paper outlines <strong>24 best practices</strong> across eight core areas for scientific computing, arguing that software is an “experimental apparatus” that must be built and checked with rigor, especially since most scientific programmers are self-taught.</li>
+<li>Core principles include <strong>writing human-readable programs</strong> (consistent naming, simple functions), <strong>automating repetitive tasks</strong> (using scripts and build tools), and employing <strong>incremental development</strong> with <strong>version control (VCS)</strong> for all manually created files.</li>
+<li>Key recommendations for code quality and reliability involve <strong>planning for mistakes</strong> through the use of <strong>assertions</strong> and <strong>automated testing</strong>, optimizing performance only <strong>after the code works correctly</strong> and often by using a <strong>higher-level language</strong>, and <strong>documenting design/interfaces</strong> rather than implementation mechanics.</li>
+</ul>
+</section>
+<section id="biobanking-with-genetics-shapes-precision-medicine-and-global-health" class="level3">
+<h3 class="anchored" data-anchor-id="biobanking-with-genetics-shapes-precision-medicine-and-global-health"><a href="https://pubmed.ncbi.nlm.nih.gov/39567741/">Biobanking with genetics shapes precision medicine and global health</a></h3>
+<ul>
+<li><strong>Core Function</strong>: Biobanks are large-scale, longitudinal cohorts linking genomic data and electronic health records (EHRs) to enable high-powered analyses for precision medicine, including GWAS, Polygenic Risk Scores (PRS), and Pharmacogenomics (PGx).</li>
+<li><strong>Key Applications</strong>: Biobanks facilitate the discovery of novel genetic loci for complex diseases, improve the predictive performance of PRS for conditions like multiple sclerosis, and highlight the necessity of population-specific PGx screening.</li>
+<li><strong>Major Challenge</strong>: The field’s greatest limitation is the severe <strong>underrepresentation of non-European ancestries</strong>, which results in the poor transferability and reduced utility of genetic risk models across diverse global populations.</li>
+</ul>
+</section>
+<section id="simona-a-comprehensive-r-package-for-semantic-similarity-analysis-on-bio-ontologies" class="level2">
+<h2 class="anchored" data-anchor-id="simona-a-comprehensive-r-package-for-semantic-similarity-analysis-on-bio-ontologies"><a href="https://pubmed.ncbi.nlm.nih.gov/39285315/">simona: a comprehensive R package for semantic similarity analysis on bio-ontologies</a></h2>
+<ul>
+<li><strong>Goal</strong>: Introduces <strong>simona</strong>, an R package providing a comprehensive and efficient solution for <strong>semantic similarity analysis</strong> on general <strong>bio-ontologies</strong>.</li>
+<li><strong>Features</strong>: The package is highly flexible, implementing over <strong>70 diverse semantic similarity methods</strong>, utilizing efficient data structures and fast ontology traversal.</li>
+<li><strong>Result</strong>: A benchmark confirmed that methods cluster by mathematical approach, and that similarities based on <strong>ontology topology</strong> alone are highly effective for revealing semantic relationships.</li>
 </ul>
 
 

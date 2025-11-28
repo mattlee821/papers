@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-28">
 
-<title>metabolomics</title>
+<title>Exploring public cancer gene expression signatures across bulk, single-cell and spatial transcriptomics data with signifinder Bioconductor package</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,37 +69,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -114,55 +86,55 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./genetics.html"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./proteomics.html"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./metabolomics.html" aria-current="page"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pgs.html"> 
+    <a class="nav-link" href="../pgs.html"> 
 <span class="menu-text">PGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./statistics.html"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./interaction.html"> 
+    <a class="nav-link" href="../interaction.html"> 
 <span class="menu-text">interaction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./other.html"> 
+    <a class="nav-link" href="../other.html"> 
 <span class="menu-text">other</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./expression.html"> 
+    <a class="nav-link" href="../expression.html"> 
 <span class="menu-text">expression</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./ml.html"> 
+    <a class="nav-link" href="../ml.html"> 
 <span class="menu-text">ml</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./finemap-colocalisation.html"> 
+    <a class="nav-link" href="../finemap-colocalisation.html"> 
 <span class="menu-text">finemap-colocalisation</span></a>
   </li>  
 </ul>
@@ -181,12 +153,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation" id="toc-network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation" class="nav-link active" data-scroll-target="#network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation">Network-based strategies in metabolomics data analysis and interpretation: from molecular networking to biological interpretation</a></li>
-  <li><a href="#longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity" id="toc-longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity" class="nav-link" data-scroll-target="#longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity">Longitudinal metabolomics of increasing body-mass index and waist-hip ratio reveals two dynamic patterns of obesity</a></li>
-  <li><a href="#characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies" id="toc-characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies" class="nav-link" data-scroll-target="#characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies">Characterization of missing values in untargeted MS-based metabolomics data and evaluation of missing data handling strategies</a></li>
-  <li><a href="#networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation" id="toc-networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation" class="nav-link" data-scroll-target="#networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</a></li>
-  <li><a href="#best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data" id="toc-best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data" class="nav-link" data-scroll-target="#best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data">Best practices and tools in R and Python for statistical processing and visualization of lipidomics and metabolomics data</a></li>
-  <li><a href="#altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy" id="toc-altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy" class="nav-link" data-scroll-target="#altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy">Altered metabolite levels in cancer: implications for tumour biology and cancer therapy</a></li>
+  <li><a href="#core-problem-and-study-goal" id="toc-core-problem-and-study-goal" class="nav-link active" data-scroll-target="#core-problem-and-study-goal">Core Problem and Study Goal</a></li>
+  <li><a href="#methods-the-signifinder-bioconductor-package" id="toc-methods-the-signifinder-bioconductor-package" class="nav-link" data-scroll-target="#methods-the-signifinder-bioconductor-package">Methods: The signifinder Bioconductor Package</a>
+  <ul class="collapse">
+  <li><a href="#signature-collection-and-input" id="toc-signature-collection-and-input" class="nav-link" data-scroll-target="#signature-collection-and-input">1. Signature Collection and Input</a></li>
+  <li><a href="#signature-scoring-and-analysis" id="toc-signature-scoring-and-analysis" class="nav-link" data-scroll-target="#signature-scoring-and-analysis">2. Signature Scoring and Analysis</a></li>
+  <li><a href="#visualization-and-interpretation" id="toc-visualization-and-interpretation" class="nav-link" data-scroll-target="#visualization-and-interpretation">3. Visualization and Interpretation</a></li>
+  </ul></li>
+  <li><a href="#key-findings-application-to-breast-cancer-signatures" id="toc-key-findings-application-to-breast-cancer-signatures" class="nav-link" data-scroll-target="#key-findings-application-to-breast-cancer-signatures">Key Findings: Application to Breast Cancer Signatures</a>
+  <ul class="collapse">
+  <li><a href="#robustness-across-modalities" id="toc-robustness-across-modalities" class="nav-link" data-scroll-target="#robustness-across-modalities">1. Robustness Across Modalities</a></li>
+  <li><a href="#deconvoluting-the-tumor-microenvironment-tme" id="toc-deconvoluting-the-tumor-microenvironment-tme" class="nav-link" data-scroll-target="#deconvoluting-the-tumor-microenvironment-tme">2. Deconvoluting the Tumor Microenvironment (TME)</a></li>
+  </ul></li>
+  <li><a href="#conclusions-and-recommendations" id="toc-conclusions-and-recommendations" class="nav-link" data-scroll-target="#conclusions-and-recommendations">Conclusions and Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -195,14 +174,31 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">metabolomics</h1>
-</div>
+<h1 class="title">Exploring public cancer gene expression signatures across bulk, single-cell and spatial transcriptomics data with signifinder Bioconductor package</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Gene Expression</div>
+    <div class="quarto-category">Cancer Genomics</div>
+    <div class="quarto-category">Transcriptomics</div>
+    <div class="quarto-category">Bulk RNA-Seq</div>
+    <div class="quarto-category">Single-Cell RNA-Seq (scRNA-Seq)</div>
+    <div class="quarto-category">Spatial Transcriptomics</div>
+    <div class="quarto-category">BioConductor</div>
+    <div class="quarto-category">Bioinformatics Tool</div>
+    <div class="quarto-category">Gene Signatures</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">28 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -212,66 +208,50 @@ window.Quarto = {
 </header>
 
 
-<section id="network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="network-based-strategies-in-metabolomics-data-analysis-and-interpretation-from-molecular-networking-to-biological-interpretation"><a href="metabolomics/desouza_2020_32380880.html">Network-based strategies in metabolomics data analysis and interpretation: from molecular networking to biological interpretation</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/39363890/">39363890</a> <strong>DOI:</strong> <a href="https://doi.org/10.1093/nargab/lqae138">10.1093/nargab/lqae138</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 28/11/2025</p>
+<section id="core-problem-and-study-goal" class="level2">
+<h2 class="anchored" data-anchor-id="core-problem-and-study-goal">Core Problem and Study Goal</h2>
+<p>The vast and growing collection of published <strong>gene expression signatures</strong> (GESs)—lists of genes whose expression collectively characterizes a specific biological state, such as a cancer subtype or prognosis—are often derived from <strong>bulk RNA-Seq</strong> data. Modern transcriptomic studies increasingly rely on high-resolution methods like <strong>single-cell RNA-Seq (scRNA-Seq)</strong> and <strong>Spatial Transcriptomics (ST)</strong>. The challenge is that these bulk-derived signatures often fail to perform consistently or effectively when directly applied to the noisier, higher-resolution data.</p>
+<p>This study introduces the <strong>signifinder</strong> Bioconductor package, a comprehensive computational workflow designed to allow researchers to effectively investigate the behavior and robustness of known GESs across <strong>bulk, single-cell, and spatial transcriptomics</strong> data types.</p>
+</section>
+<section id="methods-the-signifinder-bioconductor-package" class="level2">
+<h2 class="anchored" data-anchor-id="methods-the-signifinder-bioconductor-package">Methods: The signifinder Bioconductor Package</h2>
+<p>The <strong>signifinder</strong> package provides a streamlined workflow implemented in <strong>R</strong> for the re-analysis and comparison of gene expression signatures.</p>
+<section id="signature-collection-and-input" class="level3">
+<h3 class="anchored" data-anchor-id="signature-collection-and-input">1. Signature Collection and Input</h3>
 <ul>
-<li><strong>Focus</strong>: This review highlights the use of <strong>network-based strategies</strong> as essential tools for analyzing and interpreting complex metabolomics data, especially from untargeted Mass Spectrometry (MS).</li>
-<li><strong>Molecular Networking (MN)</strong>: Used to organize MS/MS spectral data based on <strong>chemical structural similarity</strong>, thereby facilitating the identification of unknown compounds in chemical families.</li>
-<li><strong>Metabolic Networks</strong>: Constructed using <strong>statistical correlation</strong> between metabolite abundance levels to infer functional and biological relationships, enabling mapping onto known biochemical pathways for biological contextualization.</li>
+<li><strong>Input:</strong> The package accepts user-defined GESs or a large compendium of over 100 publicly available, manually curated <strong>breast cancer (BC)</strong> signatures, allowing for standardized testing.</li>
+<li><strong>Data Handling:</strong> It handles transcriptomic data from various sources (e.g., TCGA, GEO) and formats, including count and normalized data for bulk, scRNA-Seq, and ST.</li>
 </ul>
 </section>
-<section id="longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity" class="level3">
-<h3 class="anchored" data-anchor-id="longitudinal-metabolomics-of-increasing-body-mass-index-and-waist-hip-ratio-reveals-two-dynamic-patterns-of-obesity"><a href="metabolomics/makinen_2023_36823293.html">Longitudinal metabolomics of increasing body-mass index and waist-hip ratio reveals two dynamic patterns of obesity</a></h3>
+<section id="signature-scoring-and-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="signature-scoring-and-analysis">2. Signature Scoring and Analysis</h3>
+<p>The package integrates multiple popular scoring methods, making it flexible for cross-platform comparison: * <strong>Bulk Data:</strong> Uses standard methods like <strong>Z-scores</strong> and <strong>GSVA (Gene Set Variation Analysis)</strong>. * <strong>Single-Cell/Spatial Data:</strong> Integrates specialized methods designed for sparse data, such as <strong>AUCell</strong> and <strong>singscore</strong>.</p>
+</section>
+<section id="visualization-and-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-and-interpretation">3. Visualization and Interpretation</h3>
+<p>The workflow provides structured output and visualization tools to interpret the results, including: * <strong>Robustness Metrics:</strong> Quantification of how consistently a signature identifies specific sample groups across different platforms. * <strong>Feature Visualization:</strong> Maps of signature scores onto spatial transcriptomics images to visualize the physical location of the cell states predicted by the signature.</p>
+</section>
+</section>
+<section id="key-findings-application-to-breast-cancer-signatures" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-application-to-breast-cancer-signatures">Key Findings: Application to Breast Cancer Signatures</h2>
+<p>The authors applied <strong>signifinder</strong> to investigate the robustness of 106 published breast cancer GESs across three different data modalities:</p>
+<section id="robustness-across-modalities" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-across-modalities">1. Robustness Across Modalities</h3>
 <ul>
-<li><strong>Objective</strong>: This longitudinal study used metabolomics and <strong>systems epidemiology tools</strong> (Self-Organizing Map, SOM) on over 12,800 participants to dissect the complex temporal associations between <strong>Body-Mass Index (BMI)</strong>, <strong>Waist-Hip Ratio (WHR)</strong>, and the circulating metabolome.</li>
-<li><strong>Key Finding</strong>: The study revealed <strong>two dynamically different metabolic patterns</strong> for increasing obesity:
-<ol type="1">
-<li>An increase in <strong>BMI</strong> that was <strong>not</strong> accompanied by an increase in <strong>fatty acid (FA) saturation</strong> was associated with a relatively favorable metabolic profile.</li>
-<li>An increase in <strong>WHR</strong> (central adiposity) was <strong>uniformly associated</strong> with a single, highly adverse metabolic profile, characterized by worse glucose metabolism, inflammation, and high amino acid levels.</li>
-</ol></li>
-<li><strong>Implication</strong>: The results suggest that obesity is metabolically heterogeneous and that <strong>WHR is a more consistent marker of severe adverse metabolic risk</strong> than BMI alone, emphasizing the need to consider dynamic metabolic changes for personalized risk assessment.</li>
+<li><strong>Consistent Signatures:</strong> Only a small subset of the tested signatures showed high robustness across all three data types (bulk, scRNA-Seq, ST).</li>
+<li><strong>High-Resolution Data Value:</strong> The analysis revealed that some signatures that performed well in bulk data lost their predictive power in scRNA-Seq or ST, highlighting the need to re-validate bulk-derived signatures in high-resolution contexts.</li>
+<li><strong>Example:</strong> Signatures based on <strong>Proliferation</strong> and <strong>Basal/Claudin-low</strong> subtypes were among the most robust, consistently classifying cell populations across technologies.</li>
 </ul>
 </section>
-<section id="characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies" class="level3">
-<h3 class="anchored" data-anchor-id="characterization-of-missing-values-in-untargeted-ms-based-metabolomics-data-and-evaluation-of-missing-data-handling-strategies"><a href="metabolomics/do_2018_30830398.html">Characterization of missing values in untargeted MS-based metabolomics data and evaluation of missing data handling strategies</a></h3>
-<ul>
-<li><strong>Objective</strong>: The study systematically characterized the sources of <strong>missing values (MVs)</strong> in untargeted Mass Spectrometry (MS)-based metabolomics data and evaluated various imputation strategies.</li>
-<li><strong>Missing Value Types</strong>: Distinguished between <strong>systematic missingness</strong> primarily due to <strong>Limits of Detection (LOD)</strong> and <strong>random missingness</strong> due to technical issues.</li>
-<li><strong>Best Strategy</strong>: For the prevalent LOD-related MVs, which represent concentrations near zero, simple methods like <strong>imputation with half of the minimum observed value</strong> were found to be effective and often outperformed complex data-driven methods (e.g., PPCA).</li>
-<li><strong>Recommendation</strong>: Researchers should use targeted imputation strategies based on the <strong>nature of the missingness</strong> to avoid introducing bias and reducing statistical power.</li>
-</ul>
+<section id="deconvoluting-the-tumor-microenvironment-tme" class="level3">
+<h3 class="anchored" data-anchor-id="deconvoluting-the-tumor-microenvironment-tme">2. Deconvoluting the Tumor Microenvironment (TME)</h3>
+<p>Using <strong>signifinder</strong> on spatial transcriptomics data (e.g., from Visium), the authors demonstrated the package’s ability to: * <strong>Locate Signatures:</strong> Accurately map the spatial enrichment of signatures associated with different cell populations (e.g., immune cells, fibroblasts) and cancer features (e.g., proliferation) within the breast tumor tissue. * <strong>TME Characterization:</strong> This capability allows researchers to refine the understanding of how the tumor microenvironment influences gene expression patterns, which is often masked in bulk sequencing.</p>
 </section>
-<section id="networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="networks-and-graphs-discovery-in-metabolomics-data-analysis-and-interpretation"><a href="metabolomics/amara_2022_35350714.html">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</a></h3>
-<ul>
-<li><strong>Focus</strong>: This review highlights the use of <strong>networks and graph theory</strong> as powerful computational tools for analyzing and interpreting complex metabolomics data.</li>
-<li><strong>Network Types</strong>:
-<ol type="1">
-<li><strong>Analytical/Chemical Networks</strong>: Derived from Mass Spectrometry (MS) data, such as <strong>Molecular Networking (MN)</strong>, which connects spectra based on <strong>chemical structural similarity</strong> to aid in compound identification.</li>
-<li><strong>Biological/Correlation Networks</strong>: Derived from quantitative metabolite abundance data. These networks use <strong>statistical correlation</strong> between metabolites to infer shared biological regulation, map metabolites onto known <strong>biochemical pathways</strong>, and facilitate <strong>multi-omics integration</strong> (connecting metabolites to genes/proteins).</li>
-</ol></li>
-<li><strong>Implication</strong>: Graph theory enables researchers to move beyond simple lists of metabolites to view the metabolome as a structured, interactive system, which is essential for biological interpretation and hypothesis generation.</li>
-</ul>
 </section>
-<section id="best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data" class="level3">
-<h3 class="anchored" data-anchor-id="best-practices-and-tools-in-r-and-python-for-statistical-processing-and-visualization-of-lipidomics-and-metabolomics-data"><a href="metabolomics/idkowiak_2025_41027880.html">Best practices and tools in R and Python for statistical processing and visualization of lipidomics and metabolomics data</a></h3>
-<ul>
-<li><strong>Objective</strong>: This review compiles <strong>best practices and freely accessible tools</strong> in <strong>R and Python</strong> for the <strong>statistical processing and visualization</strong> of extensive mass spectrometry-based <strong>lipidomics and metabolomics</strong> data.</li>
-<li><strong>Focus</strong>: The article provides a “solid core” of resources for <strong>exploratory data analysis (EDA)</strong> and visualization to help researchers identify and visualize statistically significant trends and biologically relevant differences within their complex datasets.</li>
-<li><strong>Implication</strong>: It guides researchers on using modern computational platforms (R/Python) and integrating metadata (e.g., clinical parameters) with their omics data to perform robust and reproducible downstream analysis.</li>
-</ul>
-</section>
-<section id="altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy" class="level3">
-<h3 class="anchored" data-anchor-id="altered-metabolite-levels-in-cancer-implications-for-tumour-biology-and-cancer-therapy"><a href="metabolomics/sullivan_2016_27658530.html">Altered metabolite levels in cancer: implications for tumour biology and cancer therapy</a></h3>
-<ul>
-<li><strong>Focus</strong>: This review examines how <strong>altered intracellular metabolite concentrations</strong> in cancer cells, often driven by genetic mutations, actively <strong>promote tumor initiation and progression</strong>, moving beyond the idea that metabolic changes are merely a consequence of cancer.</li>
-<li><strong>Oncometabolites</strong>: Specific metabolites act as effector molecules:
-<ul>
-<li><strong>2-Hydroxyglutarate (2-HG)</strong>: Produced by <em>IDH1/2</em> mutations, it inhibits <strong>epigenetic regulators</strong> (like TET enzymes) leading to globally altered gene expression and oncogenesis.</li>
-<li><strong>Fumarate and Succinate</strong>: Accumulate due to <em>FH/SDH</em> mutations, leading to the stabilization of <strong>HIF-<span class="math inline">\(1\alpha\)</span></strong> (pseudohypoxia), which drives proliferation and the Warburg effect.</li>
-</ul></li>
-<li><strong>Implication</strong>: The altered metabolome is a rich source of <strong>therapeutic targets</strong>. Strategies can focus on counteracting the effects of oncometabolites or exploiting the metabolic dependencies created by these shifts (e.g., limited aspartate for nucleotide synthesis).</li>
-</ul>
+<section id="conclusions-and-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-recommendations">Conclusions and Recommendations</h2>
+<p>The <strong>signifinder</strong> Bioconductor package addresses a critical need in computational cancer biology by providing a standardized, reproducible, and flexible tool for assessing the performance of gene expression signatures across emerging high-resolution transcriptomics platforms. The authors recommend that researchers use such methods to validate the relevance and consistency of their signatures when moving between bulk and single-cell/spatial data, ensuring reliable translation of findings.</p>
 
 
 </section>
