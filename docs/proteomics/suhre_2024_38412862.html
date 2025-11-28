@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-11-28">
 
-<title>Proteomics</title>
+<title>Genetic associations with ratios between protein levels detect new pQTLs and reveal protein-protein interactions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -85,43 +115,43 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">info</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./genetics.html"> 
+    <a class="nav-link" href="../genetics.html"> 
 <span class="menu-text">genetics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./proteomics.html" aria-current="page"> 
+    <a class="nav-link" href="../proteomics.html"> 
 <span class="menu-text">proteomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./metabolomics.html"> 
+    <a class="nav-link" href="../metabolomics.html"> 
 <span class="menu-text">metabolomics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./multi-omics.html"> 
+    <a class="nav-link" href="../multi-omics.html"> 
 <span class="menu-text">multi-omics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mr.html"> 
+    <a class="nav-link" href="../mr.html"> 
 <span class="menu-text">MR</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pgs.html"> 
+    <a class="nav-link" href="../pgs.html"> 
 <span class="menu-text">PGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./statistics.html"> 
+    <a class="nav-link" href="../statistics.html"> 
 <span class="menu-text">statistics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./interaction.html"> 
+    <a class="nav-link" href="../interaction.html"> 
 <span class="menu-text">interaction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./other.html"> 
+    <a class="nav-link" href="../other.html"> 
 <span class="menu-text">other</span></a>
   </li>  
 </ul>
@@ -140,16 +170,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#current-landscape-of-plasma-proteomics-from-technical-innovations-to-biological-insights-and-biomarker-discovery" id="toc-current-landscape-of-plasma-proteomics-from-technical-innovations-to-biological-insights-and-biomarker-discovery" class="nav-link active" data-scroll-target="#current-landscape-of-plasma-proteomics-from-technical-innovations-to-biological-insights-and-biomarker-discovery">Current landscape of plasma proteomics from technical innovations to biological insights and biomarker discovery</a></li>
-  <li><a href="#a-human-pan-disease-blood-atlas-of-the-circulating-proteome" id="toc-a-human-pan-disease-blood-atlas-of-the-circulating-proteome" class="nav-link" data-scroll-target="#a-human-pan-disease-blood-atlas-of-the-circulating-proteome">A human pan-disease blood atlas of the circulating proteome</a></li>
-  <li><a href="#pwas-proteome-wide-association-study-linking-genes-and-phenotypes-by-functional-variation-in-proteins" id="toc-pwas-proteome-wide-association-study-linking-genes-and-phenotypes-by-functional-variation-in-proteins" class="nav-link" data-scroll-target="#pwas-proteome-wide-association-study-linking-genes-and-phenotypes-by-functional-variation-in-proteins">PWAS: proteome-wide association study-linking genes and phenotypes by functional variation in proteins</a></li>
-  <li><a href="#decoding-the-functional-impact-of-the-cancer-genome-through-protein-protein-interactions" id="toc-decoding-the-functional-impact-of-the-cancer-genome-through-protein-protein-interactions" class="nav-link" data-scroll-target="#decoding-the-functional-impact-of-the-cancer-genome-through-protein-protein-interactions">Decoding the functional impact of the cancer genome through protein-protein interactions</a></li>
-  <li><a href="#longitudinal-multi-omics-study-reveals-common-etiology-underlying-association-between-plasma-proteome-and-bmi-trajectories-in-adolescent-and-young-adult-twins" id="toc-longitudinal-multi-omics-study-reveals-common-etiology-underlying-association-between-plasma-proteome-and-bmi-trajectories-in-adolescent-and-young-adult-twins" class="nav-link" data-scroll-target="#longitudinal-multi-omics-study-reveals-common-etiology-underlying-association-between-plasma-proteome-and-bmi-trajectories-in-adolescent-and-young-adult-twins">Longitudinal multi-omics study reveals common etiology underlying association between plasma proteome and BMI trajectories in adolescent and young adult twins</a></li>
-  <li><a href="#proteomic-signatures-improve-risk-prediction-for-common-and-rare-diseases" id="toc-proteomic-signatures-improve-risk-prediction-for-common-and-rare-diseases" class="nav-link" data-scroll-target="#proteomic-signatures-improve-risk-prediction-for-common-and-rare-diseases">Proteomic signatures improve risk prediction for common and rare diseases</a></li>
-  <li><a href="#genetic-associations-with-ratios-between-protein-levels-detect-new-pqtls-and-reveal-protein-protein-interactions" id="toc-genetic-associations-with-ratios-between-protein-levels-detect-new-pqtls-and-reveal-protein-protein-interactions" class="nav-link" data-scroll-target="#genetic-associations-with-ratios-between-protein-levels-detect-new-pqtls-and-reveal-protein-protein-interactions">Genetic associations with ratios between protein levels detect new pQTLs and reveal protein-protein interactions</a></li>
-  <li><a href="#machine-learning-guided-deconvolution-of-plasma-protein-levels" id="toc-machine-learning-guided-deconvolution-of-plasma-protein-levels" class="nav-link" data-scroll-target="#machine-learning-guided-deconvolution-of-plasma-protein-levels">Machine learning-guided deconvolution of plasma protein levels</a></li>
-  <li><a href="#blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank" id="toc-blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank" class="nav-link" data-scroll-target="#blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank">Blood protein assessment of leading incident diseases and mortality in the UK Biobank</a></li>
-  <li><a href="#mapping-the-proteo-genomic-convergence-of-human-diseases" id="toc-mapping-the-proteo-genomic-convergence-of-human-diseases" class="nav-link" data-scroll-target="#mapping-the-proteo-genomic-convergence-of-human-diseases">Mapping the proteo-genomic convergence of human diseases</a></li>
+  <li><a href="#key-findings-the-power-of-ratio-qtls-rqtls" id="toc-key-findings-the-power-of-ratio-qtls-rqtls" class="nav-link active" data-scroll-target="#key-findings-the-power-of-ratio-qtls-rqtls">Key Findings: The Power of Ratio-QTLs (rQTLs)</a>
+  <ul class="collapse">
+  <li><a href="#enhanced-detection-and-biological-relevance" id="toc-enhanced-detection-and-biological-relevance" class="nav-link" data-scroll-target="#enhanced-detection-and-biological-relevance">Enhanced Detection and Biological Relevance</a></li>
+  </ul></li>
+  <li><a href="#methods-and-study-design" id="toc-methods-and-study-design" class="nav-link" data-scroll-target="#methods-and-study-design">Methods and Study Design</a>
+  <ul class="collapse">
+  <li><a href="#data-and-cohort" id="toc-data-and-cohort" class="nav-link" data-scroll-target="#data-and-cohort">Data and Cohort</a></li>
+  <li><a href="#theoretical-interpretation-of-rqtls" id="toc-theoretical-interpretation-of-rqtls" class="nav-link" data-scroll-target="#theoretical-interpretation-of-rqtls">Theoretical Interpretation of rQTLs</a></li>
+  </ul></li>
+  <li><a href="#results-case-studies-and-functional-insights" id="toc-results-case-studies-and-functional-insights" class="nav-link" data-scroll-target="#results-case-studies-and-functional-insights">Results: Case Studies and Functional Insights</a>
+  <ul class="collapse">
+  <li><a href="#high-impact-rqtls" id="toc-high-impact-rqtls" class="nav-link" data-scroll-target="#high-impact-rqtls">High-Impact rQTLs</a></li>
+  </ul></li>
+  <li><a href="#conclusions-and-recommendations" id="toc-conclusions-and-recommendations" class="nav-link" data-scroll-target="#conclusions-and-recommendations">Conclusions and Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -158,14 +192,30 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Proteomics</h1>
-</div>
+<h1 class="title">Genetic associations with ratios between protein levels detect new pQTLs and reveal protein-protein interactions</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Proteomics</div>
+    <div class="quarto-category">pQTL</div>
+    <div class="quarto-category">Ratio QTL</div>
+    <div class="quarto-category">Genetics</div>
+    <div class="quarto-category">Protein-Protein Interactions</div>
+    <div class="quarto-category">UK Biobank</div>
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">Biomarker Discovery</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">28 November 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -175,85 +225,54 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="current-landscape-of-plasma-proteomics-from-technical-innovations-to-biological-insights-and-biomarker-discovery" class="level3">
-<h3 class="anchored" data-anchor-id="current-landscape-of-plasma-proteomics-from-technical-innovations-to-biological-insights-and-biomarker-discovery"><a href="proteomics/kirsher_2025_40999057.html">Current landscape of plasma proteomics from technical innovations to biological insights and biomarker discovery</a></h3>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/38412862/">38412862</a> <strong>DOI:</strong> <a href="https://doi.org/10.1016/j.xgen.2024.100506">10.1016/j.xgen.2024.100506</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 28/11/2025</p>
+<section id="key-findings-the-power-of-ratio-qtls-rqtls" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-the-power-of-ratio-qtls-rqtls">Key Findings: The Power of Ratio-QTLs (rQTLs)</h2>
+<p>This study introduces a novel concept in proteomic genetics: the systematic analysis of <strong>ratios between protein levels</strong> to identify <strong>ratio quantitative trait loci (rQTLs)</strong>. The central finding is that using protein ratios dramatically enhances the statistical power to detect genetic variants influencing protein regulation, particularly those linked to functional biological mechanisms like <strong>Protein-Protein Interactions (PPIs)</strong>.</p>
+<section id="enhanced-detection-and-biological-relevance" class="level3">
+<h3 class="anchored" data-anchor-id="enhanced-detection-and-biological-relevance">Enhanced Detection and Biological Relevance</h3>
 <ul>
-<li><strong>Topic</strong>: A <strong>systematic benchmarking</strong> and technical evaluation of the current landscape of plasma proteomics, directly comparing different <strong>affinity-based</strong> and <strong>mass spectrometry</strong> platforms.</li>
-<li><strong>Method</strong>: Eight state-of-the-art proteomics platforms were applied to the <strong>same human plasma cohort</strong> to compare performance across <strong>over 13,000 proteins</strong>, assessing metrics like coverage, sensitivity, and reproducibility.</li>
-<li><strong>Impact</strong>: The study provides a critical resource for researchers, detailing the <strong>trade-offs in protein coverage</strong> and identifying the complementary strengths and limitations of each platform to guide informed decision-making for biomarker discovery.</li>
+<li><strong>Increased Association Strength:</strong> Analyzing ratios between protein pairs, rather than individual protein levels, strengthened associations at known pQTL loci by <strong>several hundred orders of magnitude (p-gain)</strong>.</li>
+<li><strong>New Loci:</strong> The use of ratios increased the number of proteogenomic loci by <strong>25%</strong> and helped detect <strong>39 previously unidentified cis-pQTLs</strong>.</li>
+<li><strong>PPI Enrichment:</strong> The identified rQTLs were <strong>7.6-fold enriched in established protein-protein interactions (PPIs)</strong> from the BioGRID database. This high enrichment indicates that the ratio method is particularly effective at capturing genetic effects that modulate the functional interaction or shared regulation of two proteins.</li>
 </ul>
 </section>
-<section id="a-human-pan-disease-blood-atlas-of-the-circulating-proteome" class="level3">
-<h3 class="anchored" data-anchor-id="a-human-pan-disease-blood-atlas-of-the-circulating-proteome"><a href="proteomics/alvez_2025_41066540.html">A human pan-disease blood atlas of the circulating proteome</a></h3>
+</section>
+<section id="methods-and-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="methods-and-study-design">Methods and Study Design</h2>
+<section id="data-and-cohort" class="level3">
+<h3 class="anchored" data-anchor-id="data-and-cohort">Data and Cohort</h3>
 <ul>
-<li><strong>Topic</strong>: Creation of a definitive <strong>human pan-disease blood atlas</strong> of the circulating proteome to discover and validate protein <strong>biomarkers</strong> and develop <strong>predictive algorithms</strong> across a wide spectrum of human diseases.</li>
-<li><strong>Methods</strong>: Utilized large-scale human cohorts and benchmarked high-throughput affinity-based proteomics, specifically the <strong>Olink Explore 1536/HT</strong> platforms, to profile thousands of proteins. The data was analyzed using <strong>machine learning</strong> for disease prediction and to assess protein profiles relative to <strong>time-to-diagnosis</strong> (temporal analysis) for major cancers (lung, colorectal, breast, ovarian, and prostate).</li>
-<li><strong>Key Findings &amp; Impact</strong>: The study confirmed the utility of circulating proteins (e.g., PAEP, CEACAM5, WFDC2) as robust biomarkers. The temporal analysis demonstrated the potential for <strong>predicting disease onset years before clinical diagnosis</strong>. The resulting atlas is a critical resource for developing <strong>next-generation diagnostics and therapeutics</strong>.</li>
+<li><strong>Cohort:</strong> A large-scale analysis using proteomic and genetic data from <strong>52,705 samples</strong> in the <strong>UK Biobank</strong>.</li>
+<li><strong>Proteome:</strong> Measured levels for <strong>1,473 plasma proteins</strong> using the Olink Proximity Extension Assay (PEA).</li>
+<li><strong>Statistical Approach:</strong> The study analyzed approximately <strong>1.1 million protein ratios</strong>, testing each ratio against genetic variants (SNPs) to find rQTLs.</li>
 </ul>
 </section>
-<section id="pwas-proteome-wide-association-study-linking-genes-and-phenotypes-by-functional-variation-in-proteins" class="level3">
-<h3 class="anchored" data-anchor-id="pwas-proteome-wide-association-study-linking-genes-and-phenotypes-by-functional-variation-in-proteins"><a href="proteomics/brandes_2020_32665031.html">PWAS: proteome-wide association study-linking genes and phenotypes by functional variation in proteins</a></h3>
+<section id="theoretical-interpretation-of-rqtls" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-interpretation-of-rqtls">Theoretical Interpretation of rQTLs</h3>
+<p>An rQTL signal between two proteins (<span class="math inline">\(P_1/P_2\)</span>) can arise from three primary scenarios:</p>
+<ol type="1">
+<li><strong>Shared Confounder:</strong> A genetic variant influences a common confounding factor (e.g., cell type composition, inflammation) that affects both proteins similarly.</li>
+<li><strong>Shared Pathway:</strong> A variant affects a shared regulatory pathway (e.g., transcription factor) controlling both proteins.</li>
+<li><strong>Protein-Protein Interaction (PPI):</strong> A variant directly or indirectly alters the functional or physical interaction between <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>. The strong enrichment of rQTLs in known PPIs suggests this method excels at identifying the latter two, especially PPIs.</li>
+</ol>
+</section>
+</section>
+<section id="results-case-studies-and-functional-insights" class="level2">
+<h2 class="anchored" data-anchor-id="results-case-studies-and-functional-insights">Results: Case Studies and Functional Insights</h2>
+<section id="high-impact-rqtls" class="level3">
+<h3 class="anchored" data-anchor-id="high-impact-rqtls">High-Impact rQTLs</h3>
+<p>The study highlighted several high-impact rQTLs with strong biological relevance:</p>
 <ul>
-<li><strong>Novel Method</strong>: Introduces <strong>PWAS (Proteome-Wide Association Study)</strong>, a protein-centric method that detects gene-phenotype associations by quantifying the cumulative functional damage caused by coding-region variants on the resulting protein product using a machine learning model called FIRM.</li>
-<li><strong>Key Advantage</strong>: PWAS is specifically designed to model and detect non-additive heritability, demonstrating its power in identifying associations under the <strong>recessive inheritance</strong> model, which is often missed by standard GWAS.</li>
-<li><strong>Discovery Power</strong>: In analysis using the UK Biobank, PWAS uncovered numerous gene-phenotype associations unique from standard GWAS, including detecting the known colorectal cancer gene <strong>MUTYH</strong> with high significance under its characteristic recessive mode.</li>
+<li><strong>Complement Components:</strong> The strongest associations involved proteins in the <strong>complement system</strong>, an essential part of the innate immune response. The rQTL analysis revealed variants impacting the balance of activation and regulation components, such as C3/C4 and C5/C9.</li>
+<li><strong>Duffy Blood Group (ACKR1):</strong> A classic example was the rQTL signal for the <strong>Duffy blood type variant (rs12075 in <em>ACKR1</em>)</strong>. While this variant is known to affect multiple cytokine levels individually, the ratio analysis significantly amplified the association, indicating a shared, highly coordinated regulatory effect on a panel of cytokines.</li>
+<li><strong>NFATC1 Pathway:</strong> The analysis revealed rQTLs regulating the ratio of <strong>NFATC1</strong> with several other proteins, pointing to complex regulatory mechanisms related to the NFATC1-mediated signaling pathway.</li>
 </ul>
 </section>
-<section id="decoding-the-functional-impact-of-the-cancer-genome-through-protein-protein-interactions" class="level3">
-<h3 class="anchored" data-anchor-id="decoding-the-functional-impact-of-the-cancer-genome-through-protein-protein-interactions"><a href="proteomics/fu_2025_39810024.html">Decoding the functional impact of the cancer genome through protein-protein interactions</a></h3>
-<ul>
-<li><strong>Core Concept</strong>: This review establishes that oncogenic driver mutations exert their functional impact largely by <strong>rewiring molecular signaling networks</strong> through the alteration of <strong>Protein-Protein Interactions (PPIs)</strong>.</li>
-<li><strong>Mechanism</strong>: Mutations at the protein surface, particularly at PPI interfaces, can lead to the creation of <strong>neomorphic PPIs (neoPPIs)</strong> or the loss of existing <strong>hypomorphic PPIs (hypoPPIs)</strong>, necessitating a mutation-focused analysis.</li>
-<li><strong>Therapeutic Implication</strong>: The mutation-directed PPIs are presented as a new class of targets for precision oncology, paving the way for the development of small-molecule modulators that can selectively disrupt oncogenic neoPPIs or restore tumor-suppressive hypoPPIs.</li>
-</ul>
 </section>
-<section id="longitudinal-multi-omics-study-reveals-common-etiology-underlying-association-between-plasma-proteome-and-bmi-trajectories-in-adolescent-and-young-adult-twins" class="level3">
-<h3 class="anchored" data-anchor-id="longitudinal-multi-omics-study-reveals-common-etiology-underlying-association-between-plasma-proteome-and-bmi-trajectories-in-adolescent-and-young-adult-twins"><a href="proteomics/drouard_2023_38129841.html">Longitudinal multi-omics study reveals common etiology underlying association between plasma proteome and BMI trajectories in adolescent and young adult twins</a></h3>
-<ul>
-<li><strong>Design</strong>: A longitudinal multi-omics twin study (NTR and FinnTwin12 cohorts) examining the association between plasma protein levels and changes in BMI (trajectories) over approximately a decade.</li>
-<li><strong>Key Finding</strong>: The association between the plasma proteome and BMI trajectories is largely explained by <strong>shared genetic factors</strong> and common environmental influences, pointing to a common underlying etiology.</li>
-<li><strong>Causal Link</strong>: Mendelian Randomization analysis identified <strong>Apolipoprotein B (ApoB)</strong> as a key protein, providing evidence that genetically determined ApoB levels have a <strong>causal effect on BMI</strong>, but not the reverse.</li>
-</ul>
-</section>
-<section id="proteomic-signatures-improve-risk-prediction-for-common-and-rare-diseases" class="level3">
-<h3 class="anchored" data-anchor-id="proteomic-signatures-improve-risk-prediction-for-common-and-rare-diseases"><a href="proteomics/carrascozanini_2024_39039249.html">Proteomic signatures improve risk prediction for common and rare diseases</a></h3>
-<ul>
-<li><strong>Objective</strong>: This large-scale study demonstrated the ability of <strong>plasma proteomic signatures</strong> to enhance the 10-year incidence risk prediction for 218 common and rare diseases in the UK Biobank (UKB-PPP) cohort.</li>
-<li><strong>Result</strong>: <strong>Sparse proteomic models</strong> (using 5–20 proteins) significantly improved the C-index over models based on basic clinical information for <strong>67 diseases</strong>, including hard-to-diagnose conditions like multiple myeloma and motor neuron disease.</li>
-<li><strong>Robustness/Confounding</strong>: The analysis highlighted that <strong>residual confounding</strong> is a major issue, as over 80% of initial associations attenuated after adjusting for demographic and clinical factors, underscoring the necessity of understanding <strong>protein determinants</strong> to ensure findings are biologically relevant and not spurious.</li>
-</ul>
-</section>
-<section id="genetic-associations-with-ratios-between-protein-levels-detect-new-pqtls-and-reveal-protein-protein-interactions" class="level3">
-<h3 class="anchored" data-anchor-id="genetic-associations-with-ratios-between-protein-levels-detect-new-pqtls-and-reveal-protein-protein-interactions"><a href="proteomics/suhre_2024_38412862.html">Genetic associations with ratios between protein levels detect new pQTLs and reveal protein-protein interactions</a></h3>
-<ul>
-<li><strong>Novel Method</strong>: Introduces <strong>Ratio-QTLs (rQTLs)</strong>, a proteogenomic method that analyzes the genetic determinants of ratios between pairs of plasma protein levels rather than individual protein levels.</li>
-<li><strong>Key Finding</strong>: The rQTL approach provided an enormous increase in statistical power, strengthening associations at known pQTL loci by <strong>several hundred orders of magnitude</strong> (p-gain) and enabling the discovery of new cis-pQTLs.</li>
-<li><strong>Biological Relevance</strong>: rQTLs were <strong>7.6-fold enriched in established Protein-Protein Interactions (PPIs)</strong>, confirming the method’s unique ability to uncover genetic variants that regulate the functional interaction or shared biological regulation between two proteins.</li>
-</ul>
-</section>
-<section id="machine-learning-guided-deconvolution-of-plasma-protein-levels" class="level3">
-<h3 class="anchored" data-anchor-id="machine-learning-guided-deconvolution-of-plasma-protein-levels"><a href="proteomics/pietzner_2025_41068475.html">Machine learning-guided deconvolution of plasma protein levels</a></h3>
-<ul>
-<li><strong>Objective</strong>: Used <strong>machine learning (ML)</strong> to systematically identify and quantify the contribution of over 1,800 characteristics (health, genetic, technical) to the variation in approximately 3,000 plasma protein levels across 43,240 UK Biobank individuals.</li>
-<li><strong>Key Result</strong>: A median of 20 factors explained an average of <strong>19.4%</strong> of protein variance. <strong>Modifiable characteristics</strong> (median: 10.0%) were found to explain significantly more variation than <strong>genetic factors</strong> (median: 3.9%).</li>
-<li><strong>Implication</strong>: The study provides a crucial resource (knowledge graph, R package) and framework for understanding protein origins, clustering proteins by their drivers (e.g., disease, pre-analytical factors), and guiding the identification of biologically relevant biomarkers and <strong>drug target engagement markers</strong>.</li>
-</ul>
-</section>
-<section id="blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank" class="level3">
-<h3 class="anchored" data-anchor-id="blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank"><a href="proteomics/gadd_2024_38987645.html">Blood protein assessment of leading incident diseases and mortality in the UK Biobank</a></h3>
-<ul>
-<li><strong>Objective</strong>: To identify and validate protein biomarkers for the 10-year incidence of 23 age-related diseases and all-cause mortality using proteomics data from <strong>47,600 UK Biobank participants</strong>.</li>
-<li><strong>Key Result</strong>: Multi-protein risk scores (<strong>ProteinScores</strong>), developed using penalized Cox regression, significantly <strong>improved the Area Under the Curve (AUC)</strong> for the 10-year onset prediction of <strong>six major outcomes</strong>, including all-cause mortality, coronary artery disease (CAD), and Type 2 diabetes (T2D), even after adjusting for 24 comprehensive clinical and lifestyle factors.</li>
-<li><strong>Implication</strong>: The ProteinScores capture independent biological information related to underlying <strong>aging and systemic disease risk</strong> not found in standard clinical measures, validating the use of multi-protein panels for enhanced personalized risk stratification.</li>
-</ul>
-</section>
-<section id="mapping-the-proteo-genomic-convergence-of-human-diseases" class="level3">
-<h3 class="anchored" data-anchor-id="mapping-the-proteo-genomic-convergence-of-human-diseases"><a href="proteomics/pietzner_2021_34648354.html">Mapping the proteo-genomic convergence of human diseases</a></h3>
-<ul>
-<li><strong>Objective</strong>: To construct a <strong>proteo-genomic map</strong> by systematically linking genetic risk for hundreds of human diseases and traits to variations in the levels of ~3,000 plasma proteins using data from &gt;54,000 individuals.</li>
-<li><strong>Key Result</strong>: Identified <strong>2,228 instances of genetic colocalization</strong> across 1,440 proteins and 498 diseases/traits, indicating that a substantial portion of genetic disease risk is mediated by altered protein levels.</li>
-<li><strong>Causal Inference</strong>: Through Mendelian Randomization (MR), the study robustly predicted <strong>44 proteins</strong> to be <strong>causally linked</strong> to 37 diseases/traits (e.g., CRP and CAD), thereby providing high-priority candidates for drug targets.</li>
-</ul>
+<section id="conclusions-and-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-recommendations">Conclusions and Recommendations</h2>
+<p>The concept of rQTLs provides a <strong>powerful and generalizable theoretical framework</strong> for detecting subtle genetic effects that modulate the relative abundance of protein pairs. By focusing on ratios, researchers can effectively filter out much of the biological noise and shared technical variation that obscures signals in single-protein pQTL analyses. The high enrichment for known PPIs validates rQTLs as a superior method for <strong>identifying functional protein relationships</strong> and should be a standard approach in future proteogenomic studies for drug target discovery. The authors recommend further theoretical development and generalization of the ratio concept.</p>
 
 
 </section>
