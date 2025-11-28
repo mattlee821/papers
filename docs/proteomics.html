@@ -124,6 +124,18 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./other.html"> 
 <span class="menu-text">other</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./expression.html"> 
+<span class="menu-text">expression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ml.html"> 
+<span class="menu-text">ml</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./finemap-colocalisation.html"> 
+<span class="menu-text">finemap-colocalisation</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -150,6 +162,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#machine-learning-guided-deconvolution-of-plasma-protein-levels" id="toc-machine-learning-guided-deconvolution-of-plasma-protein-levels" class="nav-link" data-scroll-target="#machine-learning-guided-deconvolution-of-plasma-protein-levels">Machine learning-guided deconvolution of plasma protein levels</a></li>
   <li><a href="#blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank" id="toc-blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank" class="nav-link" data-scroll-target="#blood-protein-assessment-of-leading-incident-diseases-and-mortality-in-the-uk-biobank">Blood protein assessment of leading incident diseases and mortality in the UK Biobank</a></li>
   <li><a href="#mapping-the-proteo-genomic-convergence-of-human-diseases" id="toc-mapping-the-proteo-genomic-convergence-of-human-diseases" class="nav-link" data-scroll-target="#mapping-the-proteo-genomic-convergence-of-human-diseases">Mapping the proteo-genomic convergence of human diseases</a></li>
+  <li><a href="#imputation-of-label-free-quantitative-mass-spectrometry-based-proteomics-data-using-self-supervised-deep-learning" id="toc-imputation-of-label-free-quantitative-mass-spectrometry-based-proteomics-data-using-self-supervised-deep-learning" class="nav-link" data-scroll-target="#imputation-of-label-free-quantitative-mass-spectrometry-based-proteomics-data-using-self-supervised-deep-learning">Imputation of label-free quantitative mass spectrometry-based proteomics data using self-supervised deep learning</a></li>
+  <li><a href="#proteomic-prediction-of-disease-largely-reflects-environmental-risk-exposure" id="toc-proteomic-prediction-of-disease-largely-reflects-environmental-risk-exposure" class="nav-link" data-scroll-target="#proteomic-prediction-of-disease-largely-reflects-environmental-risk-exposure">Proteomic prediction of disease largely reflects environmental risk exposure</a></li>
   </ul>
 </nav>
     </div>
@@ -253,6 +267,22 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Objective</strong>: To construct a <strong>proteo-genomic map</strong> by systematically linking genetic risk for hundreds of human diseases and traits to variations in the levels of ~3,000 plasma proteins using data from &gt;54,000 individuals.</li>
 <li><strong>Key Result</strong>: Identified <strong>2,228 instances of genetic colocalization</strong> across 1,440 proteins and 498 diseases/traits, indicating that a substantial portion of genetic disease risk is mediated by altered protein levels.</li>
 <li><strong>Causal Inference</strong>: Through Mendelian Randomization (MR), the study robustly predicted <strong>44 proteins</strong> to be <strong>causally linked</strong> to 37 diseases/traits (e.g., CRP and CAD), thereby providing high-priority candidates for drug targets.</li>
+</ul>
+</section>
+<section id="imputation-of-label-free-quantitative-mass-spectrometry-based-proteomics-data-using-self-supervised-deep-learning" class="level3">
+<h3 class="anchored" data-anchor-id="imputation-of-label-free-quantitative-mass-spectrometry-based-proteomics-data-using-self-supervised-deep-learning"><a href="proteomics/webel_2024_38926340.html">Imputation of label-free quantitative mass spectrometry-based proteomics data using self-supervised deep learning</a></h3>
+<ul>
+<li><strong>Goal:</strong> To develop and validate <strong>PIMMS</strong> (Proteomics Imputation Modeling Mass Spectrometry), a deep learning-based framework for imputing missing values in label-free quantitative (LFQ) mass spectrometry data.</li>
+<li><strong>Method:</strong> PIMMS leverages three self-supervised models—<strong>Collaborative Filtering (CF)</strong>, <strong>Denoising Autoencoder (DAE)</strong>, and <strong>Variational Autoencoder (VAE)</strong>—which significantly outperformed 27 other imputation methods, including median imputation and R-based KNN, on simulated Missing Not At Random (MNAR) data.</li>
+<li><strong>Impact:</strong> Applying PIMMS-VAE to a clinical ALD cohort identified <strong>30 additional significantly differentially abundant proteins</strong> (+13.2%) compared to non-imputed data, demonstrating that DL imputation can enhance the biological conclusions derived from proteomics analysis.</li>
+</ul>
+</section>
+<section id="proteomic-prediction-of-disease-largely-reflects-environmental-risk-exposure" class="level3">
+<h3 class="anchored" data-anchor-id="proteomic-prediction-of-disease-largely-reflects-environmental-risk-exposure"><a href="proteomics/tsuo_2025_40909825.html">Proteomic prediction of disease largely reflects environmental risk exposure</a></h3>
+<ul>
+<li><strong>Core Finding</strong>: The high disease predictive value of the plasma proteome primarily reflects its sensitivity as a <strong>quantitative readout of environmental risk factors</strong> (like smoking and alcohol intake), rather than identifying proteins that are causal drivers of disease.</li>
+<li><strong>Causality Assessment</strong>: Using Mendelian Randomization (MR) on thousands of protein-disease associations in the UK Biobank, the study found <strong>only 8%</strong> showed suggestive evidence of a causal relationship, confirming that causal drivers are rare and disease-specific.</li>
+<li><strong>Environmental Biomarkers</strong>: The vast majority of non-causal proteins, particularly those broadly associated with multiple diseases, were found to be exposure-associated. The developed Proteomic Score for Smoking (SmokingPS) achieved an <strong>AUC of 0.96</strong>, validating the proteome’s role as an objective, quantitative index of lifestyle behaviors.</li>
 </ul>
 
 
