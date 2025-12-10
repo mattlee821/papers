@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-26">
+<meta name="dcterms.date" content="2025-12-10">
 
-<title>The ASA’s Statement on p-Values: Context, Process, and Purpose</title>
+<title>Post-transcriptional regulation across human tissues</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -157,11 +186,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-findings-principles-for-the-proper-use-of-the-p-value" id="toc-key-findings-principles-for-the-proper-use-of-the-p-value" class="nav-link active" data-scroll-target="#key-findings-principles-for-the-proper-use-of-the-p-value">Key Findings: Principles for the Proper Use of the p-Value</a>
+  <li><a href="#research-goal-and-study-design" id="toc-research-goal-and-study-design" class="nav-link active" data-scroll-target="#research-goal-and-study-design">Research Goal and Study Design</a>
   <ul class="collapse">
-  <li><a href="#six-core-principles-for-p-values" id="toc-six-core-principles-for-p-values" class="nav-link" data-scroll-target="#six-core-principles-for-p-values">Six Core Principles for p-Values</a></li>
-  <li><a href="#purpose-of-the-statement" id="toc-purpose-of-the-statement" class="nav-link" data-scroll-target="#purpose-of-the-statement">Purpose of the Statement</a></li>
+  <li><a href="#distinguishing-variability-sources" id="toc-distinguishing-variability-sources" class="nav-link" data-scroll-target="#distinguishing-variability-sources">Distinguishing Variability Sources</a></li>
+  <li><a href="#methods-and-data" id="toc-methods-and-data" class="nav-link" data-scroll-target="#methods-and-data">Methods and Data</a></li>
   </ul></li>
+  <li><a href="#key-findings-and-simpsons-paradox" id="toc-key-findings-and-simpsons-paradox" class="nav-link" data-scroll-target="#key-findings-and-simpsons-paradox">Key Findings and Simpson’s Paradox</a>
+  <ul class="collapse">
+  <li><a href="#the-simpsons-paradox-illustration" id="toc-the-simpsons-paradox-illustration" class="nav-link" data-scroll-target="#the-simpsons-paradox-illustration">The Simpson’s Paradox Illustration</a></li>
+  <li><a href="#evidence-for-post-transcriptional-regulation" id="toc-evidence-for-post-transcriptional-regulation" class="nav-link" data-scroll-target="#evidence-for-post-transcriptional-regulation">Evidence for Post-transcriptional Regulation</a></li>
+  </ul></li>
+  <li><a href="#conclusions-and-recommendations" id="toc-conclusions-and-recommendations" class="nav-link" data-scroll-target="#conclusions-and-recommendations">Conclusions and Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -170,14 +205,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The ASA’s Statement on p-Values: Context, Process, and Purpose</h1>
+<h1 class="title">Post-transcriptional regulation across human tissues</h1>
   <div class="quarto-categories">
+    <div class="quarto-category">Post-transcriptional Regulation</div>
+    <div class="quarto-category">Gene Expression</div>
+    <div class="quarto-category">Proteomics</div>
+    <div class="quarto-category">Transcriptomics</div>
+    <div class="quarto-category">Systems Biology</div>
     <div class="quarto-category">Statistical Methods</div>
-    <div class="quarto-category">P-values</div>
-    <div class="quarto-category">Misinterpretation</div>
-    <div class="quarto-category">Statistical Inference</div>
-    <div class="quarto-category">American Statistical Association</div>
-    <div class="quarto-category">Scientific Reform</div>
   </div>
   </div>
 
@@ -189,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26 November 2025</p>
+      <p class="date">10 December 2025</p>
     </div>
   </div>
   
@@ -201,46 +236,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>DOI:</strong> <a href="http://dx.doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
-<section id="key-findings-principles-for-the-proper-use-of-the-p-value" class="level2">
-<h2 class="anchored" data-anchor-id="key-findings-principles-for-the-proper-use-of-the-p-value">Key Findings: Principles for the Proper Use of the p-Value</h2>
-<p>This article presents and explains the <strong>American Statistical Association’s (ASA) Statement on p-Values and Statistical Significance</strong>, the first-ever policy statement from the ASA specifically addressing a foundational issue of statistical inference. The statement was prompted by the widespread misuse and misinterpretation of the p-value across all fields of science, which contributes to the crisis of irreproducible research.</p>
-<section id="six-core-principles-for-p-values" class="level3">
-<h3 class="anchored" data-anchor-id="six-core-principles-for-p-values">Six Core Principles for p-Values</h3>
-<p>The statement outlines six key principles, aiming to promote better practice and curb common errors:</p>
-<ol type="1">
-<li><strong>P-values can indicate how incompatible the data are with a specified statistical model.</strong>
-<ul>
-<li>The p-value measures the incompatibility between the data and the assumed statistical model (usually the null hypothesis). A small p-value indicates that the data are unlikely under the null model.</li>
-</ul></li>
-<li><strong>P-values do not measure the probability that the studied hypothesis is true, or the probability that the data were produced by random chance alone.</strong>
-<ul>
-<li>This directly addresses the most common and disastrous misinterpretation: that a low p-value (e.g., P=0.01) means the null hypothesis has only a 1% chance of being true. P-values relate to data <em>given</em> the model, not the probability of the model <em>given</em> the data.</li>
-</ul></li>
-<li><strong>Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.</strong>
-<ul>
-<li>The ASA strongly discourages the practice of dichotomizing results into “statistically significant” and “not statistically significant.” This threshold thinking can lead to flawed decisions, ignoring the importance of effect size, context, and other evidence.</li>
-</ul></li>
-<li><strong>Proper inference requires full reporting and transparency.</strong>
-<ul>
-<li>The selective reporting of only “significant” results (known as <strong>P-hacking</strong> or publication bias) renders the reported p-values meaningless. All analyses, assumptions, and findings, regardless of the p-value, must be disclosed.</li>
-</ul></li>
-<li><strong>A p-value, or statistical significance, does not measure the size of an effect or the importance of a result.</strong>
-<ul>
-<li>Statistical significance is often confused with <strong>substantive</strong> (clinical, practical, or scientific) importance. A very large study can produce a statistically significant p-value for a trivial effect, while a small study might fail to find significance for a massive, important effect. The focus should be on <strong>effect magnitude</strong>.</li>
-</ul></li>
-<li><strong>By itself, a p-value does not provide a good measure of evidence regarding a model or hypothesis.</strong>
-<ul>
-<li>Scientific reasoning requires more than just a p-value. It demands contextual knowledge, common sense, study design quality, data reliability, and integration with external evidence. Other statistical measures, particularly <strong>Confidence Intervals (CIs)</strong> and <strong>Bayesian methods</strong>, should be used to provide a richer understanding of the evidence.</li>
-</ul></li>
-</ol>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/28481885/">28481885</a> <strong>DOI:</strong> <a href="https://doi.org/10.1371/journal.pcbi.1005535">10.1371/journal.pcbi.1005535</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 10/12/2025</p>
+<section id="research-goal-and-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="research-goal-and-study-design">Research Goal and Study Design</h2>
+<p>The primary goal of this research was to estimate the relative contributions of transcriptional and post-transcriptional regulation in shaping tissue-type-specific proteomes across human tissues. The study addressed the long-standing contestation over whether protein levels are primarily set by mRNA levels or by other regulatory mechanisms.</p>
+<section id="distinguishing-variability-sources" class="level3">
+<h3 class="anchored" data-anchor-id="distinguishing-variability-sources">Distinguishing Variability Sources</h3>
+<p>A core methodological distinction was made between two orthogonal sources of protein variability in the data, which often become conflated in correlation analyses: 1. <strong>Mean-Level Variability:</strong> The differences in the mean abundance of different proteins (e.g., highly abundant ribosomal proteins vs.&nbsp;less abundant signaling proteins). Scaled mRNA levels were found to account for most of this variability. 2. <strong>Across-Tissues Variability:</strong> The physiological differences in the abundance of the <em>same</em> protein across different tissue types. This variability, though smaller in magnitude, is critical for defining tissue identity.</p>
 </section>
-<section id="purpose-of-the-statement" class="level3">
-<h3 class="anchored" data-anchor-id="purpose-of-the-statement">Purpose of the Statement</h3>
-<p>The statement is not intended to be a simple replacement for null hypothesis significance testing, but rather a step toward a <strong>“post p&lt;0.05 era”</strong> where statistical methods are used more thoughtfully. It calls for a move toward better scientific practice characterized by open communication, transparent methodology, and a focus on <strong>effect size, precision (CIs), and context</strong>.</p>
+<section id="methods-and-data" class="level3">
+<h3 class="anchored" data-anchor-id="methods-and-data">Methods and Data</h3>
+<p>The study performed a statistical analysis using large cohorts of mRNA (RNA-seq) and protein (shotgun mass spectrometry) data measured across 12 different human tissues.</p>
+<ul>
+<li><strong>Data Reliability Assessment:</strong> The authors rigorously estimated the reliability of relative mRNA and protein quantification. They found that low reliability, especially across studies, limited the accurate quantification of regulatory mechanisms for individual proteins, indicating that much of the noise was study-dependent.</li>
+<li><strong>Consensus Dataset:</strong> To improve data quality, a <strong>consensus protein dataset</strong> was generated by appropriately combining data from independent mass spectrometry studies, resulting in estimates with increased reliability.</li>
+<li><strong>Protein-to-mRNA (PTR) Ratios:</strong> The relative protein-to-mRNA ratio (rPTR) was used as a measure of post-transcriptional regulation to quantify the variability of functional gene sets across tissues.</li>
+</ul>
+</section>
+</section>
+<section id="key-findings-and-simpsons-paradox" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-and-simpsons-paradox">Key Findings and Simpson’s Paradox</h2>
+<p>The analysis highlighted a crucial statistical nuance, demonstrating how misleading total correlation values can be in this context.</p>
+<section id="the-simpsons-paradox-illustration" class="level3">
+<h3 class="anchored" data-anchor-id="the-simpsons-paradox-illustration">The Simpson’s Paradox Illustration</h3>
+<ul>
+<li>The overall correlation (<span class="math inline">\(R_T\)</span>) between scaled mRNA and absolute protein levels across all genes and tissues was high (<span class="math inline">\(R_T^2 \approx 0.70\)</span>).</li>
+<li>However, this correlation was primarily driven by the large <strong>mean-level variability</strong> between different proteins.</li>
+<li>When examining the <strong>across-tissues variability</strong> for any single gene (within-gene correlation, <span class="math inline">\(R_P\)</span>), the correlation was often low or near zero.</li>
+<li>This discrepancy is an example of <strong>Simpson’s paradox</strong>, where a large overall trend (high <span class="math inline">\(R_T\)</span>) masks the true, opposite trend within subgroups (low <span class="math inline">\(R_P\)</span> for individual genes across tissues).</li>
+</ul>
+</section>
+<section id="evidence-for-post-transcriptional-regulation" class="level3">
+<h3 class="anchored" data-anchor-id="evidence-for-post-transcriptional-regulation">Evidence for Post-transcriptional Regulation</h3>
+<ul>
+<li><strong>Weak Predictive Power:</strong> For any single gene, its protein levels across tissues were found to be poorly predicted by its corresponding mRNA levels, suggesting tissue-specific post-transcriptional regulation.</li>
+<li><strong>Functional Concertion:</strong> The analysis of relative PTR (rPTR) showed substantial across-tissues variability that was functionally concerted and reproducible across independent datasets, which further supports the existence of extensive post-transcriptional control.</li>
+<li><strong>Reliability-Corrected Estimates:</strong> After correcting for measurement noise and low data reliability, the results indicated that approximately 50% of the <strong>across-tissues protein variance</strong> could be attributed to transcriptional regulation, and approximately 50% was due to post-transcriptional regulation.</li>
+</ul>
+</section>
+</section>
+<section id="conclusions-and-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-recommendations">Conclusions and Recommendations</h2>
+<p>The study concludes that post-transcriptional regulation is a significant contributor to shaping tissue-type-specific proteomes in humans.</p>
+<ul>
+<li>The results caution researchers against estimating protein fold-changes from mRNA fold-changes between different cell types.</li>
+<li>It is critical to avoid conflating different sources of variability; the high correlation between absolute protein and mRNA levels should not be used to infer the degree of post-transcriptional regulation of a specific protein across different tissues.</li>
+<li>The work underscores the fact that cell-type differentiation and commitment involve substantial post-transcriptional remodeling.</li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

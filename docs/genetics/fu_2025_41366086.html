@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-26">
+<meta name="dcterms.date" content="2025-12-10">
 
-<title>The ASA’s Statement on p-Values: Context, Process, and Purpose</title>
+<title>A biobank-scale test of marginal epistasis reveals genome-wide signals of polygenic interaction effects</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -157,11 +186,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-findings-principles-for-the-proper-use-of-the-p-value" id="toc-key-findings-principles-for-the-proper-use-of-the-p-value" class="nav-link active" data-scroll-target="#key-findings-principles-for-the-proper-use-of-the-p-value">Key Findings: Principles for the Proper Use of the p-Value</a>
+  <li><a href="#research-goal-and-methodology" id="toc-research-goal-and-methodology" class="nav-link active" data-scroll-target="#research-goal-and-methodology">Research Goal and Methodology</a>
   <ul class="collapse">
-  <li><a href="#six-core-principles-for-p-values" id="toc-six-core-principles-for-p-values" class="nav-link" data-scroll-target="#six-core-principles-for-p-values">Six Core Principles for p-Values</a></li>
-  <li><a href="#purpose-of-the-statement" id="toc-purpose-of-the-statement" class="nav-link" data-scroll-target="#purpose-of-the-statement">Purpose of the Statement</a></li>
+  <li><a href="#what-is-marginal-epistasis" id="toc-what-is-marginal-epistasis" class="nav-link" data-scroll-target="#what-is-marginal-epistasis">What is Marginal Epistasis?</a></li>
+  <li><a href="#fame-algorithm" id="toc-fame-algorithm" class="nav-link" data-scroll-target="#fame-algorithm">FAME Algorithm</a></li>
   </ul></li>
+  <li><a href="#key-findings-genome-wide-marginal-epistasis-signals" id="toc-key-findings-genome-wide-marginal-epistasis-signals" class="nav-link" data-scroll-target="#key-findings-genome-wide-marginal-epistasis-signals">Key Findings: Genome-Wide Marginal Epistasis Signals</a></li>
+  <li><a href="#implications-for-heritability-and-genetic-architecture" id="toc-implications-for-heritability-and-genetic-architecture" class="nav-link" data-scroll-target="#implications-for-heritability-and-genetic-architecture">Implications for Heritability and Genetic Architecture</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   </ul>
 </nav>
     </div>
@@ -170,14 +202,15 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The ASA’s Statement on p-Values: Context, Process, and Purpose</h1>
+<h1 class="title">A biobank-scale test of marginal epistasis reveals genome-wide signals of polygenic interaction effects</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Statistical Methods</div>
-    <div class="quarto-category">P-values</div>
-    <div class="quarto-category">Misinterpretation</div>
-    <div class="quarto-category">Statistical Inference</div>
-    <div class="quarto-category">American Statistical Association</div>
-    <div class="quarto-category">Scientific Reform</div>
+    <div class="quarto-category">Statistical Genetics</div>
+    <div class="quarto-category">Epistasis</div>
+    <div class="quarto-category">Marginal Epistasis</div>
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">Complex Traits</div>
+    <div class="quarto-category">UK Biobank</div>
+    <div class="quarto-category">Genetic Architecture</div>
   </div>
   </div>
 
@@ -189,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">26 November 2025</p>
+      <p class="date">10 December 2025</p>
     </div>
   </div>
   
@@ -201,46 +234,50 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>DOI:</strong> <a href="http://dx.doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 26/11/2025</p>
-<section id="key-findings-principles-for-the-proper-use-of-the-p-value" class="level2">
-<h2 class="anchored" data-anchor-id="key-findings-principles-for-the-proper-use-of-the-p-value">Key Findings: Principles for the Proper Use of the p-Value</h2>
-<p>This article presents and explains the <strong>American Statistical Association’s (ASA) Statement on p-Values and Statistical Significance</strong>, the first-ever policy statement from the ASA specifically addressing a foundational issue of statistical inference. The statement was prompted by the widespread misuse and misinterpretation of the p-value across all fields of science, which contributes to the crisis of irreproducible research.</p>
-<section id="six-core-principles-for-p-values" class="level3">
-<h3 class="anchored" data-anchor-id="six-core-principles-for-p-values">Six Core Principles for p-Values</h3>
-<p>The statement outlines six key principles, aiming to promote better practice and curb common errors:</p>
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/41366086/">41366086</a> <strong>DOI:</strong> <a href="https://doi.org/10.1038/s41588-025-02411-y">10.1038/s41588-025-02411-y</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 10/12/2025</p>
+<section id="research-goal-and-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="research-goal-and-methodology">Research Goal and Methodology</h2>
+<p>This study addresses the challenge of identifying genetic interactions (epistasis) in complex human traits, which is often hindered by computational complexity and statistical power limitations in biobank-scale datasets. The authors introduce <strong>FAME (FAst Marginal Epistasis test)</strong>, a novel, computationally efficient method designed to detect <strong>marginal epistasis</strong> for a single-nucleotide polymorphism (SNP) on a quantitative trait.</p>
+<section id="what-is-marginal-epistasis" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-marginal-epistasis">What is Marginal Epistasis?</h3>
+<p>Marginal epistasis, in this context, refers to whether the effect of a given SNP on a trait is significantly modulated by the individual’s overall genetic background. It tests for the aggregate effect of interaction between a focal SNP and <em>all</em> other polygenic effects, rather than requiring the testing of millions of pairwise SNP interactions.</p>
+</section>
+<section id="fame-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="fame-algorithm">FAME Algorithm</h3>
+<p>The FAME method is designed as an extension of standard linear mixed models (LMMs) used in GWAS. It estimates the interaction effect of a focal SNP with the polygenic background by:</p>
 <ol type="1">
-<li><strong>P-values can indicate how incompatible the data are with a specified statistical model.</strong>
-<ul>
-<li>The p-value measures the incompatibility between the data and the assumed statistical model (usually the null hypothesis). A small p-value indicates that the data are unlikely under the null model.</li>
-</ul></li>
-<li><strong>P-values do not measure the probability that the studied hypothesis is true, or the probability that the data were produced by random chance alone.</strong>
-<ul>
-<li>This directly addresses the most common and disastrous misinterpretation: that a low p-value (e.g., P=0.01) means the null hypothesis has only a 1% chance of being true. P-values relate to data <em>given</em> the model, not the probability of the model <em>given</em> the data.</li>
-</ul></li>
-<li><strong>Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.</strong>
-<ul>
-<li>The ASA strongly discourages the practice of dichotomizing results into “statistically significant” and “not statistically significant.” This threshold thinking can lead to flawed decisions, ignoring the importance of effect size, context, and other evidence.</li>
-</ul></li>
-<li><strong>Proper inference requires full reporting and transparency.</strong>
-<ul>
-<li>The selective reporting of only “significant” results (known as <strong>P-hacking</strong> or publication bias) renders the reported p-values meaningless. All analyses, assumptions, and findings, regardless of the p-value, must be disclosed.</li>
-</ul></li>
-<li><strong>A p-value, or statistical significance, does not measure the size of an effect or the importance of a result.</strong>
-<ul>
-<li>Statistical significance is often confused with <strong>substantive</strong> (clinical, practical, or scientific) importance. A very large study can produce a statistically significant p-value for a trivial effect, while a small study might fail to find significance for a massive, important effect. The focus should be on <strong>effect magnitude</strong>.</li>
-</ul></li>
-<li><strong>By itself, a p-value does not provide a good measure of evidence regarding a model or hypothesis.</strong>
-<ul>
-<li>Scientific reasoning requires more than just a p-value. It demands contextual knowledge, common sense, study design quality, data reliability, and integration with external evidence. Other statistical measures, particularly <strong>Confidence Intervals (CIs)</strong> and <strong>Bayesian methods</strong>, should be used to provide a richer understanding of the evidence.</li>
-</ul></li>
+<li><strong>Estimating Polygenic Background:</strong> The effect of the entire genetic background is estimated using a standard LMM and captured by the individual-level <strong>polygenic scores</strong> (or ‘residual additive effect’).</li>
+<li><strong>Testing Interaction:</strong> FAME then tests the interaction between the focal SNP’s genotype and this estimated polygenic background effect.</li>
 </ol>
+<p>This formulation allows FAME to be highly efficient, enabling genome-wide testing of marginal epistasis, which was previously intractable for large biobanks.</p>
 </section>
-<section id="purpose-of-the-statement" class="level3">
-<h3 class="anchored" data-anchor-id="purpose-of-the-statement">Purpose of the Statement</h3>
-<p>The statement is not intended to be a simple replacement for null hypothesis significance testing, but rather a step toward a <strong>“post p&lt;0.05 era”</strong> where statistical methods are used more thoughtfully. It calls for a move toward better scientific practice characterized by open communication, transparent methodology, and a focus on <strong>effect size, precision (CIs), and context</strong>.</p>
+</section>
+<section id="key-findings-genome-wide-marginal-epistasis-signals" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings-genome-wide-marginal-epistasis-signals">Key Findings: Genome-Wide Marginal Epistasis Signals</h2>
+<p>The authors applied FAME to GWAS-significant trait-SNP associations across <strong>53 quantitative traits</strong> in approximately 300,000 unrelated White British individuals from the UK Biobank (UKBB).</p>
+<ul>
+<li><strong>Significant Signals:</strong> FAME identified <strong>16 significant marginal epistasis signals</strong> across 12 unique traits, with the most robust signals found for anthropometric traits (e.g., height, standing height) and blood cell phenotypes.</li>
+<li><strong>Trait-Specific Patterns:</strong>
+<ul>
+<li><strong>Height:</strong> Two of the most significant epistasis signals were found for height, suggesting that the effect of specific height-associated SNPs is non-linearly dependent on the individual’s overall polygenic predisposition for height.</li>
+<li><strong>Blood Cell Traits:</strong> Strong signals were also detected for mean corpuscular volume and monocyte count, indicating that complex cell biology is also influenced by polygenic interaction effects.</li>
+</ul></li>
+<li><strong>Novel Findings:</strong> While previous studies have hinted at epistasis, the 16 signals identified by FAME are novel findings at a genome-wide scale, demonstrating the power of marginal epistasis testing to capture aggregate interaction effects.</li>
+</ul>
+</section>
+<section id="implications-for-heritability-and-genetic-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="implications-for-heritability-and-genetic-architecture">Implications for Heritability and Genetic Architecture</h2>
+<p>The study provides evidence for the widespread presence of polygenic interaction effects, which has significant implications for understanding the total genetic architecture of complex traits:</p>
+<ul>
+<li><strong>Contribution to Variation:</strong> The authors estimated the proportion of phenotypic variance explained by these marginal epistasis effects, finding that, while individually small (typically <span class="math inline">\(&lt;0.05\%\)</span>), the cumulative contribution across the genome may be substantial, potentially helping to explain some of the <strong>“missing heritability”</strong> gap.</li>
+<li><strong>Additive Model Limitations:</strong> The presence of these polygenic interaction effects suggests that the common assumption in GWAS—that genetic effects are purely additive—is an oversimplification. FAME provides a scalable way to account for the systematic non-additive contributions to trait variation.</li>
+</ul>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>FAME is a powerful and scalable statistical method that has successfully identified genome-wide signals of marginal epistasis in a biobank-scale cohort. The identification of 16 robust marginal epistasis signals across diverse traits underscores that genetic interactions with the polygenic background are a fundamental component of the genetic architecture of human complex traits. This work opens the door for more comprehensive modeling of non-additive effects in future large-scale genetic studies.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
