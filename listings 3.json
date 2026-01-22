@@ -1,0 +1,170 @@
+[
+  {
+    "listing": "/proteomics/index.html",
+    "items": [
+      "/proteomics/alvez_2025_41066540.html",
+      "/proteomics/drouard_2023_38129841.html",
+      "/proteomics/webel_2024_38926340.html",
+      "/proteomics/gadd_2024_38987645.html",
+      "/proteomics/carrascozanini_2024_39039249.html",
+      "/proteomics/pietzner_2021_34648354.html",
+      "/proteomics/kirsher_2025_40999057.html",
+      "/proteomics/tsuo_2025_40909825.html",
+      "/proteomics/fu_2025_39810024.html",
+      "/proteomics/suhre_2024_38412862.html",
+      "/proteomics/pietzner_2025_41068475.html",
+      "/proteomics/brandes_2020_32665031.html"
+    ]
+  },
+  {
+    "listing": "/expression/index.html",
+    "items": [
+      "/expression/pirrotta_2024_39363890.html"
+    ]
+  },
+  {
+    "listing": "/genetics/index.html",
+    "items": [
+      "/genetics/benson_2023_37582364.html",
+      "/genetics/wu_2023_37601976.html",
+      "/genetics/tokolyi_2025_40038547.html",
+      "/genetics/timpson_2017_29225335.html",
+      "/genetics/tambets_2024_39210598.html",
+      "/genetics/schwanhausser_2011_21593866.html",
+      "/genetics/ren_2023_37181332.html",
+      "/genetics/ota_2025_41372418.html",
+      "/genetics/monsees_2009_19365863.html",
+      "/genetics/miao_2024_39349818.html",
+      "/genetics/hoerbst_2025_biorxiv.html",
+      "/genetics/fu_2025_41366086.html",
+      "/genetics/franks_2017_28481885.html",
+      "/genetics/dewalsche_2025_39792927.html",
+      "/genetics/coral_2023_36703017.html",
+      "/genetics/aschard_2015_25640676.html",
+      "/genetics/spence_2025_41193809.html"
+    ]
+  },
+  {
+    "listing": "/ml/index.html",
+    "items": [
+      "/ml/bobb_2015_25532525.html"
+    ]
+  },
+  {
+    "listing": "/other/index.html",
+    "items": []
+  },
+  {
+    "listing": "/multi-omics/index.html",
+    "items": [
+      "/multi-omics/atabaki_2025_40502600.html",
+      "/multi-omics/okamoto_2025_39901160.html",
+      "/multi-omics/singh_2019_30657866.html",
+      "/multi-omics/velten_2022_35027765.html",
+      "/multi-omics/cantini_2021_33402734.html",
+      "/multi-omics/tenenhaus_2014_24550197.html",
+      "/multi-omics/mo_2018_30657866.html",
+      "/multi-omics/richenberg_2023_37873386.html",
+      "/multi-omics/hsu_2020_32467615.html",
+      "/multi-omics/lin_2020_32691502.html",
+      "/multi-omics/adamer_2024_38940158.html",
+      "/multi-omics/garg_2024_39261665.html",
+      "/multi-omics/chalise_2023_36929074.html",
+      "/multi-omics/ryan_2024_39177104.html",
+      "/multi-omics/argelaguet_2018_29925568.html",
+      "/multi-omics/dugourd_2021_33502086.html"
+    ]
+  },
+  {
+    "listing": "/statistics/index.html",
+    "items": [
+      "/statistics/gururaghavendran_2025_39218433.html",
+      "/statistics/hoenig_2001.html",
+      "/statistics/greenland_2016_27209009.html",
+      "/statistics/lawlor_2017_28108528.html",
+      "/statistics/mcgowan_2024_2276446.html",
+      "/statistics/thoresen_2019_30732587.html",
+      "/statistics/dewalsche_2025_40918066.html",
+      "/statistics/shaw_2023_37338987.html",
+      "/statistics/altman_2006_16675816.html",
+      "/statistics/senn_1994_7997705.html",
+      "/statistics/sterne_2001_11159626.html",
+      "/statistics/pividori_2024_39243756.html",
+      "/statistics/smith_2018_dyw314.html",
+      "/statistics/ciolino_2013_24138438.html",
+      "/statistics/debertin_2024_38860706.html",
+      "/statistics/wasserstein_2019_1583913.html",
+      "/statistics/hernan_2025_39494894.html",
+      "/statistics/wasserstein_2016_26820252.html"
+    ]
+  },
+  {
+    "listing": "/metabolomics/index.html",
+    "items": [
+      "/metabolomics/idkowiak_2025_41027880.html",
+      "/metabolomics/do_2018_30830398.html",
+      "/metabolomics/sullivan_2016_27658530.html",
+      "/metabolomics/makinen_2023_36823293.html",
+      "/metabolomics/amara_2022_35350714.html",
+      "/metabolomics/desouza_2020_32380880.html"
+    ]
+  },
+  {
+    "listing": "/mr/index.html",
+    "items": [
+      "/mr/cupido_2024_39147365.html",
+      "/mr/robinson_2021_33504897.html",
+      "/mr/leyden_2022_35090585.html",
+      "/mr/taylor_2019_30704512.html",
+      "/mr/swanson_2017_28379526.html",
+      "/mr/leyden_2022_36434155.html",
+      "/mr/burgess_2011_21414999.html",
+      "/mr/hartwig_2021_33619569.html",
+      "/mr/stender_2024_39244551.html",
+      "/mr/richardson_2022_35213538.html",
+      "/mr/sanderson_2023_37634227.html",
+      "/mr/labrecque_2018_30148040.html",
+      "/mr/merino_2022_34980908.html",
+      "/mr/haglund_2025_39794547.html",
+      "/mr/verkouter_2020_32500151.html",
+      "/mr/labrecque_2018_30239571.html",
+      "/mr/leyden_2025_40375348.html",
+      "/mr/ray_2025_40555237.html",
+      "/mr/coscia_2022_35639294.html",
+      "/mr/burgess_2024_38362310.html",
+      "/mr/hemani_2017_29149188.html",
+      "/mr/burgess_2023_32760811.html",
+      "/mr/thornton_2025_39565278.html"
+    ]
+  },
+  {
+    "listing": "/pgs/index.html",
+    "items": [
+      "/pgs/ma_2021_34243982.html",
+      "/pgs/marquezluna_2021_34663819.html",
+      "/pgs/mars_2022_35591975.html",
+      "/pgs/ghatan_2024_38200577.html",
+      "/pgs/ding_2023_37198491.html"
+    ]
+  },
+  {
+    "listing": "/finemap-colocalisation/index.html",
+    "items": [
+      "/finemap-colocalisation/patel_2024_240212171.html"
+    ]
+  },
+  {
+    "listing": "/cancer/index.html",
+    "items": [
+      "/cancer/qiu_2024_39690287.html",
+      "/cancer/albrecht_2025_40555635.html"
+    ]
+  },
+  {
+    "listing": "/interaction/index.html",
+    "items": [
+      "/interaction/gauderman_2025_40763299.html",
+      "/interaction/miao_2025_40410536.html"
+    ]
+  }
+]

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-01-23">
+<meta name="description" content="Focus: This review highlights the use of networks and graph theory as powerful computational tools for analyzing and interpreting complex metabolomics data.Network Types:Analytical/Chemical Networks: Derived from Mass Spectrometry (MS) data, such as Molecular Networking (MN), which connects spectra based on chemical structural similarity to aid in compound identification.Biological/Correlation Networks: Derived from quantitative metabolite abundance data. These networks use statistical correlation between metabolites to infer shared biological regulation, map metabolites onto known biochemical pathways, and facilitate multi-omics integration (connecting metabolites to genes/proteins).Implication: Graph theory enables researchers to move beyond simple lists of metabolites to view the metabolome as a structured, interactive system, which is essential for biological interpretation and hypothesis generation.">
+
+<title>Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2757cfadcc89ddbfb9e61569f8c3689f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">info</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../genetics/index.html"> 
+<span class="menu-text">genetics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../finemap-colocalisation/index.html"> 
+<span class="menu-text">finemap-colocalisation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../expression/index.html"> 
+<span class="menu-text">expression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proteomics/index.html"> 
+<span class="menu-text">proteomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../metabolomics/index.html" aria-current="page"> 
+<span class="menu-text">metabolomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../multi-omics/index.html"> 
+<span class="menu-text">multi-omics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../mr/index.html"> 
+<span class="menu-text">MR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pgs/index.html"> 
+<span class="menu-text">PGS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../statistics/index.html"> 
+<span class="menu-text">statistics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../interaction/index.html"> 
+<span class="menu-text">interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../other/index.html"> 
+<span class="menu-text">other</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ml/index.html"> 
+<span class="menu-text">ml</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cancer/index.html"> 
+<span class="menu-text">cancer</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../metabolomics/index.html">Papers</a></li><li class="breadcrumb-item"><a href="../metabolomics/amara_2022_35350714.html">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../metabolomics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metabolomics/amara_2022_35350714.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metabolomics/desouza_2020_32380880.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network-based strategies in metabolomics data analysis and interpretation: from molecular networking to biological interpretation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metabolomics/do_2018_30830398.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Characterization of missing values in untargeted MS-based metabolomics data and evaluation of missing data handling strategies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metabolomics/idkowiak_2025_41027880.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Best practices and tools in R and Python for statistical processing and visualization of lipidomics and metabolomics data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metabolomics/makinen_2023_36823293.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Longitudinal metabolomics of increasing body-mass index and waist-hip ratio reveals two dynamic patterns of obesity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../metabolomics/sullivan_2016_27658530.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Altered metabolite levels in cancer: implications for tumour biology and cancer therapy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#key-focus-the-application-of-graph-theory-in-metabolomics" id="toc-key-focus-the-application-of-graph-theory-in-metabolomics" class="nav-link active" data-scroll-target="#key-focus-the-application-of-graph-theory-in-metabolomics">Key Focus: The Application of Graph Theory in Metabolomics</a>
+  <ul class="collapse">
+  <li><a href="#the-role-of-graph-theory" id="toc-the-role-of-graph-theory" class="nav-link" data-scroll-target="#the-role-of-graph-theory">The Role of Graph Theory</a></li>
+  </ul></li>
+  <li><a href="#network-types-and-their-applications" id="toc-network-types-and-their-applications" class="nav-link" data-scroll-target="#network-types-and-their-applications">Network Types and Their Applications</a>
+  <ul class="collapse">
+  <li><a href="#analyticalchemical-networks" id="toc-analyticalchemical-networks" class="nav-link" data-scroll-target="#analyticalchemical-networks">1. Analytical/Chemical Networks</a></li>
+  <li><a href="#biologicalcorrelation-networks" id="toc-biologicalcorrelation-networks" class="nav-link" data-scroll-target="#biologicalcorrelation-networks">2. Biological/Correlation Networks</a></li>
+  </ul></li>
+  <li><a href="#key-advantages" id="toc-key-advantages" class="nav-link" data-scroll-target="#key-advantages">Key Advantages</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../metabolomics/index.html">Papers</a></li><li class="breadcrumb-item"><a href="../metabolomics/amara_2022_35350714.html">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Networks and Graphs Discovery in Metabolomics Data Analysis and Interpretation</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data interpretation</div>
+    <div class="quarto-category">graph theory</div>
+    <div class="quarto-category">metabolomics</div>
+    <div class="quarto-category">molecular networking</div>
+    <div class="quarto-category">network analysis</div>
+    <div class="quarto-category">review</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <ul>
+    <li><strong>Focus</strong>: This review highlights the use of <strong>networks and graph theory</strong> as powerful computational tools for analyzing and interpreting complex metabolomics data.</li>
+    <li><strong>Network Types</strong>:
+    <ol type="1">
+    <li><strong>Analytical/Chemical Networks</strong>: Derived from Mass Spectrometry (MS) data, such as <strong>Molecular Networking (MN)</strong>, which connects spectra based on <strong>chemical structural similarity</strong> to aid in compound identification.</li>
+    <li><strong>Biological/Correlation Networks</strong>: Derived from quantitative metabolite abundance data. These networks use <strong>statistical correlation</strong> between metabolites to infer shared biological regulation, map metabolites onto known <strong>biochemical pathways</strong>, and facilitate <strong>multi-omics integration</strong> (connecting metabolites to genes/proteins).</li>
+    </ol></li>
+    <li><strong>Implication</strong>: Graph theory enables researchers to move beyond simple lists of metabolites to view the metabolome as a structured, interactive system, which is essential for biological interpretation and hypothesis generation.</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">23 January 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/35350714/">35350714</a> <strong>DOI:</strong> <a href="https://doi.org/10.3389/fmolb.2022.841373">10.3389/fmolb.2022.841373</a> <strong>Overview generated by:</strong> Gemini 2.5 Flash, 28/11/2025</p>
+<section id="key-focus-the-application-of-graph-theory-in-metabolomics" class="level2">
+<h2 class="anchored" data-anchor-id="key-focus-the-application-of-graph-theory-in-metabolomics">Key Focus: The Application of Graph Theory in Metabolomics</h2>
+<p>This review article provides a comprehensive overview of how <strong>networks and graph theory</strong> are used as analytical and interpretive tools in metabolomics data analysis. It focuses on the shift from viewing the metabolome as a list of molecules to a structured system of interactions, which is crucial for making biological sense of complex high-throughput data.</p>
+<section id="the-role-of-graph-theory" class="level3">
+<h3 class="anchored" data-anchor-id="the-role-of-graph-theory">The Role of Graph Theory</h3>
+<p>In metabolomics, graphs (or networks) are mathematical structures used to represent relationships between two entities: * <strong>Nodes (Vertices):</strong> Represent the metabolites, genes, proteins, samples, or analytical features (e.g., MS ions). * <strong>Edges (Links):</strong> Represent the connections or relationships between the nodes, which can be <strong>chemical similarity, biological correlation, co-occurrence, or a known reaction</strong>.</p>
+</section>
+</section>
+<section id="network-types-and-their-applications" class="level2">
+<h2 class="anchored" data-anchor-id="network-types-and-their-applications">Network Types and Their Applications</h2>
+<p>The review categorizes network applications into two main areas based on the type of data they analyze:</p>
+<section id="analyticalchemical-networks" class="level3">
+<h3 class="anchored" data-anchor-id="analyticalchemical-networks">1. Analytical/Chemical Networks</h3>
+<p>These networks are derived directly from mass spectrometry (MS) data and are primarily used for <strong>compound identification and annotation</strong>.</p>
+<ul>
+<li><strong>Molecular Networking (MN):</strong> This is the most prominent example. It connects MS/MS spectra based on the <strong>similarity of their fragmentation patterns</strong>. This allows researchers to group structurally related metabolites (e.g., compounds in the same chemical family) into clusters, enabling the identification of unknown members once one member of the cluster is known</li>
+</ul>
+<p>[Image of Molecular Networking Graph] . * <strong>Feature-Based Molecular Networking (FBMN):</strong> An extension that integrates chromatographic and quantitative data for more robust connections.</p>
+</section>
+<section id="biologicalcorrelation-networks" class="level3">
+<h3 class="anchored" data-anchor-id="biologicalcorrelation-networks">2. Biological/Correlation Networks</h3>
+<p>These networks are derived from quantitative abundance data and are primarily used for <strong>biological interpretation and pathway discovery</strong>.</p>
+<ul>
+<li><strong>Metabolite-Metabolite Correlation Networks:</strong> Nodes are metabolites, and edges represent a <strong>significant statistical correlation</strong> in their concentration changes across different samples or conditions. These correlations can indicate shared regulation, sequential reactions in a metabolic pathway, or common transporters.</li>
+<li><strong>Metabolite-Pathway Networks:</strong> These map identified metabolites onto <strong>established biochemical pathways</strong> (e.g., KEGG, MetaCyc) to visualize which pathways are perturbed in a given experiment.</li>
+<li><strong>Integrated Omics Networks:</strong> Graphs are essential for <strong>multi-omics integration</strong>, connecting metabolites to other molecular entities like transcripts (mRNA) and proteins. The edges often represent genetic co-expression, shared regulation, or enzyme-substrate relationships.</li>
+</ul>
+</section>
+</section>
+<section id="key-advantages" class="level2">
+<h2 class="anchored" data-anchor-id="key-advantages">Key Advantages</h2>
+<p>The application of graph theory offers significant advantages for metabolomics: * <strong>Discovery of Hidden Relationships:</strong> Networks can reveal complex, non-linear relationships that are missed by traditional univariate statistics. * <strong>Hypothesis Generation:</strong> Network hubs (highly connected nodes) often represent key regulatory or rate-limiting enzymes and metabolites, pointing to critical biological control points. * <strong>Visualization:</strong> They provide an intuitive and powerful way to visualize and communicate complex, high-dimensional data.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The review concludes that network and graph-based approaches are fundamental to modern metabolomics, bridging the gap between raw analytical data and comprehensive biological understanding. They are crucial for moving the field forward, especially in the context of integrating data from multiple omics layers.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mattlee821\.github\.io\/papers\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

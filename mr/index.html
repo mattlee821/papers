@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mendelian randomisation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2757cfadcc89ddbfb9e61569f8c3689f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">info</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../genetics/index.html"> 
+<span class="menu-text">genetics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../finemap-colocalisation/index.html"> 
+<span class="menu-text">finemap-colocalisation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../expression/index.html"> 
+<span class="menu-text">expression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proteomics/index.html"> 
+<span class="menu-text">proteomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../metabolomics/index.html"> 
+<span class="menu-text">metabolomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../multi-omics/index.html"> 
+<span class="menu-text">multi-omics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../mr/index.html" aria-current="page"> 
+<span class="menu-text">MR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pgs/index.html"> 
+<span class="menu-text">PGS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../statistics/index.html"> 
+<span class="menu-text">statistics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../interaction/index.html"> 
+<span class="menu-text">interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../other/index.html"> 
+<span class="menu-text">other</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ml/index.html"> 
+<span class="menu-text">ml</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cancer/index.html"> 
+<span class="menu-text">cancer</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mr/index.html">Papers</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../mr/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/burgess_2011_21414999.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding bias from weak instruments in Mendelian randomization studies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/burgess_2023_32760811.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guidelines for performing Mendelian randomization investigations: update for summer 2023</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/burgess_2024_38362310.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Incorporating biological and clinical insights into variant choice for Mendelian randomisation: examples and principles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/coscia_2022_35639294.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding collider bias in Mendelian randomization when performing stratified analyses</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/cupido_2024_39147365.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Specific approaches and limitations in (multi)-omic Mendelian randomization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/haglund_2025_39794547.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell state-dependent allelic effects and contextual Mendelian randomization analysis for human brain phenotypes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/hartwig_2021_33619569.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bias in two-sample Mendelian randomization when using heritable covariable-adjusted summary associations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/hemani_2017_29149188.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Orienting the causal relationship between imprecisely measured traits using GWAS summary data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/labrecque_2018_30148040.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding the Assumptions Underlying Instrumental Variable Analyses: a Brief Review of Falsification Strategies and Related Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/labrecque_2018_30239571.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interpretation and Potential Biases of Mendelian Randomization Estimates With Time-Varying Exposures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/leyden_2022_35090585.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harnessing tissue-specific genetic variation to dissect putative causal pathways between body mass index and cardiometabolic phenotypes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/leyden_2022_36434155.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disentangling the aetiological pathways between body mass index and site-specific cancer risk using tissue-partitioned Mendelian randomisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/leyden_2025_40375348.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Distinct pathway-based effects of blood pressure and body mass index on cardiovascular traits: comparison of novel Mendelian randomization approaches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/merino_2022_34980908.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The unique challenges of studying the genetics of diet and nutrition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/ray_2025_40555237.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Single-cell transcriptome-wide Mendelian randomization and colocalization analyses uncover cell-specific mechanisms in atherosclerotic cardiovascular disease</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/richardson_2022_35213538.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Characterising metabolomic signatures of lipid-modifying therapies through drug target Mendelian randomisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/robinson_2021_33504897.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transcriptome-wide Mendelian randomization study prioritising novel tissue-dependent genes for glioma susceptibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/sanderson_2023_37634227.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reappraising the role of instrumental inequalities for mendelian randomization studies in the mega Biobank era</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/stender_2024_39244551.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reclaiming mendelian randomization from the deluge of papers and misleading findings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/swanson_2017_28379526.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The challenging interpretation of instrumental variable estimates under monotonicity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/taylor_2019_30704512.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prioritizing putative influential genes in cardiovascular disease susceptibility by applying tissue-specific Mendelian randomization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/thornton_2025_39565278.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Brain multi-omic Mendelian randomisation to identify novel drug targets for gliomagenesis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../mr/verkouter_2020_32500151.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The contribution of tissue-grouped BMI-associated gene sets to cardiometabolic-disease risk: a Mendelian randomization study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(23)</span></div><div class="category" data-category="YWRpcG9zZSUyMHRpc3N1ZQ==">adipose tissue <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YXNzdW1wdGlvbiUyMHRlc3Rpbmc=">assumption testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXRoZXJvc2NsZXJvc2lz">atherosclerosis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmVzdCUyMHByYWN0aWNlcw==">best practices <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ymlhcw==">bias <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YmlhcyUyMGNvcnJlY3Rpb24=">bias correction <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmlhcyUyMGRldGVjdGlvbg==">bias detection <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ymxvb2QlMjBwcmVzc3VyZQ==">blood pressure <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ym9keSUyMG1hc3MlMjBpbmRleA==">body mass index <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YnJhaW4=">brain <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Y2FuY2VyJTIwcmlzaw==">cancer risk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FyZGlvbWV0YWJvbGljJTIwcGhlbm90eXBlcw==">cardiometabolic phenotypes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2F1c2FsJTIwZGlyZWN0aW9u">causal direction <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2F1c2FsJTIwaW5mZXJlbmNl">causal inference <span class="quarto-category-count">(10)</span></div><div class="category" data-category="Y2VsbCUyMHN0YXRl">cell state <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2VsbCUyMHR5cGUlMjBzcGVjaWZpY2l0eQ==">cell type specificity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2hhbGxlbmdlcw==">challenges <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29sbGlkZXIlMjBiaWFz">collider bias <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29sb2NhbGl6YXRpb24=">colocalization <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y29sb3JlY3RhbCUyMGNhbmNlcg==">colorectal cancer <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29udGV4dHVhbCUyMG1y">contextual mr <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29yb25hcnklMjBhcnRlcnklMjBkaXNlYXNl">coronary artery disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y292YXJpYWJsZSUyMGFkanVzdG1lbnQ=">covariable adjustment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGlldA==">diet <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZG5hJTIwbWV0aHlsYXRpb24=">dna methylation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZHJ1ZyUyMHRhcmdldA==">drug target <span class="quarto-category-count">(3)</span></div><div class="category" data-category="ZWRpdG9yaWFs">editorial <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXBpZGVtaW9sb2d5">epidemiology <span class="quarto-category-count">(4)</span></div><div class="category" data-category="ZVFUTA==">eQTL <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZmFsc2lmaWNhdGlvbg==">falsification <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2VuZSUyMGV4cHJlc3Npb24=">gene expression <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Z2VuZXRpYyUyMGVwaWRlbWlvbG9neQ==">genetic epidemiology <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Z2VuZXRpYyUyMGhldGVyb2dlbmVpdHk=">genetic heterogeneity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2VuZXRpYyUyMHZhcmlhbnRz">genetic variants <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2xpb2JsYXN0b21h">glioblastoma <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Z2xpb21h">glioma <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Z3VpZGVsaW5lcw==">guidelines <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R1dBUw==">GWAS <span class="quarto-category-count">(4)</span></div><div class="category" data-category="aW5zdHJ1bWVudGFsJTIwaW5lcXVhbGl0aWVz">instrumental inequalities <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW5zdHJ1bWVudGFsJTIwdmFyaWFibGVz">instrumental variables <span class="quarto-category-count">(6)</span></div><div class="category" data-category="aXYlMjBhc3N1bXB0aW9ucw==">iv assumptions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGlwaWRz">lipids <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bHVuZyUyMGNhbmNlcg==">lung cancer <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVuZGVsaWFuJTIwcmFuZG9taXNhdGlvbg==">mendelian randomisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbg==">mendelian randomization <span class="quarto-category-count">(22)</span></div><div class="category" data-category="bWV0YWJvbG9taWNz">metabolomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bXVsdGktb21pY3M=">multi-omics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bmV1cm9sb2dpY2FsJTIwZGlzZWFzZQ==">neurological disease <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bnV0cml0aW9u">nutrition <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGF0aHdheSUyMGFuYWx5c2lz">pathway analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGhhcm1hY29sb2d5">pharmacology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGxlaW90cm9weQ==">pleiotropy <span class="quarto-category-count">(3)</span></div><div class="category" data-category="cHJvdGVvbWljcw==">proteomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHVibGljYXRpb24lMjBiaWFz">publication bias <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhbGl0eSUyMGNvbnRyb2w=">quality control <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2luZ2xlLWNlbGwlMjBybmEtc2Vx">single-cell rna-seq <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c3RhdGlzdGljYWwlMjBtZXRob2Rz">statistical methods <span class="quarto-category-count">(7)</span></div><div class="category" data-category="c3RyYXRpZmllZCUyMGFuYWx5c2lz">stratified analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3R1ZHklMjBkZXNpZ24=">study design <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGltZS12YXJ5aW5nJTIwZXhwb3N1cmVz">time-varying exposures <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGlzc3VlJTIwZXhwcmVzc2lvbg==">tissue expression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGlzc3VlJTIwc3BlY2lmaWNpdHk=">tissue specificity <span class="quarto-category-count">(5)</span></div><div class="category" data-category="dHJhbnNjcmlwdG9taWNz">transcriptomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dHlwZSUyMDIlMjBkaWFiZXRlcyUyMG1lbGxpdHVz">type 2 diabetes mellitus <span class="quarto-category-count">(1)</span></div><div class="category" data-category="d2VhayUyMGluc3RydW1lbnRz">weak instruments <span class="quarto-category-count">(1)</span></div></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Mendelian randomisation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="R1dBUyUyQ2NhdXNhbCUyMGluZmVyZW5jZSUyQ2luc3RydW1lbnRhbCUyMHZhcmlhYmxlcyUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNtdWx0aS1vbWljcyUyQ3BsZWlvdHJvcHk=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880380" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="502">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/cupido_2024_39147365.html" class="no-external">Specific approaches and limitations in (multi)-omic Mendelian randomization</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/cupido_2024_39147365.html" class="no-external">
+<ul>
+<li><strong>Purpose</strong>: This paper reviews critical methodological challenges in <strong>Mendelian Randomization (MR)</strong> when applied to complex exposures derived from multi-omics data.</li>
+<li><strong>Key Challenge: Pleiotropy</strong>: The authors advocate for using a <strong>biologically motivated strategy</strong> for selecting genetic instrumental variables (IVs) to avoid pleiotropy, such as explicitly excluding confounding genetic regions (e.g., the <em>IL6R</em> locus when using IL-6 levels).</li>
+<li><strong>Data Quality</strong>: The review highlights the importance of the <strong>measurement technique</strong> for the exposure (e.g., avoiding low-resolution 16S sequencing for microbiome or techniques that cannot separate lipid isomers) as data quality issues can invalidate MR assumptions and introduce pleiotropy.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/cupido_2024_39147365.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Y29sb2NhbGl6YXRpb24lMkNlUVRMJTJDZ2VuZSUyMGV4cHJlc3Npb24lMkNnbGlvYmxhc3RvbWElMkNnbGlvbWElMkNtZW5kZWxpYW4lMjByYW5kb21pemF0aW9uJTJDdGlzc3VlJTIwc3BlY2lmaWNpdHk=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880384" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="556">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/robinson_2021_33504897.html" class="no-external">Transcriptome-wide Mendelian randomization study prioritising novel tissue-dependent genes for glioma susceptibility</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/robinson_2021_33504897.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study used a two-sample Mendelian randomization (MR) and colocalization approach to identify genes whose <strong>tissue-specific expression</strong> is causally associated with the risk of <strong>glioma</strong> and its subtypes (glioblastoma and non-GBM gliomas).</li>
+<li><strong>Key Findings</strong>: MR analysis provided evidence for a causal link between the expression of <strong>12 genes</strong> and glioma risk, including three novel genes: <strong>RETREG2/FAM134A</strong>, <strong>FAM178B</strong>, and <strong>MVB12B</strong>.</li>
+<li><strong>Tissue Specificity</strong>: The results confirmed that effects are often <strong>tissue-dependent</strong>, such as the association for <strong>MDM4</strong> being specific to <strong>brain tissue</strong>, emphasizing the necessity of using relevant eQTL data.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/robinson_2021_33504897.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="YWRpcG9zZSUyMHRpc3N1ZSUyQ2JvZHklMjBtYXNzJTIwaW5kZXglMkNicmFpbiUyQ2NhcmRpb21ldGFib2xpYyUyMHBoZW5vdHlwZXMlMkNnZW5lJTIwZXhwcmVzc2lvbiUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkN0aXNzdWUlMjBzcGVjaWZpY2l0eQ==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880382" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="641">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/leyden_2022_35090585.html" class="no-external">Harnessing tissue-specific genetic variation to dissect putative causal pathways between body mass index and cardiometabolic phenotypes</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/leyden_2022_35090585.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This MR study partitioned BMI-associated genetic variants into two distinct groups based on their association with gene expression in <strong>subcutaneous adipose tissue (metabolic)</strong> or <strong>brain tissue (appetite)</strong> to assess their differential effects on cardiometabolic risk.</li>
+<li><strong>Key Finding</strong>: The <strong>brain-mediated genetic pathway</strong> (appetite regulation) for higher BMI was found to be <strong>significantly more strongly associated with increased risk of Type 2 Diabetes Mellitus (T2DM)</strong> compared to the adipose-mediated pathway.</li>
+<li><strong>Shared Effects</strong>: Both tissue-specific pathways showed <strong>similar detrimental effects</strong> on blood lipids (LDL-C, triglycerides) and blood pressure, suggesting these are shared downstream consequences of increased BMI regardless of the initiating genetic mechanism.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/leyden_2022_35090585.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="R1dBUyUyQ2RuYSUyMG1ldGh5bGF0aW9uJTJDZ2VuZSUyMGV4cHJlc3Npb24lMkNtZW5kZWxpYW4lMjByYW5kb21pemF0aW9uJTJDdGlzc3VlJTIwc3BlY2lmaWNpdHk=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="547">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/taylor_2019_30704512.html" class="no-external">Prioritizing putative influential genes in cardiovascular disease susceptibility by applying tissue-specific Mendelian randomization</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/taylor_2019_30704512.html" class="no-external">
+<ul>
+<li><strong>Core Method</strong>: The study developed a multi-step analysis pipeline integrating eQTL-wide association, two-sample Mendelian randomization (MR), and multiple-trait colocalization to investigate the causal pathway from genetic variants to cardiovascular traits.</li>
+<li><strong>Key Findings</strong>: MR analysis provided evidence for <strong>tissue-specific genetic effects</strong> on traits like BMI (<strong>ADCY3</strong>) and cholesterol (<strong>FADS1</strong> and <strong>SORT1</strong> in liver tissue), demonstrating that the biological context of gene expression is critical.</li>
+<li><strong>Mechanism Elucidation</strong>: Colocalization analyses suggested that <strong>DNA methylation</strong> may also play a role alongside gene expression, particularly at the FADS1/TMEM258 locus, and the pipeline identified a total of <strong>233 candidate association signals</strong> for future functional studies.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/taylor_2019_30704512.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="Y2F1c2FsJTIwaW5mZXJlbmNlJTJDZXBpZGVtaW9sb2d5JTJDaW5zdHJ1bWVudGFsJTIwdmFyaWFibGVzJTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbiUyQ3N0YXRpc3RpY2FsJTIwbWV0aG9kcw==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="414">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/swanson_2017_28379526.html" class="no-external">The challenging interpretation of instrumental variable estimates under monotonicity</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/swanson_2017_28379526.html" class="no-external">
+<ul>
+<li><strong>Core Argument</strong>: The paper analyzes the interpretation difficulties of <strong>Instrumental Variable (IV) estimates</strong> that rely on the <strong>monotonicity assumption</strong>, particularly when the instrument is <strong>non-causal</strong> (e.g., in many Mendelian Randomization studies).</li>
+<li><strong>Effect Identified</strong>: IV methods typically identify the <strong>Local Average Treatment Effect (LATE)</strong>, which applies only to the subgroup of <strong>compliers</strong>—those whose treatment status is modified by the instrument.</li>
+<li><strong>Policy Implications</strong>: The LATE is often <strong>not ideal for informing clinical or policy decision-making</strong> because the complier subgroup is often ill-defined or not the target of the intervention, requiring researchers to be cautious about generalization.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/swanson_2017_28379526.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="YWRpcG9zZSUyMHRpc3N1ZSUyQ2JvZHklMjBtYXNzJTIwaW5kZXglMkNicmFpbiUyQ2NhbmNlciUyMHJpc2slMkNjb2xvcmVjdGFsJTIwY2FuY2VyJTJDbHVuZyUyMGNhbmNlciUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkN0aXNzdWUlMjBzcGVjaWZpY2l0eQ==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880383" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="682">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/leyden_2022_36434155.html" class="no-external">Disentangling the aetiological pathways between body mass index and site-specific cancer risk using tissue-partitioned Mendelian randomisation</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/leyden_2022_36434155.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study used <strong>tissue-partitioned Mendelian randomization (MR)</strong> to separate the genetic effects of BMI into <strong>brain-mediated (appetite)</strong> and <strong>adipose-mediated (metabolic)</strong> pathways to assess their independent causal impact on seven site-specific cancer risks.</li>
+<li><strong>Key Finding (Lung Cancer)</strong>: The <strong>brain-mediated BMI variants</strong> were identified as the predominant causal driver of <strong>lung cancer</strong> risk (OR: 1.17), an effect which was shown to be highly correlated with an increase in <strong>cigarettes per day</strong>, suggesting a shared genetic mechanism acting via addictive behaviors.</li>
+<li><strong>Key Finding (Colorectal Cancer)</strong>: A non-significant trend suggested that the <strong>adipose-mediated BMI variants</strong> were more strongly associated with <strong>colorectal cancer</strong> risk, supporting the role of metabolic consequences of adiposity in this disease.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/leyden_2022_36434155.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="YmlhcyUyQ2NhdXNhbCUyMGluZmVyZW5jZSUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNzdGF0aXN0aWNhbCUyMG1ldGhvZHMlMkN3ZWFrJTIwaW5zdHJ1bWVudHM=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880379" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="448">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/burgess_2011_21414999.html" class="no-external">Avoiding bias from weak instruments in Mendelian randomization studies</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/burgess_2011_21414999.html" class="no-external">
+<ul>
+<li><strong>Core Problem</strong>: This study addresses <strong>weak instrument bias</strong> in Mendelian Randomization (MR), which occurs when genetic variants are only weakly associated with the exposure phenotype.</li>
+<li><strong>Bias Direction</strong>: When instruments are weak, the MR causal estimate is biased toward the <strong>confounded observational association</strong> (i.e., the same bias that conventional observational studies suffer from).</li>
+<li><strong>Guideline</strong>: To minimize this bias, the paper recommends that genetic instruments used in MR studies should have a collective <strong>F-statistic greater than 10</strong> in the exposure sample.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/burgess_2011_21414999.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="R1dBUyUyQ2JpYXMlMkNjYXVzYWwlMjBpbmZlcmVuY2UlMkNjb3ZhcmlhYmxlJTIwYWRqdXN0bWVudCUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNzdGF0aXN0aWNhbCUyMG1ldGhvZHM=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880381" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="465">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/hartwig_2021_33619569.html" class="no-external">Bias in two-sample Mendelian randomization when using heritable covariable-adjusted summary associations</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/hartwig_2021_33619569.html" class="no-external">
+<ul>
+<li><strong>Core Problem</strong>: This study demonstrates that using <strong>GWAS summary statistics</strong> that have been <strong>adjusted for heritable covariables</strong> (e.g., adjusting BMI for height) can introduce bias into <strong>Two-Sample Mendelian Randomization (2SMR)</strong> estimates.</li>
+<li><strong>Mechanism</strong>: Adjusting the exposure GWAS for a heritable covariable makes the resulting MR estimate prone to <strong>bias toward the null</strong> (zero), as the genetic variant is no longer a valid instrument for the total effect of the unadjusted exposure.</li>
+<li><strong>Recommendation</strong>: Researchers should prioritize using <strong>unadjusted GWAS summary statistics</strong> to estimate the total causal effect of the exposure and must be transparent about any adjustments made to the summary data used.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/hartwig_2021_33619569.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="Y2F1c2FsJTIwaW5mZXJlbmNlJTJDZWRpdG9yaWFsJTJDZ2VuZXRpYyUyMGVwaWRlbWlvbG9neSUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNwdWJsaWNhdGlvbiUyMGJpYXMlMkNxdWFsaXR5JTIwY29udHJvbA==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880385" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="414">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/stender_2024_39244551.html" class="no-external">Reclaiming mendelian randomization from the deluge of papers and misleading findings</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/stender_2024_39244551.html" class="no-external">
+<ul>
+<li><strong>Core Concern</strong>: The paper addresses the decline in quality of Mendelian Randomization (MR) research due to an overwhelming number of low-value <strong>Two-Sample MR (2SMR) papers</strong> and the premature, unvalidated application of <strong>highly complex MR methods</strong>.</li>
+<li><strong>Recommendations for Editors</strong>: Editors are advised to set a higher bar, specifically to <strong>reject</strong> papers that report only standard 2SMR findings without additional supporting evidence, methodological novelty, or validation.</li>
+<li><strong>Reviewer Focus</strong>: Reviewers must enforce rigorous quality control, demanding comprehensive sensitivity analyses (e.g., MR-Egger, Steiger filtering) and ensuring that findings, especially those from complex non-linear MR, are biologically plausible and properly validated.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/stender_2024_39244551.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="Y2F1c2FsJTIwaW5mZXJlbmNlJTJDZHJ1ZyUyMHRhcmdldCUyQ2xpcGlkcyUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNtZXRhYm9sb21pY3MlMkNwaGFybWFjb2xvZ3k=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880384" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="743">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/richardson_2022_35213538.html" class="no-external">Characterising metabolomic signatures of lipid-modifying therapies through drug target Mendelian randomisation</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/richardson_2022_35213538.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study employed <strong>drug target Mendelian randomization (MR)</strong> to emulate the effects of five different classes of <strong>lipid-modifying therapies</strong> and characterize their resulting causal impact on <strong>229 circulating metabolic traits</strong>.</li>
+<li><strong>Key Findings</strong>: The analysis successfully generated distinct metabolomic signatures for each drug class, confirming known effects (e.g., Statins reducing <strong>LDL-C</strong>) while providing novel insights into their differential impact on lipoprotein subclasses; for instance, <strong>PCSK9 inhibitors</strong> showed limited effect on <strong>VLDL/triglycerides</strong> compared to Statins.</li>
+<li><strong>Implication</strong>: The findings validate drug target MR as a valuable tool for <strong>predicting the pleiotropic effects</strong> of therapies on the metabolome, which can inform drug development, safety assessment, and personalized clinical choice.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/richardson_2022_35213538.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="YmlhcyUyMGRldGVjdGlvbiUyQ2dlbmV0aWMlMjBlcGlkZW1pb2xvZ3klMkNpbnN0cnVtZW50YWwlMjBpbmVxdWFsaXRpZXMlMkNpbnN0cnVtZW50YWwlMjB2YXJpYWJsZXMlMkNpdiUyMGFzc3VtcHRpb25zJTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbg==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880385" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="564">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/sanderson_2023_37634227.html" class="no-external">Reappraising the role of instrumental inequalities for mendelian randomization studies in the mega Biobank era</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/sanderson_2023_37634227.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This commentary discusses the increasing <strong>relevance and power of instrumental inequalities (IIs)</strong>—mathematical constraints derived from the core assumptions of Instrumental Variables (IV)—as a tool for <strong>detecting bias</strong> in Mendelian Randomization (MR) studies using large-scale Biobank data.</li>
+<li><strong>Instrumental Inequalities</strong>: IIs are a set of conditions that <em>must</em> be satisfied if the IV assumptions hold true. If the data <strong>violates</strong> these inequalities, it proves the instruments are <strong>invalid</strong>.</li>
+<li><strong>Role in Mega-Biobanks</strong>: The authors argue that the large sample sizes of modern Biobanks provide the necessary <strong>statistical power</strong> to accurately detect subtle violations of the inequalities, making this tool highly effective for <strong>falsifying</strong> the validity of genetic instruments.</li>
+<li><strong>Recommendation</strong>: IIs should be used as a <strong>complementary, stringent test</strong> alongside standard MR sensitivity analyses to enhance the statistical rigor of causal inference.</li>
+</ul>
+</a><section id="reviewing" class="level2"><a href="../mr/sanderson_2023_37634227.html" class="no-external">
+<h2 class="anchored" data-anchor-id="reviewing">reviewing</h2>
+</a></section></div>
+
+</div>
+<div class="metadata">
+<a href="../mr/sanderson_2023_37634227.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="YXNzdW1wdGlvbiUyMHRlc3RpbmclMkNjYXVzYWwlMjBpbmZlcmVuY2UlMkNmYWxzaWZpY2F0aW9uJTJDaW5zdHJ1bWVudGFsJTIwdmFyaWFibGVzJTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbiUyQ3N0YXRpc3RpY2FsJTIwbWV0aG9kcw==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880382" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="490">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/labrecque_2018_30148040.html" class="no-external">Understanding the Assumptions Underlying Instrumental Variable Analyses: a Brief Review of Falsification Strategies and Related Tools</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/labrecque_2018_30148040.html" class="no-external">
+<ul>
+<li><strong>Core Purpose</strong>: This review advocates for the systematic use of <strong>falsification strategies and statistical tools</strong> to assess the plausibility of the unverifiable assumptions underlying Instrumental Variable (IV) analyses, especially in Mendelian Randomization (MR).</li>
+<li><strong>Methods</strong>: While the <strong>Relevance</strong> assumption is statistically testable (e.g., F-statistic), the <strong>Exclusion Restriction</strong> and <strong>Independence</strong> assumptions can be tested for violation using methods like <strong>Negative Control Outcomes</strong> and <strong>sensitivity analyses</strong> (e.g., MR-Egger regression).</li>
+<li><strong>Recommendation</strong>: The paper stresses that epidemiologists should move beyond justifying IV assumptions solely with subject matter knowledge and routinely employ formal statistical checks to improve the robustness and transparency of causal inference.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/labrecque_2018_30148040.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-categories="Y2hhbGxlbmdlcyUyQ2RpZXQlMkNlcGlkZW1pb2xvZ3klMkNtZW5kZWxpYW4lMjByYW5kb21pemF0aW9uJTJDbnV0cml0aW9u" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880383" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="339">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/merino_2022_34980908.html" class="no-external">The unique challenges of studying the genetics of diet and nutrition</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/merino_2022_34980908.html" class="no-external">
+<ul>
+<li><strong>Core Problem</strong>: This comment highlights the methodological difficulties of using Mendelian Randomization (MR) to establish causal links between <strong>dietary exposures and health outcomes</strong> due to the inherent nature of diet.</li>
+<li><strong>Key Challenges</strong>: Challenges include <strong>difficulty quantifying intake</strong> and reliance on non-representative midlife measurements, the <strong>time-varying</strong> nature of diet, and its <strong>compositional</strong> constraints (change in one nutrient affects others).</li>
+<li><strong>MR Limitation</strong>: The strong correlation between nutrition and other lifestyle/environmental factors (e.g., physical activity) risks <strong>violating core MR assumptions</strong> (pleiotropy and independence), potentially leading to biased or misleading causal estimates .</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/merino_2022_34980908.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-categories="YnJhaW4lMkNjZWxsJTIwc3RhdGUlMkNjb250ZXh0dWFsJTIwbXIlMkNkcnVnJTIwdGFyZ2V0JTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbiUyQ25ldXJvbG9naWNhbCUyMGRpc2Vhc2UlMkNwbGVpb3Ryb3B5JTJDc2luZ2xlLWNlbGwlMjBybmEtc2Vx" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880381" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="691">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/haglund_2025_39794547.html" class="no-external">Cell state-dependent allelic effects and contextual Mendelian randomization analysis for human brain phenotypes</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/haglund_2025_39794547.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study introduced a novel <strong>Contextual Mendelian Randomization (cMR)</strong> framework that leverages single-cell RNA sequencing (scRNA-seq) to identify genetic effects on gene expression that are <strong>dependent on the cell type and the cell’s state</strong> (e.g., inflammatory vs.&nbsp;homeostatic) in the human brain.</li>
+<li><strong>Key Findings</strong>: The cMR approach identified hundreds of <strong>cell state-dependent eQTLs</strong>, and, when applied to neurological diseases, it prioritized novel causal genes missed by bulk MR; for example, linking the expression of <strong>LRRC18</strong> and <strong>RHOBTB3</strong> in <strong>microglia</strong> to <strong>Alzheimer’s Disease (AD)</strong> risk.</li>
+<li><strong>Significance</strong>: By resolving genetic signals to specific cellular contexts, cMR offers highly refined and biologically precise causal estimates, reducing pleiotropy and identifying superior, cell state-specific drug targets for complex brain phenotypes.</li>
+</ul>
+</a><section id="methods" class="level2"><a href="../mr/haglund_2025_39794547.html" class="no-external">
+<h2 class="anchored" data-anchor-id="methods">methods</h2>
+</a></section></div>
+
+</div>
+<div class="metadata">
+<a href="../mr/haglund_2025_39794547.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-categories="Ym9keSUyMG1hc3MlMjBpbmRleCUyQ2Nvcm9uYXJ5JTIwYXJ0ZXJ5JTIwZGlzZWFzZSUyQ2dlbmV0aWMlMjBlcGlkZW1pb2xvZ3klMkNtZW5kZWxpYW4lMjByYW5kb21pemF0aW9uJTJDdGlzc3VlJTIwZXhwcmVzc2lvbiUyQ3R5cGUlMjAyJTIwZGlhYmV0ZXMlMjBtZWxsaXR1cw==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="643">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/verkouter_2020_32500151.html" class="no-external">The contribution of tissue-grouped BMI-associated gene sets to cardiometabolic-disease risk: a Mendelian randomization study</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/verkouter_2020_32500151.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This Mendelian randomization (MR) study aimed to determine if grouping BMI-associated genetic variants based on differential tissue expression profiles (from GTEx data) could identify distinct causal effects on <strong>Type 2 Diabetes Mellitus (T2DM)</strong> and <strong>Coronary Artery Disease (CAD)</strong>.</li>
+<li><strong>Key Finding</strong>: The study identified 17 tissue-grouped gene sets; however, all sets showed a <strong>similar association</strong> with increased risks of T2DM and CAD, with effect estimates comparable to those from <strong>randomly sampled genetic variants</strong>.</li>
+<li><strong>Conclusion</strong>: The novel approach of clustering BMI genetic instruments by tissue expression <strong>did not provide additional insight</strong> into the role of specific tissues in the genetic risk for these cardiometabolic diseases.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/verkouter_2020_32500151.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="15" data-categories="Y2F1c2FsJTIwaW5mZXJlbmNlJTJDZXBpZGVtaW9sb2d5JTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbiUyQ3N0YXRpc3RpY2FsJTIwbWV0aG9kcyUyQ3RpbWUtdmFyeWluZyUyMGV4cG9zdXJlcw==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880382" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="503">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/labrecque_2018_30239571.html" class="no-external">Interpretation and Potential Biases of Mendelian Randomization Estimates With Time-Varying Exposures</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/labrecque_2018_30239571.html" class="no-external">
+<ul>
+<li><strong>Core Problem</strong>: This study addresses the difficulty of interpreting Mendelian Randomization (MR) results when the exposure (e.g., smoking) is <strong>time-varying</strong> and changes over an individual’s life course.</li>
+<li><strong>Interpretation</strong>: Standard MR estimates for a time-varying exposure should be interpreted as the causal effect of an intervention on the <strong>long-term average or cumulative lifetime exposure</strong>, not the effect of intervening at a specific moment (e.g., quitting at age 40).</li>
+<li><strong>Recommendation</strong>: Researchers must be explicit about this interpretation, as the estimate may not align with the causal effect relevant to clinical or public health policy interventions, necessitating the development of MR methods based on <strong>g-methods</strong> for time-varying treatments.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/labrecque_2018_30239571.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="16" data-categories="Ymxvb2QlMjBwcmVzc3VyZSUyQ2JvZHklMjBtYXNzJTIwaW5kZXglMkNnZW5ldGljJTIwaGV0ZXJvZ2VuZWl0eSUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNwYXRod2F5JTIwYW5hbHlzaXMlMkN0aXNzdWUlMjBzcGVjaWZpY2l0eQ==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880383" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="648">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/leyden_2025_40375348.html" class="no-external">Distinct pathway-based effects of blood pressure and body mass index on cardiovascular traits: comparison of novel Mendelian randomization approaches</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/leyden_2025_40375348.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study introduced a <strong>novel pathway-partitioned Mendelian randomization (MR) approach</strong> (based on proximity to Mendelian disease genes) and compared its findings to the existing <strong>tissue-partitioned MR</strong> approach for <strong>Blood Pressure (BP)</strong> and <strong>Body Mass Index (BMI)</strong> effects on cardiovascular traits.</li>
+<li><strong>BP Findings</strong>: The pathway-partitioned MR showed that <strong>renal-system related IVs</strong> were significantly associated with <strong>Coronary Artery Disease (CAD)</strong>, while <strong>vascular-related IVs</strong> were significantly associated with <strong>Stroke</strong>, demonstrating distinct causal pathways.</li>
+<li><strong>BMI Findings</strong>: Both the pathway-partitioned (Mental Health vs.&nbsp;Metabolic) and tissue-partitioned (Brain vs.&nbsp;Adipose) methods for BMI consistently found that genetic variants related to <strong>central/appetite regulation</strong> had a <strong>stronger causal effect</strong> on the risk of <strong>Type 2 Diabetes Mellitus (T2DM)</strong>.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/leyden_2025_40375348.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="17" data-categories="YXRoZXJvc2NsZXJvc2lzJTJDY2VsbCUyMHR5cGUlMjBzcGVjaWZpY2l0eSUyQ2NvbG9jYWxpemF0aW9uJTJDZVFUTCUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNzaW5nbGUtY2VsbCUyMHJuYS1zZXE=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880384" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="683">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/ray_2025_40555237.html" class="no-external">Single-cell transcriptome-wide Mendelian randomization and colocalization analyses uncover cell-specific mechanisms in atherosclerotic cardiovascular disease</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/ray_2025_40555237.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study introduced a novel <strong>single-cell transcriptome-wide Mendelian randomization (scTWMR)</strong> framework to leverage cell-type-specific gene expression data from atherosclerotic plaques and identify causal genes for <strong>Atherosclerotic Cardiovascular Disease (ASCVD)</strong> risk.</li>
+<li><strong>Key Findings</strong>: The approach prioritized <strong>23 causal genes</strong> by resolving signals to specific cell types, finding the strongest evidence in <strong>immune cells</strong>; for example, genetically predicted increased expression of <strong>HSH2D</strong> in <strong>macrophages</strong> was causally associated with increased ASCVD risk.</li>
+<li><strong>Significance</strong>: scTWMR provides a level of resolution superior to traditional bulk-tissue MR, enabling the identification of <strong>cell-specific drug targets</strong> and offering a scalable strategy for uncovering mechanistic details of complex diseases.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/ray_2025_40555237.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="18" data-categories="YmlhcyUyMGNvcnJlY3Rpb24lMkNjb2xsaWRlciUyMGJpYXMlMkNpbnN0cnVtZW50YWwlMjB2YXJpYWJsZXMlMkNtZW5kZWxpYW4lMjByYW5kb21pemF0aW9uJTJDc3RyYXRpZmllZCUyMGFuYWx5c2lz" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880380" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="607">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/coscia_2022_35639294.html" class="no-external">Avoiding collider bias in Mendelian randomization when performing stratified analyses</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/coscia_2022_35639294.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This paper introduced a novel, robust method to conduct <strong>Mendelian Randomization (MR) stratified analyses</strong> while effectively <strong>avoiding the introduction of collider bias</strong>, a common pitfall when stratifying by a variable influenced by both the exposure and the outcome.</li>
+<li><strong>Methodology (Residual Collider)</strong>: The solution is to construct a <strong>residual collider (<span class="math inline">\(\tilde{C}\)</span>)</strong> by regressing the original collider (<span class="math inline">\(C\)</span>) on the genetic instrument (<span class="math inline">\(G\)</span>). Stratifying the MR analysis by quantiles of this residual (<span class="math inline">\(\tilde{C}\)</span>) preserves the independence of the instrument and the stratifying variable, thus ensuring the validity of the causal estimate.</li>
+<li><strong>Conclusion</strong>: The study validates that stratification by the residual collider provides <strong>unbiased causal estimates</strong> and allows for the valid investigation of causal effect heterogeneity across population subgroups defined by the collider.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/coscia_2022_35639294.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="19" data-categories="ZXBpZGVtaW9sb2d5JTJDZ2VuZXRpYyUyMHZhcmlhbnRzJTJDaW5zdHJ1bWVudGFsJTIwdmFyaWFibGVzJTJDbWVuZGVsaWFuJTIwcmFuZG9taXNhdGlvbiUyQ3BsZWlvdHJvcHklMkNzdHVkeSUyMGRlc2lnbg==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880380" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="583">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/burgess_2024_38362310.html" class="no-external">Incorporating biological and clinical insights into variant choice for Mendelian randomisation: examples and principles</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/burgess_2024_38362310.html" class="no-external">
+<ul>
+<li><strong>Core Recommendation</strong>: For Mendelian Randomisation (MR), a <strong>biologically motivated strategy</strong> for selecting genetic variants is preferred over a genome-wide approach to increase the plausibility of the <strong>No Pleiotropy</strong> instrumental variable assumption.</li>
+<li><strong>Selection Methods</strong>: Plausible variant selection includes <strong>Cis-MR</strong> (variants in the coding region of the exposure gene) and using instruments associated with a specific <strong>biomarker</strong> rather than a broad behavioral proxy.</li>
+<li><strong>Validation</strong>: The study advocates for rigorous sensitivity checks such as <strong>Multivariable MR (MVMR)</strong>, <strong>positive controls</strong>, and <strong>negative controls</strong> to validate the instruments and dissect causal pathways from confounding or pleiotropy.</li>
+</ul>
+</a><section id="approaches" class="level2"><a href="../mr/burgess_2024_38362310.html" class="no-external">
+<h2 class="anchored" data-anchor-id="approaches">approaches</h2>
+</a></section></div>
+
+</div>
+<div class="metadata">
+<a href="../mr/burgess_2024_38362310.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="20" data-categories="R1dBUyUyQ2NhdXNhbCUyMGRpcmVjdGlvbiUyQ2NhdXNhbCUyMGluZmVyZW5jZSUyQ21lbmRlbGlhbiUyMHJhbmRvbWl6YXRpb24lMkNzdGF0aXN0aWNhbCUyMG1ldGhvZHM=" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880381" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="475">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/hemani_2017_29149188.html" class="no-external">Orienting the causal relationship between imprecisely measured traits using GWAS summary data</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/hemani_2017_29149188.html" class="no-external">
+<ul>
+<li><strong>Core Problem</strong>: This research addresses how to determine the <strong>causal direction</strong> between two highly correlated traits (<span class="math inline">\(X \rightarrow Y\)</span> vs.&nbsp;<span class="math inline">\(Y \rightarrow X\)</span>) using easily accessible <strong>GWAS summary data</strong>.</li>
+<li><strong>Key Method (Steiger Filtering)</strong>: The primary method is <strong>Steiger filtering</strong>, which tests if the genetic instrument explains more variance in the intended <strong>exposure</strong> than in the intended <strong>outcome</strong>. If the reverse is true, it suggests an incorrect causal direction or unmodeled pleiotropy.</li>
+<li><strong>Impact</strong>: The method has become a routine, mandatory step in Mendelian Randomization studies to validate that the genetic variants selected are genuine instruments for the exposure and not proxies for the outcome or unmodeled confounders, thus preventing reverse causation bias.</li>
+</ul>
+</a><section id="assumptionslimitationsbias" class="level2"><a href="../mr/hemani_2017_29149188.html" class="no-external">
+<h2 class="anchored" data-anchor-id="assumptionslimitationsbias">assumptions/limitations/bias</h2>
+</a></section></div>
+
+</div>
+<div class="metadata">
+<a href="../mr/hemani_2017_29149188.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="21" data-categories="YmVzdCUyMHByYWN0aWNlcyUyQ2NhdXNhbCUyMGluZmVyZW5jZSUyQ2dlbmV0aWMlMjBlcGlkZW1pb2xvZ3klMkNndWlkZWxpbmVzJTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbiUyQ3N0YXRpc3RpY2FsJTIwbWV0aG9kcw==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880379" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="524">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/burgess_2023_32760811.html" class="no-external">Guidelines for performing Mendelian randomization investigations: update for summer 2023</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/burgess_2023_32760811.html" class="no-external">
+<ul>
+<li><strong>Core Goal</strong>: This paper provides updated guidelines for Mendelian Randomization (MR) investigations, stressing the need for a rigorous, multi-method approach to inferring causality between an exposure and an outcome using genetic variants.</li>
+<li><strong>Validity Checks</strong>: The guidelines mandate systematic testing of the core IV assumptions, particularly the <strong>Exclusion Restriction</strong> (no pleiotropy), using multiple sensitivity analyses such as <strong>MR-Egger</strong>, <strong>Weighted Median/Mode</strong>, and <strong>Steiger Filtering</strong>.</li>
+<li><strong>Best Practices</strong>: Recommended practices for Two-Sample MR include proper variant selection (<strong>clumping</strong>), careful data <strong>harmonization</strong>, and comprehensive reporting of all sensitivity analysis results, including visual plots, to ensure robustness and transparency.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/burgess_2023_32760811.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="22" data-categories="YnJhaW4lMkNkcnVnJTIwdGFyZ2V0JTJDZ2xpb2JsYXN0b21hJTJDZ2xpb21hJTJDbWVuZGVsaWFuJTIwcmFuZG9taXphdGlvbiUyQ211bHRpLW9taWNzJTJDcHJvdGVvbWljcyUyQ3RyYW5zY3JpcHRvbWljcw==" data-listing-date-sort="1769125880000" data-listing-file-modified-sort="1769125880386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="707">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../mr/thornton_2025_39565278.html" class="no-external">Brain multi-omic Mendelian randomisation to identify novel drug targets for gliomagenesis</a>
+</h3>
+<div class="delink listing-description"><a href="../mr/thornton_2025_39565278.html" class="no-external">
+<ul>
+<li><strong>Objective</strong>: This study employed a novel <strong>brain multi-omic Mendelian randomization (MR)</strong> approach, integrating brain-specific genetic, transcriptomic (eQTLs), and <strong>proteomic (pQTLs)</strong> data to identify genes and proteins causally associated with <strong>glioma</strong> risk.</li>
+<li><strong>Key Findings</strong>: The analysis identified 25 causal genes and, more specifically, 13 causal proteins. The strongest evidence pointed to two promising drug targets for <strong>glioblastoma (GBM)</strong>: genetically predicted lower levels of the protein <strong>FAM178B</strong> and higher levels of the protein <strong>MDM4</strong> both increased risk.</li>
+<li><strong>Significance</strong>: The work validates the use of <strong>brain-specific proteomic data</strong> in MR to enhance the prioritization of highly relevant molecular drug targets for neurological cancers.</li>
+</ul>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../mr/thornton_2025_39565278.html" class="no-external">
+<div class="listing-date">
+23 January 2026
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mattlee821\.github\.io\/papers\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

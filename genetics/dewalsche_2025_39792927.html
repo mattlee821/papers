@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-01-23">
+<meta name="description" content="Novel meta-analysis approach for multi-environment trials (METs) that jointly analyzes GWAS summary statistics while accounting for inter-environment correlationsControls Type I error effectively (FDR ≤0.05) where competing methods fail severely (METAL FDR >0.84), with computational efficiency enabling analysis of 600K markers × 22 environments in ~2 minutesIdentified novel competition-responsive flowering QTLs in Arabidopsis and heat-stress yield QTLs in maize through contrast tests and meta-regression with environmental covariates">
+
+<title>metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2757cfadcc89ddbfb9e61569f8c3689f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">info</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../genetics/index.html" aria-current="page"> 
+<span class="menu-text">genetics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../finemap-colocalisation/index.html"> 
+<span class="menu-text">finemap-colocalisation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../expression/index.html"> 
+<span class="menu-text">expression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proteomics/index.html"> 
+<span class="menu-text">proteomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../metabolomics/index.html"> 
+<span class="menu-text">metabolomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../multi-omics/index.html"> 
+<span class="menu-text">multi-omics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../mr/index.html"> 
+<span class="menu-text">MR</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pgs/index.html"> 
+<span class="menu-text">PGS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../statistics/index.html"> 
+<span class="menu-text">statistics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../interaction/index.html"> 
+<span class="menu-text">interaction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../other/index.html"> 
+<span class="menu-text">other</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ml/index.html"> 
+<span class="menu-text">ml</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cancer/index.html"> 
+<span class="menu-text">cancer</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../genetics/index.html">Papers</a></li><li class="breadcrumb-item"><a href="../genetics/dewalsche_2025_39792927.html">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../genetics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/aschard_2015_25640676.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Adjusting for Heritable Covariates Can Bias Effect Estimates in Genome-Wide Association Studies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/benson_2023_37582364.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protein-metabolite association studies identify novel proteomic determinants of metabolite levels in human plasma</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/coral_2023_36703017.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A phenome-wide comparative analysis of genetic discordance between obesity and type 2 diabetes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/dewalsche_2025_39792927.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/franks_2017_28481885.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Post-transcriptional regulation across human tissues</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/fu_2025_41366086.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A biobank-scale test of marginal epistasis reveals genome-wide signals of polygenic interaction effects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/hoerbst_2025_biorxiv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What is a Differentially Expressed Gene?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/miao_2024_39349818.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Valid inference for machine learning-assisted genome-wide association studies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/monsees_2009_19365863.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genome-wide association scans for secondary traits using case-control samples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/ota_2025_41372418.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal modelling of gene effects from regulators to programs to traits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/ren_2023_37181332.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using GWAS summary data to impute traits for genotyped individuals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/schwanhausser_2011_21593866.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Global quantification of mammalian gene expression control</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/spence_2025_41193809.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Specificity, length and luck drive gene rankings in association studies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/tambets_2024_39210598.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extensive co-regulation of neighboring genes complicates the use of eQTLs in target gene prioritization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/timpson_2017_29225335.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic architecture: the shape of the genetic contribution to human traits and disease</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/tokolyi_2025_40038547.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The contribution of genetic determinants of blood gene expression and splicing to molecular phenotypes and health outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../genetics/wu_2023_37601976.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Joint analysis of GWAS and multi-omics QTL summary statistics reveals a large fraction of GWAS signals shared with molecular phenotypes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link active" data-scroll-target="#key-findings">Key Findings</a>
+  <ul class="collapse">
+  <li><a href="#main-discoveries" id="toc-main-discoveries" class="nav-link" data-scroll-target="#main-discoveries">Main Discoveries</a></li>
+  </ul></li>
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a>
+  <ul class="collapse">
+  <li><a href="#methodological-framework" id="toc-methodological-framework" class="nav-link" data-scroll-target="#methodological-framework">Methodological Framework</a></li>
+  <li><a href="#statistical-models" id="toc-statistical-models" class="nav-link" data-scroll-target="#statistical-models">Statistical Models</a></li>
+  <li><a href="#correlation-matrix-estimation" id="toc-correlation-matrix-estimation" class="nav-link" data-scroll-target="#correlation-matrix-estimation">Correlation Matrix Estimation</a></li>
+  </ul></li>
+  <li><a href="#simulation-study" id="toc-simulation-study" class="nav-link" data-scroll-target="#simulation-study">Simulation Study</a>
+  <ul class="collapse">
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a></li>
+  <li><a href="#type-i-error-control" id="toc-type-i-error-control" class="nav-link" data-scroll-target="#type-i-error-control">Type I Error Control</a></li>
+  <li><a href="#detection-power" id="toc-detection-power" class="nav-link" data-scroll-target="#detection-power">Detection Power</a></li>
+  <li><a href="#meta-regression-specificity" id="toc-meta-regression-specificity" class="nav-link" data-scroll-target="#meta-regression-specificity">Meta-Regression Specificity</a></li>
+  </ul></li>
+  <li><a href="#application-i-arabidopsis-competition-response" id="toc-application-i-arabidopsis-competition-response" class="nav-link" data-scroll-target="#application-i-arabidopsis-competition-response">Application I: Arabidopsis Competition Response</a>
+  <ul class="collapse">
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#major-finding-qtl5_22.0" id="toc-major-finding-qtl5_22.0" class="nav-link" data-scroll-target="#major-finding-qtl5_22.0">Major Finding: QTL5_22.0</a></li>
+  </ul></li>
+  <li><a href="#application-ii-maize-drought-response" id="toc-application-ii-maize-drought-response" class="nav-link" data-scroll-target="#application-ii-maize-drought-response">Application II: Maize Drought Response</a>
+  <ul class="collapse">
+  <li><a href="#dataset-1" id="toc-dataset-1" class="nav-link" data-scroll-target="#dataset-1">Dataset</a></li>
+  <li><a href="#metage-re-results" id="toc-metage-re-results" class="nav-link" data-scroll-target="#metage-re-results">metaGE RE Results</a></li>
+  <li><a href="#meta-regression-results" id="toc-meta-regression-results" class="nav-link" data-scroll-target="#meta-regression-results">Meta-Regression Results</a></li>
+  </ul></li>
+  <li><a href="#application-iii-multi-parent-population" id="toc-application-iii-multi-parent-population" class="nav-link" data-scroll-target="#application-iii-multi-parent-population">Application III: Multi-Parent Population</a>
+  <ul class="collapse">
+  <li><a href="#eu-nam-flint-dataset" id="toc-eu-nam-flint-dataset" class="nav-link" data-scroll-target="#eu-nam-flint-dataset">EU-NAM Flint Dataset</a></li>
+  <li><a href="#results-1" id="toc-results-1" class="nav-link" data-scroll-target="#results-1">Results</a></li>
+  <li><a href="#advantages-over-original-analysis" id="toc-advantages-over-original-analysis" class="nav-link" data-scroll-target="#advantages-over-original-analysis">Advantages Over Original Analysis</a></li>
+  </ul></li>
+  <li><a href="#application-iv-wheat-supplementary" id="toc-application-iv-wheat-supplementary" class="nav-link" data-scroll-target="#application-iv-wheat-supplementary">Application IV: Wheat (Supplementary)</a>
+  <ul class="collapse">
+  <li><a href="#dataset-2" id="toc-dataset-2" class="nav-link" data-scroll-target="#dataset-2">Dataset</a></li>
+  <li><a href="#key-findings-1" id="toc-key-findings-1" class="nav-link" data-scroll-target="#key-findings-1">Key Findings</a></li>
+  </ul></li>
+  <li><a href="#computational-performance" id="toc-computational-performance" class="nav-link" data-scroll-target="#computational-performance">Computational Performance</a></li>
+  <li><a href="#methodological-advantages" id="toc-methodological-advantages" class="nav-link" data-scroll-target="#methodological-advantages">Methodological Advantages</a>
+  <ul class="collapse">
+  <li><a href="#over-classical-meta-analysis-metal" id="toc-over-classical-meta-analysis-metal" class="nav-link" data-scroll-target="#over-classical-meta-analysis-metal">Over Classical Meta-Analysis (METAL)</a></li>
+  <li><a href="#over-mixture-models-mash" id="toc-over-mixture-models-mash" class="nav-link" data-scroll-target="#over-mixture-models-mash">Over Mixture Models (mash)</a></li>
+  <li><a href="#over-mixed-models" id="toc-over-mixed-models" class="nav-link" data-scroll-target="#over-mixed-models">Over Mixed Models</a></li>
+  <li><a href="#comparison-to-subgroup-meta-analysis" id="toc-comparison-to-subgroup-meta-analysis" class="nav-link" data-scroll-target="#comparison-to-subgroup-meta-analysis">Comparison to Subgroup Meta-Analysis</a></li>
+  </ul></li>
+  <li><a href="#novel-testing-capabilities" id="toc-novel-testing-capabilities" class="nav-link" data-scroll-target="#novel-testing-capabilities">Novel Testing Capabilities</a>
+  <ul class="collapse">
+  <li><a href="#standard-association-test" id="toc-standard-association-test" class="nav-link" data-scroll-target="#standard-association-test">1. Standard Association Test</a></li>
+  <li><a href="#heterogeneity-test" id="toc-heterogeneity-test" class="nav-link" data-scroll-target="#heterogeneity-test">2. Heterogeneity Test</a></li>
+  <li><a href="#contrast-test" id="toc-contrast-test" class="nav-link" data-scroll-target="#contrast-test">3. Contrast Test</a></li>
+  <li><a href="#meta-regression" id="toc-meta-regression" class="nav-link" data-scroll-target="#meta-regression">4. Meta-Regression</a></li>
+  </ul></li>
+  <li><a href="#biological-insights" id="toc-biological-insights" class="nav-link" data-scroll-target="#biological-insights">Biological Insights</a>
+  <ul class="collapse">
+  <li><a href="#power-gain-through-joint-analysis" id="toc-power-gain-through-joint-analysis" class="nav-link" data-scroll-target="#power-gain-through-joint-analysis">Power Gain Through Joint Analysis</a></li>
+  <li><a href="#interpreting-effect-variability" id="toc-interpreting-effect-variability" class="nav-link" data-scroll-target="#interpreting-effect-variability">Interpreting Effect Variability</a></li>
+  </ul></li>
+  <li><a href="#data-sharing-and-privacy" id="toc-data-sharing-and-privacy" class="nav-link" data-scroll-target="#data-sharing-and-privacy">Data Sharing and Privacy</a>
+  <ul class="collapse">
+  <li><a href="#advantages-of-summary-statistics" id="toc-advantages-of-summary-statistics" class="nav-link" data-scroll-target="#advantages-of-summary-statistics">Advantages of Summary Statistics</a></li>
+  <li><a href="#technical-benefits" id="toc-technical-benefits" class="nav-link" data-scroll-target="#technical-benefits">Technical Benefits</a></li>
+  </ul></li>
+  <li><a href="#practical-recommendations" id="toc-practical-recommendations" class="nav-link" data-scroll-target="#practical-recommendations">Practical Recommendations</a>
+  <ul class="collapse">
+  <li><a href="#when-to-use-metage" id="toc-when-to-use-metage" class="nav-link" data-scroll-target="#when-to-use-metage">When to Use metaGE</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model Selection</a></li>
+  <li><a href="#multiple-testing-control" id="toc-multiple-testing-control" class="nav-link" data-scroll-target="#multiple-testing-control">Multiple Testing Control</a></li>
+  </ul></li>
+  <li><a href="#implementation-details" id="toc-implementation-details" class="nav-link" data-scroll-target="#implementation-details">Implementation Details</a>
+  <ul class="collapse">
+  <li><a href="#r-package-metage" id="toc-r-package-metage" class="nav-link" data-scroll-target="#r-package-metage">R Package: metaGE</a></li>
+  </ul></li>
+  <li><a href="#limitations-and-considerations" id="toc-limitations-and-considerations" class="nav-link" data-scroll-target="#limitations-and-considerations">Limitations and Considerations</a>
+  <ul class="collapse">
+  <li><a href="#statistical-assumptions" id="toc-statistical-assumptions" class="nav-link" data-scroll-target="#statistical-assumptions">Statistical Assumptions</a></li>
+  <li><a href="#design-considerations" id="toc-design-considerations" class="nav-link" data-scroll-target="#design-considerations">Design Considerations</a></li>
+  </ul></li>
+  <li><a href="#related-concepts" id="toc-related-concepts" class="nav-link" data-scroll-target="#related-concepts">Related Concepts</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../genetics/index.html">Papers</a></li><li class="breadcrumb-item"><a href="../genetics/dewalsche_2025_39792927.html">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">metaGE: Investigating genotype x environment interactions through GWAS meta-analysis</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">GWAS</div>
+    <div class="quarto-category">meta-analysis</div>
+    <div class="quarto-category">genotype-by-environment</div>
+    <div class="quarto-category">multi-environment trials</div>
+    <div class="quarto-category">plant genetics</div>
+    <div class="quarto-category">QTL mapping</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <ul>
+    <li>Novel meta-analysis approach for multi-environment trials (METs) that jointly analyzes GWAS summary statistics while accounting for inter-environment correlations</li>
+    <li>Controls Type I error effectively (FDR ≤0.05) where competing methods fail severely (METAL FDR &gt;0.84), with computational efficiency enabling analysis of 600K markers × 22 environments in ~2 minutes</li>
+    <li>Identified novel competition-responsive flowering QTLs in Arabidopsis and heat-stress yield QTLs in maize through contrast tests and meta-regression with environmental covariates</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">23 January 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/39792927/">39792927</a><br>
+<strong>DOI:</strong> <a href="https://doi.org/10.1371/journal.pgen.1011553">10.1371/journal.pgen.1011553</a><br>
+<strong>Overview generated by:</strong> Claude Sonnet 4.5, 25/11/2025</p>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p>This study introduces metaGE, a meta-analysis approach for detecting quantitative trait loci (QTL) in multi-environment trial (MET) experiments by jointly analyzing summary statistics from individual environment GWAS, addressing the challenge of genotype-by-environment (GxE) interactions in plant genetics.</p>
+<section id="main-discoveries" class="level3">
+<h3 class="anchored" data-anchor-id="main-discoveries">Main Discoveries</h3>
+<ol type="1">
+<li><p><strong>Superior Type I error control</strong>: metaGE effectively controls false discovery rate (FDR ≤ 0.05) across simulated scenarios, while competing methods (METAL, mash) show severe inflation (FDR &gt; 0.84)</p></li>
+<li><p><strong>Computational efficiency</strong>: Analyzes large-scale datasets (22 environments × 600K markers) in ~2 minutes, dramatically faster than existing mixed-model approaches</p></li>
+<li><p><strong>Novel QTL detection</strong>: Identified new loci in Arabidopsis (competition-responsive flowering QTLs) and maize (heat-stress responsive yield QTLs) not detected by original single-environment analyses</p></li>
+<li><p><strong>Flexible testing framework</strong>: Enables detection of QTLs with stable effects, environment-specific effects, or effects correlated with environmental covariates</p></li>
+</ol>
+</section>
+</section>
+<section id="study-design" class="level2">
+<h2 class="anchored" data-anchor-id="study-design">Study Design</h2>
+<section id="methodological-framework" class="level3">
+<h3 class="anchored" data-anchor-id="methodological-framework">Methodological Framework</h3>
+<p>metaGE jointly analyzes summary statistics (effect sizes and P-values) from per-environment GWAS without requiring raw phenotypic or genotypic data.</p>
+<p><strong>Key innovations</strong>: - Accounts for inter-environment correlations arising from overlapping genotype panels - Supports both controlled (fixed-effect) and uncontrolled (random-effect) environments - Includes meta-regression to detect QTL-environment covariate relationships</p>
+</section>
+<section id="statistical-models" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-models">Statistical Models</h3>
+<p><strong>Z-score transformation</strong>: <span class="math display">\[Z_{mk} = \Phi^{-1}(0.5 \cdot p_{mk}) \times \text{sign}(\beta_{mk})\]</span></p>
+<p>where β_mk is the marker effect and p_mk is the P-value for marker m in environment k.</p>
+<p><strong>Fixed Effect (FE) Model</strong> (controlled environments): <span class="math display">\[Z_m = X\mu_m + E_m\]</span> <span class="math display">\[E_m \sim N(0_K, \Sigma_m)\]</span></p>
+<ul>
+<li>Environments classified into J groups with stable effects within groups</li>
+<li>Tests for marker association: H₀: {μ_m = 0_J} vs H₁: {∃j, μ^j_m ≠ 0}</li>
+<li>Tests for effect heterogeneity across groups</li>
+</ul>
+<p><strong>Random Effect (RE) Model</strong> (uncontrolled environments): <span class="math display">\[Z_m = \mu_m \mathbf{1}_K + A_m + E_m\]</span> <span class="math display">\[A_m \sim N(0_K, \tau_m^2 \Lambda)\]</span></p>
+<ul>
+<li>Random marker effects account for heterogeneity</li>
+<li>Correlation matrices Σ and Λ estimated from data</li>
+</ul>
+<p><strong>Meta-Regression Test</strong>: <span class="math display">\[H_0: \{\text{cov}(\mu_m \mathbf{1}_K + A_m, X) = 0\} \text{ vs } H_1: \{\text{cov}(\mu_m \mathbf{1}_K + A_m, X) \neq 0\}\]</span></p>
+<p>Test statistic: <span class="math inline">\(\frac{Z_m^T X}{\sqrt{X^T \Sigma X}} \sim N(0,1)\)</span> under H₀</p>
+</section>
+<section id="correlation-matrix-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-matrix-estimation">Correlation Matrix Estimation</h3>
+<p>Two filtering approaches to identify H₀ markers:</p>
+<ol type="1">
+<li><strong>P-value threshold</strong>: Include markers with p_mk &gt; λ in all environments</li>
+<li><strong>Posterior probability</strong> (default): Mixture model-based filtering excluding markers with P(H₁) &gt; 0.6</li>
+</ol>
+<p>Correlation estimate: <span class="math display">\[\hat{\Sigma}_{k,k'} = \text{cor}(Z_k, Z_{k'}) = \frac{\sum_{m \in H_0} (Z_{mk} - \bar{Z}_k)(Z_{mk'} - \bar{Z}_{k'})}{\sqrt{\sum (Z_{mk} - \bar{Z}_k)^2} \sqrt{\sum (Z_{mk'} - \bar{Z}_{k'})^2}}\]</span></p>
+</section>
+</section>
+<section id="simulation-study" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-study">Simulation Study</h2>
+<section id="design" class="level3">
+<h3 class="anchored" data-anchor-id="design">Design</h3>
+<ul>
+<li><strong>Genotypes</strong>: 247 maize F1 hybrids, 506,460 SNPs</li>
+<li><strong>Environments</strong>: 22 trials</li>
+<li><strong>QTL types</strong>:
+<ul>
+<li>Fixed effect (constant across environments)</li>
+<li>Completely random effect</li>
+<li>Random effects correlated with environment similarities<br>
+</li>
+<li>Covariate-dependent (proportional to Tmax, Tnight, or Psi)</li>
+</ul></li>
+<li><strong>Simulations</strong>: 50 runs per QTL type, 12 QTLs per run</li>
+<li><strong>Heritability</strong>: 0.5, QTLs explain 44% of genetic variance</li>
+</ul>
+</section>
+<section id="type-i-error-control" class="level3">
+<h3 class="anchored" data-anchor-id="type-i-error-control">Type I Error Control</h3>
+<p><strong>FDR on H₀ chromosomes</strong> (most stringent):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>QTL Type</th>
+<th>FDR_chr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>metaGE_FE</td>
+<td>Fixed</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td>metaGE_RE</td>
+<td>Random</td>
+<td>0.04</td>
+</tr>
+<tr class="odd">
+<td>metaGE_RE</td>
+<td>RandomCov</td>
+<td>0.02</td>
+</tr>
+<tr class="even">
+<td>metaGE_MR</td>
+<td>Covariate</td>
+<td>0.00-0.02</td>
+</tr>
+<tr class="odd">
+<td>METAL_FE</td>
+<td>Fixed</td>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<td>METAL_RE</td>
+<td>Random/Cov</td>
+<td>0.88-1.00</td>
+</tr>
+<tr class="odd">
+<td>mash</td>
+<td>All types</td>
+<td>0.14-0.88</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Whole genome FDR</strong> (5 Mb window):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Range across scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>metaGE</td>
+<td>0.09-0.18</td>
+</tr>
+<tr class="even">
+<td>METAL</td>
+<td>0.93-0.94</td>
+</tr>
+<tr class="odd">
+<td>mash</td>
+<td>0.32-0.85</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="detection-power" class="level3">
+<h3 class="anchored" data-anchor-id="detection-power">Detection Power</h3>
+<p><strong>5 Mb detection window</strong>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>QTL Type</th>
+<th>metaGE</th>
+<th>METAL</th>
+<th>mash</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fixed effect</td>
+<td>0.09</td>
+<td>0.98</td>
+<td>0.20</td>
+</tr>
+<tr class="even">
+<td>Random effect</td>
+<td>0.51</td>
+<td>0.16</td>
+<td>0.79</td>
+</tr>
+<tr class="odd">
+<td>RandomCov</td>
+<td>0.26</td>
+<td>0.58</td>
+<td>0.53</td>
+</tr>
+<tr class="even">
+<td>Covariate (avg)</td>
+<td>0.37</td>
+<td>0.06</td>
+<td>0.41</td>
+</tr>
+</tbody>
+</table>
+<p>Despite lower raw power than competitors, metaGE’s proper FDR control makes identified associations reliable.</p>
+<p><strong>MAF effect on power</strong> (metaGE_FE): - Low MAF [0.20-0.25]: 0.04 - Medium MAF [0.30-0.35]: 0.08 - High MAF [0.40-0.45]: 0.14</p>
+</section>
+<section id="meta-regression-specificity" class="level3">
+<h3 class="anchored" data-anchor-id="meta-regression-specificity">Meta-Regression Specificity</h3>
+<p>Testing covariate-dependent QTLs:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>MR test</th>
+<th>Target QTLs detected</th>
+<th>Cross-detected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tnight</td>
+<td>34.5% (Tnight QTLs)</td>
+<td>5.5% (Tmax QTLs)</td>
+</tr>
+<tr class="even">
+<td>Tmax</td>
+<td>26.5% (Tmax QTLs)</td>
+<td>7% (Tnight QTLs)</td>
+</tr>
+<tr class="odd">
+<td>Psi</td>
+<td>52% (Psi QTLs)</td>
+<td>&lt;1% (others)</td>
+</tr>
+</tbody>
+</table>
+<p>Cross-detection correlated with environmental covariate correlation (r_Tnight-Tmax = 0.71, r_Tnight-Psi = -0.11).</p>
+</section>
+</section>
+<section id="application-i-arabidopsis-competition-response" class="level2">
+<h2 class="anchored" data-anchor-id="application-i-arabidopsis-competition-response">Application I: Arabidopsis Competition Response</h2>
+<section id="dataset" class="level3">
+<h3 class="anchored" data-anchor-id="dataset">Dataset</h3>
+<ul>
+<li>195 accessions, 981,278 SNPs</li>
+<li>6 controlled micro-habitats (3 soils × competition/no competition)</li>
+<li>Trait: Bolting time</li>
+<li>Competition: Poa annua weed in environments B, D, F</li>
+</ul>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p><strong>metaGE FE procedure</strong>: - 191 SNPs in 61 QTLs identified - 51/61 significant in at least one individual GWAS - <strong>Enrichment ratio = 4.13</strong> for candidate flowering genes (q₀.₀₅ = 0.066, q₀.₉₅ = 3.2)</p>
+<p><strong>Comparison with METAL</strong>: - METAL: &gt;165,000 P-values &lt;0.01 (expected ~10,000 under H₀) - Declared 15% of markers significant (severe inflation)</p>
+<p><strong>Contrasted FE test</strong> (competition vs.&nbsp;no competition): - 221 SNPs in 72 QTLs with environment-specific effects - 160 candidate genes enriched for: - Development (P = 8.9×10⁻³) - Cell processes (P = 1.5×10⁻³) - Tetrapyrrole synthesis (P = 0.020) - <strong>71/72 QTLs were novel</strong> (not detected by standard FE test)</p>
+</section>
+<section id="major-finding-qtl5_22.0" class="level3">
+<h3 class="anchored" data-anchor-id="major-finding-qtl5_22.0">Major Finding: QTL5_22.0</h3>
+<p><strong>Location</strong>: Chromosome 5, AtCNGC4 genomic region - <strong>22 markers</strong> with sign-switching effects based on competition - Positive effects without competition, negative/null with competition - AtCNGC4 known roles: - Floral transition regulation - Plant immunity impairment - Consistent with development-defense tradeoffs</p>
+</section>
+</section>
+<section id="application-ii-maize-drought-response" class="level2">
+<h2 class="anchored" data-anchor-id="application-ii-maize-drought-response">Application II: Maize Drought Response</h2>
+<section id="dataset-1" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-1">Dataset</h3>
+<ul>
+<li>244 dent maize lines (as hybrids), 602,356 SNPs</li>
+<li>22 environments (location × year × treatment)</li>
+<li>Trait: Grain yield</li>
+<li>Environmental covariates: Psi, Tmax, Tnight, Rad, VPDmax, ET0, Tnight.Fill</li>
+</ul>
+</section>
+<section id="metage-re-results" class="level3">
+<h3 class="anchored" data-anchor-id="metage-re-results">metaGE RE Results</h3>
+<p><strong>52 genomic regions identified</strong>, including:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>QTL</th>
+<th>Chr</th>
+<th>Local Score</th>
+<th>Detection status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>QTL3_120.0</td>
+<td>3</td>
+<td>38</td>
+<td>Previously reported</td>
+</tr>
+<tr class="even">
+<td>QTL6_20.3</td>
+<td>6</td>
+<td>415</td>
+<td>Previously reported</td>
+</tr>
+<tr class="odd">
+<td>QTL7_41.4</td>
+<td>7</td>
+<td>18</td>
+<td><strong>Novel</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>QTL6_20.3 analysis</strong>: - Strong effects in 6 environments with severe heatwaves: - Night temperature ~22°C - Maximum temperature &gt;36°C - High evaporative demand (3.6 KPa) - All 6 environments: P-values &lt;1×10⁻⁶ - Colocalizes with 2.4 Mb presence/absence variant - Contains ABA-induced genes for water deficit response - Shows selection signatures during domestication/improvement</p>
+<p><strong>QTL7_41.4</strong> (novel): - Moderate positive effects across ~10/22 environments - Significant in only 2 individual GWAS (P &lt;0.01 in 10) - Harbors QTLs for plant growth rate and biomass under water deficit - Demonstrates power gain from meta-analysis</p>
+</section>
+<section id="meta-regression-results" class="level3">
+<h3 class="anchored" data-anchor-id="meta-regression-results">Meta-Regression Results</h3>
+<p><strong>Evapotranspiration (ET0)</strong>: 14 QTLs detected</p>
+<p>Key finding - <strong>QTL2_153.8</strong> (marker AX-91538480): - Effects vary linearly from negative to positive with ET0 - Colocalizes with aquaporin eQTLs (PIP2.2, PIP2.1) - Related to water use efficiency and stomatal conductance</p>
+<p><strong>Night temperature during flowering (Tnight)</strong>: 21 QTLs - Main association &lt;0.6 Mb from QTL6_20.3 - Corroborates previous findings on heat stress response</p>
+<p><strong>Night temperature during grain filling (Tnight.Fill)</strong>: 15 QTLs</p>
+<p>Example - <strong>QTL9_28.6</strong> (marker AX-91123283): - Positive effects on cool nights - Negative effects on hot nights - Dramatic effect reversal with temperature</p>
+</section>
+</section>
+<section id="application-iii-multi-parent-population" class="level2">
+<h2 class="anchored" data-anchor-id="application-iii-multi-parent-population">Application III: Multi-Parent Population</h2>
+<section id="eu-nam-flint-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="eu-nam-flint-dataset">EU-NAM Flint Dataset</h3>
+<ul>
+<li>11 biparental populations (8 analyzed)</li>
+<li>5,263 SNPs, double haploid lines</li>
+<li>4 locations: La Coruna, Roggenstein, Einbeck, Ploudaniel</li>
+<li>Trait: Biomass dry matter yield</li>
+<li><strong>32 analyses</strong> (8 populations × 4 locations)</li>
+</ul>
+</section>
+<section id="results-1" class="level3">
+<h3 class="anchored" data-anchor-id="results-1">Results</h3>
+<p><strong>16 QTLs identified</strong>, including: - <strong>2 major QTLs</strong> also found in original publication (Garin et al.): - QTL1_117.6: Consistent across populations except F2 - QTL6_84.2: Ancestral allele (6 parents) with strong negative effect in TUM</p>
+<p><strong>10 novel QTLs</strong>, including: - <strong>5 QTLs with effect inversions</strong> between populations</p>
+<p>Example - <strong>QTL5_23.9</strong>: - Positive effect in F03802 population - Negative effect in F64 population - Suggests genetic background effects or allelic series</p>
+<p><strong>3 QTLs</strong> associated with flowering time: - Flowering time is simpler trait and yield driver - Correlation with yield varies by environment (negative/null/positive)</p>
+</section>
+<section id="advantages-over-original-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="advantages-over-original-analysis">Advantages Over Original Analysis</h3>
+<p>Original study (Garin et al.): - Limited to 2/4 locations - Analyzed with computationally intensive mixed models</p>
+<p>metaGE approach: - Included all 4 locations - Revealed 10 additional QTLs - Completed in 12 seconds vs.&nbsp;hours for mixed models</p>
+</section>
+</section>
+<section id="application-iv-wheat-supplementary" class="level2">
+<h2 class="anchored" data-anchor-id="application-iv-wheat-supplementary">Application IV: Wheat (Supplementary)</h2>
+<section id="dataset-2" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-2">Dataset</h3>
+<ul>
+<li>210 wheat lines, 108,410 SNPs</li>
+<li>16 environments (location × year × treatment)</li>
+<li>Trait: Grain yield</li>
+</ul>
+</section>
+<section id="key-findings-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-findings-1">Key Findings</h3>
+<ul>
+<li>All QTLs identified by metaGE RE were <strong>not significant in any single environment</strong></li>
+<li>Demonstrates power gain for complex traits with small-effect QTLs</li>
+<li>Highlights importance of joint analysis for yield traits</li>
+</ul>
+</section>
+</section>
+<section id="computational-performance" class="level2">
+<h2 class="anchored" data-anchor-id="computational-performance">Computational Performance</h2>
+<p><strong>Runtime comparison</strong> (dataset: marker count):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Environments</th>
+<th>metaGE</th>
+<th>METAL</th>
+<th>mash</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simulation (500K)</td>
+<td>22</td>
+<td>49s (31s*)</td>
+<td>2.6min</td>
+<td>16.6min</td>
+</tr>
+<tr class="even">
+<td>Arabidopsis (1M)</td>
+<td>6</td>
+<td>1.2min (26s*)</td>
+<td>2.6min</td>
+<td>29s</td>
+</tr>
+<tr class="odd">
+<td>Maize (600K)</td>
+<td>22</td>
+<td>2.25min (41s*)</td>
+<td>3.3min</td>
+<td>25.3min</td>
+</tr>
+<tr class="even">
+<td>EU-NAM (6K)</td>
+<td>32</td>
+<td>12s (8s*)</td>
+<td>3s</td>
+<td>1.8min</td>
+</tr>
+<tr class="odd">
+<td>Wheat (100K)</td>
+<td>16</td>
+<td>47s (30s*)</td>
+<td>22s</td>
+<td>3.3min</td>
+</tr>
+</tbody>
+</table>
+<p>*Time for correlation matrix inference (needs to be done only once)</p>
+<p><strong>Memory efficiency</strong>: - Handles 10⁵-10⁶ markers efficiently - Single correlation matrix estimation per analysis - Independent processing of multiple hypotheses without re-estimation</p>
+</section>
+<section id="methodological-advantages" class="level2">
+<h2 class="anchored" data-anchor-id="methodological-advantages">Methodological Advantages</h2>
+<section id="over-classical-meta-analysis-metal" class="level3">
+<h3 class="anchored" data-anchor-id="over-classical-meta-analysis-metal">Over Classical Meta-Analysis (METAL)</h3>
+<p><strong>Dependency handling</strong>: - METAL assumes independence between GWAS - Ignoring dependencies in MET causes severe FDR inflation (&gt;0.84) - metaGE explicitly models inter-environment correlations</p>
+<p><strong>Result</strong>: METAL unusable for MET analysis due to Type I error inflation</p>
+</section>
+<section id="over-mixture-models-mash" class="level3">
+<h3 class="anchored" data-anchor-id="over-mixture-models-mash">Over Mixture Models (mash)</h3>
+<p><strong>Environmental factors</strong>: - mash models different effect patterns but not environmental influences - Cannot incorporate environmental covariates - Limited ability to test specific biological hypotheses about GxE</p>
+<p><strong>Result</strong>: mash suitable for pleiotropy but not designed for MET analysis</p>
+</section>
+<section id="over-mixed-models" class="level3">
+<h3 class="anchored" data-anchor-id="over-mixed-models">Over Mixed Models</h3>
+<p><strong>Scalability</strong>: - Mixed models computationally prohibitive for large-scale GWAS - Require raw phenotypic and genotypic data - metaGE: summary statistics only, minutes vs.&nbsp;hours/days</p>
+<p><strong>Flexibility</strong>: - Easy addition/removal of environments - Handles missing data (monomorphic markers in subpopulations) - Supports unbalanced/incomplete designs without imputation</p>
+</section>
+<section id="comparison-to-subgroup-meta-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-to-subgroup-meta-analysis">Comparison to Subgroup Meta-Analysis</h3>
+<p>Previous work (human genetics): - Subgroup MA and meta-regression developed for independent studies - Not adapted to correlated studies (MET with overlapping panels)</p>
+<p>metaGE contribution: - First adaptation of these approaches to non-independent studies - Enables plant genetics applications</p>
+</section>
+</section>
+<section id="novel-testing-capabilities" class="level2">
+<h2 class="anchored" data-anchor-id="novel-testing-capabilities">Novel Testing Capabilities</h2>
+<section id="standard-association-test" class="level3">
+<h3 class="anchored" data-anchor-id="standard-association-test">1. Standard Association Test</h3>
+<p>H₀: {μ_m = 0} - marker has no effect in any environment - Detects QTLs with any non-zero effect</p>
+</section>
+<section id="heterogeneity-test" class="level3">
+<h3 class="anchored" data-anchor-id="heterogeneity-test">2. Heterogeneity Test</h3>
+<p>H₀: {μ¹_m = μ²_m = … = μᴶ_m} - effects constant across groups - Identifies environment-dependent QTLs</p>
+</section>
+<section id="contrast-test" class="level3">
+<h3 class="anchored" data-anchor-id="contrast-test">3. Contrast Test</h3>
+<p>Tests specific hypotheses about effect patterns - Example: Competition vs.&nbsp;no competition in Arabidopsis - Detected 71 new QTLs missed by standard test</p>
+</section>
+<section id="meta-regression" class="level3">
+<h3 class="anchored" data-anchor-id="meta-regression">4. Meta-Regression</h3>
+<p>Genome-wide scan for QTL-covariate relationships - Quantifies how QTL effects vary with environmental variables - Identifies adaptive QTLs responding to specific stresses</p>
+</section>
+</section>
+<section id="biological-insights" class="level2">
+<h2 class="anchored" data-anchor-id="biological-insights">Biological Insights</h2>
+<section id="power-gain-through-joint-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="power-gain-through-joint-analysis">Power Gain Through Joint Analysis</h3>
+<p><strong>Arabidopsis AtCNGC4 region</strong>: - Not genome-wide significant in individual environments - Highly significant in joint analysis - Biological relevance confirmed (floral transition, immunity)</p>
+<p><strong>Maize QTL7_41.4</strong>: - Significant in only 2/22 environments individually - Detected through meta-analysis - Contains known water deficit response QTLs</p>
+<p><strong>Wheat QTLs</strong>: - None significant in individual environments - Multiple QTLs detected jointly - Critical for complex yield traits</p>
+</section>
+<section id="interpreting-effect-variability" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-effect-variability">Interpreting Effect Variability</h3>
+<p><strong>Competition response</strong> (Arabidopsis): - Sign-switching effects indicate context-dependent gene function - Development-defense tradeoffs - Identifies condition-specific adaptive alleles</p>
+<p><strong>Heat stress response</strong> (Maize): - QTL6_20.3 effects clustered in heatwave environments - Presence/absence variant under selection - Adaptive response to temperature stress</p>
+<p><strong>Covariate-dependent effects</strong>: - Linear relationships between effects and ET0, temperature - Aquaporin-mediated water transport regulation - Plant growth sensitivity to water potential</p>
+</section>
+</section>
+<section id="data-sharing-and-privacy" class="level2">
+<h2 class="anchored" data-anchor-id="data-sharing-and-privacy">Data Sharing and Privacy</h2>
+<section id="advantages-of-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="advantages-of-summary-statistics">Advantages of Summary Statistics</h3>
+<p><strong>Confidentiality</strong>: - No raw phenotypic or genotypic data required - Only effect sizes and P-values needed - Enables data sharing between private breeding programs</p>
+<p><strong>Parallel to human genetics</strong>: - Global Biobank Meta-analysis Initiative (2.2M participants, 24 BioBanks) - Consortium approach without individual data sharing</p>
+<p><strong>Plant breeding applications</strong>: - Private companies can share GWAS results - Preserve competitive advantages - Collaborative QTL discovery</p>
+</section>
+<section id="technical-benefits" class="level3">
+<h3 class="anchored" data-anchor-id="technical-benefits">Technical Benefits</h3>
+<p><strong>Unbalanced designs</strong>: - Different markers tested per environment - Missing data due to monomorphism in subpopulations - No imputation required</p>
+<p><strong>Scale flexibility</strong>: - Different technologies/sequencing depths - Easy environment addition/removal - Post-hoc quality control</p>
+<p><strong>Multi-parent populations</strong>: - Different marker sets per family - Handles genetic background effects - Detects allelic series and epistasis</p>
+</section>
+</section>
+<section id="practical-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="practical-recommendations">Practical Recommendations</h2>
+<section id="when-to-use-metage" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-metage">When to Use metaGE</h3>
+<p><strong>Ideal scenarios</strong>: - MET experiments with overlapping genotype panels - Need to control Type I error rate - Testing specific GxE hypotheses - Limited computational resources - Data privacy concerns</p>
+<p><strong>Not recommended</strong>: - Single environment analysis (use standard GWAS) - Completely independent populations (classical MA sufficient) - Need individual-level covariate adjustments</p>
+</section>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">Model Selection</h3>
+<p><strong>Fixed Effect (FE) model</strong>: - Controlled environments with a priori classification - Testing specific group contrasts - Example: Stress vs.&nbsp;control treatments</p>
+<p><strong>Random Effect (RE) model</strong>: - Uncontrolled field conditions - Unknown/complex environment relationships - Heterogeneous QTL effects expected</p>
+<p><strong>Meta-Regression</strong>: - Quantitative environmental covariates available - Hypothesis about specific environmental drivers - Want to identify adaptive QTLs</p>
+</section>
+<section id="multiple-testing-control" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-testing-control">Multiple Testing Control</h3>
+<p><strong>Local score approach</strong> (default): - Controls FDR while accounting for LD - Accumulates evidence across linked markers - Threshold ξ typically 3-4 - Chromosome-specific significance thresholds</p>
+<p><strong>Alternative</strong>: Adaptive Benjamini-Hochberg - For low-density markers (e.g., MPP with &lt;10K SNPs) - When LD structure unknown</p>
+</section>
+</section>
+<section id="implementation-details" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-details">Implementation Details</h2>
+<section id="r-package-metage" class="level3">
+<h3 class="anchored" data-anchor-id="r-package-metage">R Package: metaGE</h3>
+<p><strong>Available on CRAN</strong></p>
+<p><strong>Key functions</strong>: - Fixed effect meta-analysis - Random effect meta-analysis<br>
+- Contrast testing - Meta-regression - Local score multiple testing correction</p>
+<p><strong>Input requirements</strong>: - Per-environment GWAS summary statistics (effects, P-values) - Marker positions - Optional: Environmental covariates</p>
+<p><strong>Outputs</strong>: - Meta-analysis P-values - Estimated correlation matrices - Significant genomic regions - Effect size estimates per environment/group</p>
+</section>
+</section>
+<section id="limitations-and-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-considerations">Limitations and Considerations</h2>
+<section id="statistical-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-assumptions">Statistical Assumptions</h3>
+<ol type="1">
+<li><strong>Marker independence</strong>: Assumes unlinked markers
+<ul>
+<li>Addressed by local score accounting for LD</li>
+</ul></li>
+<li><strong>Correlation matrix</strong>: Assumed common across markers
+<ul>
+<li>Reasonable for inter-environment correlations</li>
+<li>Reduces computational burden</li>
+</ul></li>
+<li><strong>Normal distribution</strong>: Z-scores assumed Gaussian under H₀
+<ul>
+<li>Standard assumption in GWAS</li>
+<li>Violated if P-values not uniformly distributed under null</li>
+</ul></li>
+</ol>
+</section>
+<section id="design-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="design-considerations">Design Considerations</h3>
+<p><strong>Environment classification</strong>: - FE model requires a priori grouping - Misclassification reduces power - RE model robust to classification uncertainty</p>
+<p><strong>Sample size</strong>: - Power increases with more environments - Individual environment sample sizes affect P-value quality - Minimum ~5-10 environments recommended</p>
+<p><strong>Covariate correlation</strong>: - Meta-regression may detect QTLs correlated with related covariates - Careful interpretation needed with high covariate correlation - Consider testing multiple covariates independently</p>
+</section>
+</section>
+<section id="related-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="related-concepts">Related Concepts</h2>
+<ul>
+<li><strong>Multi-environment trial (MET)</strong>: Same genotypes evaluated across locations/years</li>
+<li><strong>Genotype-by-environment (GxE) interaction</strong>: Differential genotypic response to environments</li>
+<li><strong>Z-score</strong>: Standardized test statistic combining effect sign and P-value</li>
+<li><strong>Inter-environment correlation</strong>: Similarity between environments due to overlapping panels</li>
+<li><strong>Local score</strong>: LD-aware multiple testing procedure accumulating evidence</li>
+<li><strong>Meta-regression</strong>: Modeling association between study-level covariates and effect sizes</li>
+<li><strong>Allelic series</strong>: Multiple haplotypes at a locus with varying effects</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mattlee821\.github\.io\/papers\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
