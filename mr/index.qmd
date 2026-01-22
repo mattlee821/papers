@@ -1,0 +1,9 @@
+---
+title: "Mendelian randomisation"
+listing:
+  contents: .
+  type: default
+  sort: "date desc"
+  categories: true
+  fields: [date, title, description]
+---

@@ -1,0 +1,124 @@
+project:
+  type: website
+  output-dir: docs.nosync
+
+execute:
+  freeze: auto
+
+website:
+  navbar:
+    left:
+      - text: "info"
+        href: index.qmd
+      - text: "genetics"
+        href: genetics/index.qmd
+      - text: "finemap-colocalisation"
+        href: finemap-colocalisation/index.qmd
+      - text: "expression"
+        href: expression/index.qmd
+      - text: "proteomics"
+        href: proteomics/index.qmd
+      - text: "metabolomics"
+        href: metabolomics/index.qmd
+      - text: "multi-omics"
+        href: multi-omics/index.qmd
+      - text: "MR"
+        href: mr/index.qmd
+      - text: "PGS"
+        href: pgs/index.qmd
+      - text: "statistics"
+        href: statistics/index.qmd
+      - text: "interaction"
+        href: interaction/index.qmd
+      - text: "other"
+        href: other/index.qmd
+      - text: "ml"
+        href: ml/index.qmd        
+      - text: "cancer"
+        href: cancer/index.qmd    
+  sidebar:
+    - title: "Genetics"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "genetics/*.qmd"
+    - title: "Cancer"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "cancer/*.qmd"
+    - title: "Expression"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "expression/*.qmd"
+    - title: "Finemap Colocalisation"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "finemap-colocalisation/*.qmd"
+    - title: "Interaction"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "interaction/*.qmd"
+    - title: "Metabolomics"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "metabolomics/*.qmd"
+    - title: "ML"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "ml/*.qmd"
+    - title: "MR"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "mr/*.qmd"
+    - title: "Multi omics"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "multi-omics/*.qmd"
+    - title: "PGS"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "pgs/*.qmd"
+    - title: "Proteomics"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "proteomics/*.qmd"
+    - title: "Statistics"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "statistics/*.qmd"
+    - title: "Other"
+      style: "docked"
+      search: true
+      contents:
+        - section: "Papers"
+          contents: "other/*.qmd"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    date-format: "DD MMMM YYYY"

@@ -1,0 +1,7 @@
+/.quarto/
+/_freeze/
+/docs.nosync/
+/docs/
+.DS_Store
+*.Rhistory
+scripts/

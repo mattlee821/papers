@@ -1,0 +1,29 @@
+---
+title: ""
+---
+
+## [genetics](genetics.html)
+
+- 
+
+## [proteomics](proteomics.html)
+
+- 
+
+## [metabolomics](metabolomics.html)
+
+- 
+
+## [multi-omics](multi-omicss.html)
+
+- 
+
+## [statistics](statistics.html)
+
+- 
+
+## [MR](mr.html)
+
+- 
+
+

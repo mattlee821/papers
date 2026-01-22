@@ -1,0 +1,9 @@
+---
+title: "polygenic scores"
+listing:
+  contents: .
+  type: default
+  sort: "date desc"
+  categories: true
+  fields: [date, title, description]
+---

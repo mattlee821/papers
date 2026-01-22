@@ -1,0 +1,9 @@
+---
+title: "Genetics"
+listing:
+  contents: .
+  type: default
+  sort: "date desc"
+  categories: true
+  fields: [date, title, description]
+---
