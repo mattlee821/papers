@@ -1,1 +1,37 @@
-# papers
+# Research Papers Overview
+
+A centralized repository for research paper summaries and methodology notes across various omics and statistical genetics fields.
+
+## Categories
+
+- **Genetics**: GWAS, fine-mapping, heritability, complex trait architecture, and population genetics.
+- **Mendelian Randomization (MR)**: methods, assumptions, bias correction (collider, pleiotropy), and tissue-specific applications.
+- **Proteomics**: pQTL analysis, biomarker discovery, and protein-phenotype associations across human diseases and aging.
+- **Metabolomics**: metabolic reprogramming, lipidomics, and data processing.
+- **Multi-omics**: data integration (transcriptomics, proteomics), latent variable models, and machine learning for predictive modeling.
+- **Finemap & Colocalisation**: Bayesian and frequentist methods for resolving association signals and colocalizing traits.
+- **Expression**: bulk and single-cell RNA-seq, spatial transcriptomics, and gene signature discovery in cancer genomics.
+- **PGS**: polygenic scores, ancestry transferability, disease subtyping, and functional genomics integration.
+- **Statistics**: causal diagrams (DAGs), survival analysis, p-value interpretation, and trial design.
+- **Interaction**: gene-environment (GxE) interactions, variance component methods, and polygenic trait analysis.
+- **ML**: Bayesian kernel machine regression and nonparametric models for environmental health and multi-pollutant mixtures.
+- **Cancer**: immunogenomics, targeted therapy, survival analysis, and deep learning for pan-cancer molecular subtyping.
+- **Other**: Miscellaneous research summaries and general project notes.
+
+## Technical Configuration
+
+This site is built with [Quarto](https://quarto.org) and hosted via GitHub Pages.
+
+### Local Development
+
+Render the site locally to the `.nosync` directory (to avoid iCloud sync conflicts):
+```bash
+quarto render
+```
+
+### Deployment
+
+The site is deployed to the `gh-pages` branch. To publish updates:
+```bash
+quarto publish gh-pages
+```
