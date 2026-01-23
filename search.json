@@ -1148,39 +1148,25 @@
     ]
   },
   {
-    "objectID": "index.html#proteomics",
-    "href": "index.html#proteomics",
-    "title": "",
-    "section": "proteomics",
-    "text": "proteomics"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Research Papers Overview",
+    "section": "",
+    "text": "A centralized repository for research paper summaries and methodology notes across various omics and statistical genetics fields."
   },
   {
-    "objectID": "index.html#metabolomics",
-    "href": "index.html#metabolomics",
-    "title": "",
-    "section": "metabolomics",
-    "text": "metabolomics"
+    "objectID": "index.html#categories",
+    "href": "index.html#categories",
+    "title": "Research Papers Overview",
+    "section": "Categories",
+    "text": "Categories\n\nGenetics: GWAS, fine-mapping, heritability, complex trait architecture, and population genetics.\nMendelian Randomization (MR): methods, assumptions, bias correction (collider, pleiotropy), and tissue-specific applications.\nProteomics: pQTL analysis, biomarker discovery, and protein-phenotype associations across human diseases and aging.\nMetabolomics: metabolic reprogramming, lipidomics, and data processing.\nMulti-omics: data integration (transcriptomics, proteomics), latent variable models, and machine learning for predictive modeling.\nFinemap & Colocalisation: Bayesian and frequentist methods for resolving association signals and colocalizing traits.\nExpression: bulk and single-cell RNA-seq, spatial transcriptomics, and gene signature discovery in cancer genomics.\nPGS: polygenic scores, ancestry transferability, disease subtyping, and functional genomics integration.\nStatistics: causal diagrams (DAGs), survival analysis, p-value interpretation, and trial design.\nInteraction: gene-environment (GxE) interactions, variance component methods, and polygenic trait analysis.\nML: Bayesian kernel machine regression and nonparametric models for environmental health and multi-pollutant mixtures.\nCancer: immunogenomics, targeted therapy, survival analysis, and deep learning for pan-cancer molecular subtyping.\nOther: Miscellaneous research summaries and general project notes."
   },
   {
-    "objectID": "index.html#multi-omics",
-    "href": "index.html#multi-omics",
-    "title": "",
-    "section": "multi-omics",
-    "text": "multi-omics"
-  },
-  {
-    "objectID": "index.html#statistics",
-    "href": "index.html#statistics",
-    "title": "",
-    "section": "statistics",
-    "text": "statistics"
-  },
-  {
-    "objectID": "index.html#mr",
-    "href": "index.html#mr",
-    "title": "",
-    "section": "MR",
-    "text": "MR"
+    "objectID": "index.html#project-structure",
+    "href": "index.html#project-structure",
+    "title": "Research Papers Overview",
+    "section": "Project Structure",
+    "text": "Project Structure\nThis site uses Quarto’s Listings feature to automatically organize papers by category. Use the navigation bar or the sidebars in each section to explore the summaries.\n\nSite built with Quarto and hosted via GitHub Pages."
   },
   {
     "objectID": "mr/thornton_2025_39565278.html",
